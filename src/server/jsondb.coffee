@@ -17,7 +17,10 @@ class JsonDb
       console.log "DB Error: #{e}"
 
   flush: (callback) ->
-    fs.writeFile @filename, (JSON.stringify @db), 'utf8', callback
+    fs.writeFile @filename, (JSON.stringify @db), 'utf8', callback ? (err) ->
+      if err?
+        console.error err
+
 
   all: (collection) ->
     @db[collection] ? []
@@ -32,15 +35,17 @@ class JsonDb
     if not data.id?
       data.id = crypto.randomBytes(ID_BYTES).toString 'hex'
     @db[collection] ||= []
+    @delete collection, data.id, true
     @db[collection].push data
-    @flush
+    @flush()
     data
 
-  delete: (collection, id) ->
+  delete: (collection, id, noflush = false) ->
     item = @get collection, id
     if item?
       @db[collection] = _.reject @db[collection], (item) -> item.id == id
-      @flush
+      unless noflush
+        @flush()
     item
 
 module.exports.JsonDb = JsonDb

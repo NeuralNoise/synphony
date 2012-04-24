@@ -79,7 +79,9 @@ td { vertical-align: top; }
   height: 20em;
 }
 
-
+#wordlist-saved {
+  color: green;
+}
 
 
 

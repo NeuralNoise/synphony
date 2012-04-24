@@ -15,4 +15,4 @@ describe "Wordlist", ->
     it "should clean the word list when asked", ->
       wordlist.set {wordlist: "one \ntwo\t one  \n\n  three"}
       wordlist.clean()
-      (expect wordlist.get('wordlist')).toEqual "one\ntwo\nthree\n"
+      (expect wordlist.get('wordlist')).toEqual "one\ntwo\nthree"

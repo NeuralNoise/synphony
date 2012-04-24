@@ -4,5 +4,7 @@ class SegmenterRouter extends Backbone.Router
 
   wordlist: ->
     wordlist = new Wordlist
+    wordlist.fetch()
     wordlistPageView = new WordlistPageView model: wordlist
-    ($ 'body').append wordlistPageView.render().el
+    ($ '#main').empty()
+    ($ '#main').append wordlistPageView.render().el

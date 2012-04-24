@@ -7,7 +7,15 @@ WHITESPACE = ///
   ]+
 ///
 
+# Wordlist is a free-form list of words which has not (yet)
+# been converted into a collection of Words. This corresponds
+# to the wordlist entered into the wordlist form.
 class Wordlist extends Backbone.Model
+  url: '/api/v1/wordlist/1'
+
+  defaults:
+    id: 1 # only one
+
   initialize: ->
     console.log "wordlist hai"
 
@@ -15,10 +23,12 @@ class Wordlist extends Backbone.Model
     _.unique (@get 'wordlist').split WHITESPACE
 
   clean: ->
-    @set wordlist: (@toList().join '\n')+'\n'
+    @set wordlist: @toList().join '\n'
 
-KEY_DEBOUNCE_WAIT = 300
+KEY_DEBOUNCE_WAIT = 400
+SAVE_DEBOUNCE_WAIT = 1000
 
+# View for the wordlist form.
 class WordlistView extends TemplateView
   template: 'segmenter/wordlist'
   events:
@@ -26,25 +36,47 @@ class WordlistView extends TemplateView
     "click #wordlist-clean": "onClickClean"
 
   initialize: ->
+    # debounce keyup messages so as not to spam the model with updates
     @onKeyUp = _.debounce @onKeyUp, KEY_DEBOUNCE_WAIT
 
-    @model.bind 'change', @onChange, @
+    # debounce save so as not to spam server with requests
+    @save = _.debounce @save, SAVE_DEBOUNCE_WAIT
 
-  onRawKeyUp: ->
-    @onKeyUp()
+    @model.on 'change', @onChange, @
+    @model.on 'sync', @onSaved, @
 
+  # when the form is updated, set the wordlist on the model to the
+  # text box contents
   onKeyUp: ->
-    console.log "hai here"
-    @model.set wordlist: (@$ '#wordlist').val()
+    newValue = (@$ '#wordlist').val()
+    oldValue = @model.get 'wordlist'
+    @model.set wordlist: newValue
+    if newValue isnt oldValue
+      @save()
 
+  # When the model changes update the text box contents to match
   onChange: ->
-    (@$ '#wordlist').val @model.get 'wordlist'
-    console.log "updated"
+    oldValue = (@$ '#wordlist').val()
+    newValue = @model.get 'wordlist'
+    (@$ '#wordlist').val newValue
+    if oldValue isnt newValue and oldValue isnt ''
+      @save()
 
+  # when someone clicks the clean button, call clean() on the model
   onClickClean: ->
     @model.clean()
 
+  # save the model
+  save: ->
+    @model.save()
 
+  # when model is saved briefly flash a message to the user
+  onSaved: ->
+    ($ '#wordlist-saved').fadeIn(50).delay(1000).fadeOut(500)
+    console.log "Wordlist saved"
+
+
+# View for the wordlist page
 class WordlistPageView extends Backbone.View
   initialize: ->
     @wordlistView = new WordlistView { @model }
