@@ -1,0 +1,14 @@
+<label for="wordlist">
+  <h3>Word List:</h3>
+</label>
+<div id="wordlist-count">
+  {{ count }}
+</div>
+<div>
+  <textarea
+      id="wordlist" name="wordlist"
+      placeholder="Paste the word list here using &lt;ctrl+v&gt; or &lt;cmd+v&gt;"
+    >{{ wordlist }}</textarea>
+</div><div class="buttons">
+  <button id="wordlist-clean">Clean</button>
+</div>

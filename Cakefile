@@ -21,10 +21,12 @@ spawnHandlebars = (opts, callback) ->
 task 'build', 'Build build/ from src/', ->
   spawnCoffee ['-c', '-o', 'build/server', 'src/server']
   spawnCoffee ['-c', '-j', 'build/client/synphony.js', 'src/client']
+  spawnCoffee ['-c', '-j', 'build/client/tests.js', 'src/client', 'tests/client']
 
 task 'watch', 'Build build/ from src/', ->
   spawnCoffee ['-w', '-c', '-o', 'build/server', 'src/server']
   spawnCoffee ['-w', '-c', '-j', 'build/client/synphony.js', 'src/client']
+  spawnCoffee ['-w', '-c', '-j', 'build/client/tests.js', 'src/client', 'tests/client']
 
 task 'precompile', 'Precompile handlebars templates', ->
   spawnHandlebars ['templates', '-f', 'build/client/templates.js']

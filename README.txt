@@ -1,10 +1,38 @@
-SynPhony
+= SynPhony =
 
 Synthetic Phonics project
 
-Notes:
+== Dependancies ==
+
+Install node.js and npm then:
+
+npm install -g coffeescript
+npm install -g handlebars
+
+== Building ==
+
+To build src/ into build/ run:
+
+cake build
+
+To build templates from templates into build/client/templates.js run:
+
+cake precompile
+
+To watch coffeescript files and recompile on changes:
+
+cake watch
+
+== Running ==
+
+Make sure you build, then do:
+
+node synphony_server.js
+
+== Notes ==
 
 - using coffeescript to simplify code and make it more readable/maintainable
+  - using cake for a build script system
 - split into build, src and template folders
   - build: generated javascript files (from src and templates folders)
   - src: original coffeescript files

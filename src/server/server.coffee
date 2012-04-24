@@ -1,3 +1,13 @@
+# This is the HTTP Server for providing the files over HTTP.
+#
+# Level: low
+#
+# Here the API in on URLs /api/v1/<collection>/[<id>]
+# Some javascripts are pulled from node_modules folder under
+# /js/lib/* urls.
+# Some scripts pulled from build folder.
+# The rest is in the public folder.
+
 express = require 'express'
 jsondb = require './jsondb'
 
@@ -25,9 +35,8 @@ module.exports.run = ->
   app.use express.bodyParser()
   app.use express.methodOverride()
 
-  app.get '/js/libs/json2.js', (staticFile '/node_modules/JSON', 'json2.js')
-  app.get '/js/libs/underscore.js', (staticFile '/node_modules/underscore', 'underscore.js')
-  app.get '/js/libs/backbone.js', (staticFile '/node_modules/backbone', 'backbone.js')
+  # app.get '/js/libs/underscore.js', (staticFile '/node_modules/underscore', 'underscore.js')
+  # app.get '/js/libs/backbone.js', (staticFile '/node_modules/backbone', 'backbone.js')
   app.get '/js/synphony.js', (staticFile '/build/client', 'synphony.js')
   app.get '/js/templates.js', (staticFile '/build/client', 'templates.js')
 

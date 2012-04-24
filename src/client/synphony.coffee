@@ -1,6 +1,6 @@
 window.Synphony = {}
 
 jQuery ->
-  Synphony.importRouter = new ImportRouter
+  Synphony.segmenterRouter = new SegmenterRouter
   Backbone.history.start()
 
