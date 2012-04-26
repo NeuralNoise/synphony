@@ -3,6 +3,6 @@ class TemplateView extends Backbone.View
     Handlebars.templates[@template] @model.toJSON()
 
   render: ->
-    console.log "Render template for #{TemplateView.name}"
+    console.log "Render template"
     ($ @el).html @toHTML()
     @

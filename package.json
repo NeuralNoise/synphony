@@ -1,0 +1,28 @@
+{
+  "author": "Ryan Sanche <ryan@rj45.ca>",
+  "name": "synphony",
+  "description": "Synthetic Phonics (SynPhony) literacy teaching platform",
+  "version": "0.0.1",
+  "homepage": "http://helpchildrenread.org/",
+  "repository": {
+    "url": ""
+  },
+  "main": "synphony_server.js",
+  "scripts": {
+    "build": "cake build",
+    "test": "cake test",
+    "start": "node synphony_server.js"
+  },
+  "dependencies": {
+    "coffee-script": "~1.3.1",
+    "handlebars": "~1.0.5beta",
+    "express": "~3.0.0alpha1",
+    "underscore": "~1.3.3"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "~0.6.12"
+  },
+  "private": true
+}
