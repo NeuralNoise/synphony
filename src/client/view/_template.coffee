@@ -18,7 +18,8 @@ class ToolbarView extends TemplateView
 
   accordion: (event) ->
     event.preventDefault()
-    $(event.target).parent().next().toggle('slow')
+    $(event.target).parent().toggleClass 'active'
+    $(event.target).parent().next().toggle('fast')
 
   templateData: ->
     _.map @model.toolbar, (value, key) ->

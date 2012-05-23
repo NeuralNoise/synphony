@@ -59,7 +59,7 @@ templates['common/toolbar'] = template(function (Handlebars,depth0,helpers,parti
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n  <h3><a href=\"#\" class=\"accordion\">";
+  buffer += "\n  <h3 class=\"active\"><a href=\"#\" class=\"accordion\">";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }

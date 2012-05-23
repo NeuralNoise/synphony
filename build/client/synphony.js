@@ -755,7 +755,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     ToolbarView.prototype.accordion = function(event) {
       event.preventDefault();
-      return $(event.target).parent().next().toggle('slow');
+      $(event.target).parent().toggleClass('active');
+      return $(event.target).parent().next().toggle('fast');
     };
 
     ToolbarView.prototype.templateData = function() {
