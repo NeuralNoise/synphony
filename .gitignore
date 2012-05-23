@@ -1,6 +1,4 @@
 ._*
 .DS_Store
-build/client/*
-build/server/*
 data/*.json
 
