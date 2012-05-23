@@ -74,6 +74,209 @@ td { vertical-align: top; }
    Author: Ryan Sanche
    ========================================================================== */
 
+/* GENERAL ITEMS */
+body{
+  margin: 0;
+  padding: 0px;
+  font-family:  "Trebuchet MS",sans-serif;
+}
+
+/* TOP BAR COMPONENTS */
+#main-nav {
+  height: 1.85em;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  background-color: #9DD3FF;
+  border-bottom: 1px solid #79C2FF;
+  box-shadow: 0px 3px 3px #888;
+}
+
+#main-nav .menu {
+  color: #666666;
+  float: right;
+  font-size: 0.9em;
+  margin: 4px 10px;
+  position: absolute;
+  right: 0;
+}
+
+#main-menu, #main-menu ul {
+  display: inline;
+}
+
+#main-nav h1 {
+    float: left;
+    font-family: "Trebuchet MS",sans-serif;
+    font-size: 1.4em;
+    margin: 0 10px;
+    position:absolute;
+}
+
+#main-menu ul li {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 0.8em;
+  border-right: 1px solid black;
+}
+
+#main-menu ul li:last-child {
+  border-right: none;
+}
+
+#main-menu a {
+  text-decoration: none;
+}
+
+#auth {
+  vertical-align: middle;
+  padding-left: 1em;
+}
+
+.hide {
+  display: none;
+}
+
+/* MAIN TABLE COMPONENT */
+
+table#main{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 30px;
+}
+
+/* LEFT PANEL COMPONENTS */
+.active {
+  background-color: blue;
+}
+
+.focus {
+  color: red;
+}
+
+
+#left-panel {
+  position: relative;
+  height: 100%;
+  vertical-align: top;
+  width: 250px;
+}
+#leftside{
+  width: 245px;
+  background-color: #C4E4FF;
+  padding: 5px 0 20px 5px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 3px 3px 3px #888;
+  font-size: 90%;
+}
+@font-face{font-family:"Andika"; src:url(Andika-R.ttf);}
+.w, .n, .gpcs{font-family:"Andika",Arial,sans-serif;}
+.header_options {float:right;margin:-24px 2px 0 0;font-size:1.5em;}
+.header{position:relative;}
+.header_options a {text-decoration:none;color: #888;}
+.header_options a:hover{color:red;}
+.header_options a:active{text-decoration:none;margin:0;padding:0;}
+#gpcs_controls {
+  display:none;
+  position:absolute;
+  top: 20px;
+  width: 240px;
+  height: auto;
+  background-color: #ccc;
+  opacity: .9;
+  z-index:100;
+  padding:10px 0;
+  overflow: hidden;
+}
+#gpcs_controls p{
+  height: auto;
+  padding-left:10px;
+}
+#toolbar-content {
+  min-height: 20em;
+}
+.header {
+  background-color: #9DD3FF;
+  margin: 4px 10px 10px -10px;
+  border-top: 1px solid #9DD3FF;
+  border-bottom: 1px solid #9DD3FF;
+  color: #555;
+  font-family: "Trebuchet MS",sans-serif;
+  font-weight: bold;
+  box-shadow: 1px 1px 2px #666;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-indent: 10px;
+}
+#leftside .header:hover, .gpcs label:hover, #options label:hover, #changeTextSize span:hover {
+  cursor: pointer;
+  background-color: #62B8FF;
+}
+#leftside .header:hover {
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #9FC8F0; /* AAD9FF */
+  box-shadow: 3px 3px 3px #888;
+  text-shadow: 0px 0px 5px #FFF;
+  color: #444;
+}
+form#controls input, form#gpcs input {
+  margin: 3px;
+}
+#leftside form#options {
+  line-height: 150%;
+}
+form#controls label {
+  padding: 2px 5px 0 0 ;
+}
+#changeTextSize span {
+  padding: 0 5px;
+  margin: 0 2px;
+}
+#leftside .gpcs label{
+  padding: 0 2px 2px 0;
+  white-space: nowrap;
+
+  width:3.1em;
+  display:inline-block;
+  font-size:1.2em;
+  line-height:1.3em;
+}
+form#options, form#gpcs {
+  padding-left: 5px;
+}
+#left-panel-toggle{
+  margin-left: 5px;
+  min-width: 5px;
+  width: 7px;
+  height: 95%;
+  z-index: 99;
+}
+#left-panel-toggle:hover{
+  cursor: w-resize;
+  background-color: #F5F5F5;
+  border-right: 1px inset #EEE;
+  border-left: 1px solid #EEE;
+}
+
+/* MAIN VIEW COMPONENTS */
+#main-view{
+  padding: 0.5em;
+  padding-top: 0;
+  vertical-align: top;
+  background- color: #F9F9F9;
+ }
+
+#lesson-area td .word {
+  padding: 5px 20px;
+  font: 1.2em "Andika", sans-serif;
+}
+
+#main-view h2 {
+  font-size: 1.4em;
+  text-align: center;
+}
+
 #wordlist {
   width: 20em;
   height: 20em;
@@ -83,10 +286,16 @@ td { vertical-align: top; }
   color: green;
 }
 
-
-
-
-
+@media print{
+  #main-nav, #left-panel, #leftside, #left-panel-toggle {
+    display: none;
+  }
+  #main-view {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+  }
+}
 
 
 /* =============================================================================

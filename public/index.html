@@ -9,32 +9,62 @@
 
 	<title>SynPhony</title>
 	<meta name="description" content="Synthetic phonics to teach children to learn to read">
-	<meta name="author" content="Norbert Rennert">
 
 	<meta name="viewport" content="width=device-width">
 
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/smoothness/jquery-ui-1.8.19.custom.css">
 
 	<script src="js/libs/modernizr-2.5.3.min.js"></script>
 </head>
 <body>
 <header>
-
+  <div id="main-nav">
+	  <h1>SynPhony</h1>
+    <div class="menu">
+      <nav id="main-menu">
+      </nav>
+      <span id="auth">
+      	Login/out
+      </span>
+    </div>
+  </div>
 </header>
-<section id="main">
 
+<section id="main-body">
+    <table id="main" cellspacing="0" cellpadding="0" border="0">
+      <tbody>
+        <tr>
+          <td id="left-panel">
+            <div id="leftside">
+            	<div id="toolbar-content"></div>
+            	<footer>
+	              <hr>
+	              Feedback welcome: <span id="mail"></span>
+	              <br>Copyright &copy; 2012 Norbert Rennert
+	            </footer>
+            </div><!--end of div leftside-->
+          </td><!--end of td left-panel-->
+          <td id="left-panel-toggle">
+            <div id="left-panel-toggle"></div>
+          </td>
+          <td id="main-view">
+          	<div id="main-content"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 </section>
-<footer>
-
-</footer>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
 
 <script src="js/plugins.js"></script>
 <script src="js/libs/underscore.js"></script>
+<script src="js/libs/jquery-ui-1.8.19.custom.min.js"></script>
 <script src="js/libs/backbone.js"></script>
 <script src="js/libs/handlebars.runtime-1.0.0.beta.6.js"></script>
+<script src="js/libs/xregexp-all.js"></script>
 <script src="js/synphony.js"></script>
 <script src="js/templates.js"></script>
 <script>

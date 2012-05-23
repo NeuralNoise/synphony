@@ -1,32 +1,3 @@
-# all? unicode whitespace characters
-WHITESPACE = ///
-  [
-    \u0009\u000A\u000B\u000C\u000D\u0020\u0085\u00A0\u1680
-    \u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007
-    \u2008\u2009\u200A\u2028\u2029\u202F\u205F\u3000
-  ]+
-///
-
-# Wordlist is a free-form list of words which has not (yet)
-# been converted into a collection of Words. This corresponds
-# to the wordlist entered into the wordlist form.
-class Wordlist extends Backbone.Model
-  url: '/api/v1/wordlist/1'
-
-  defaults:
-    id: 1 # only one
-
-  initialize: ->
-    console.log "wordlist hai"
-
-  toList: ->
-    words = (@get 'wordlist').split WHITESPACE
-    words = _.unique words
-    _.reject words, (word) -> word is ''
-
-  clean: ->
-    @set wordlist: @toList().join '\n'
-
 # amount of time to wait for keystrokes to stop coming in before we
 # update the model
 KEY_DEBOUNCE_WAIT = 400
@@ -42,6 +13,8 @@ class WordlistView extends TemplateView
   events:
     "keyup #wordlist": "onKeyUp"
     "click #wordlist-clean": "onClickClean"
+    "click #wordlist-clean-uppercase": "onClickCleanUpperCase"
+    "click #wordlist-clean-debris": "onClickCleanDebris"
 
   initialize: ->
     # debounce keyup messages so as not to spam the model with updates
@@ -73,6 +46,13 @@ class WordlistView extends TemplateView
   # when someone clicks the clean button, call clean() on the model
   onClickClean: ->
     @model.clean()
+
+  # when someone clicks the clean uppercase button, call cleanUpperCase() on the model
+  onClickCleanUpperCase: ->
+    @model.cleanUpperCase()
+
+  onClickCleanDebris: ->
+    @model.cleanDebris()
 
   # save the model
   save: ->

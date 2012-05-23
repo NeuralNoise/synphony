@@ -17,9 +17,13 @@ class JsonDb
       console.log "DB Error: #{e}"
 
   flush: (callback) ->
-    fs.writeFile @filename, (JSON.stringify @db), 'utf8', callback ? (err) ->
+    json = JSON.stringify @db
+    fs.writeFile @filename, json, 'utf8', callback ? (err) ->
       if err?
         console.error err
+    # fs.writeFile @filename+"p", "dbTestBootstrap(#{json})", 'utf8', callback ? (err) ->
+    #   if err?
+    #     console.error err
 
 
   all: (collection) ->
