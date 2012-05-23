@@ -4,6 +4,9 @@ fs = require 'fs'
 {spawn} = require 'child_process'
 
 spawner = (cmd, opts, callback) ->
+  if process.platform == 'win32'
+    opts = for opt in opts
+      opt.replace(/\//g, '\\')
   coffee = spawn cmd, opts
   coffee.stderr.on 'data', (data) ->
     process.stderr.write data.toString()
