@@ -311,7 +311,6 @@ form#options, form#gpcs {
   height: 100%;
   min-height: 10em;
   z-index: 99;
-  border: 1px solid #FFF;
 }
 #left-panel-toggle:hover{
   cursor: w-resize;
