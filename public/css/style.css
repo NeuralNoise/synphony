@@ -309,14 +309,13 @@ form#options, form#gpcs {
   min-width: 5px;
   width: 7px;
   height: 100%;
+  min-height: 10em;
   z-index: 99;
   border: 1px solid #FFF;
 }
 #left-panel-toggle:hover{
   cursor: w-resize;
-  background-color: #F5F5F5;
-  border-right: 1px inset #EEE;
-  border-left: 1px inset #EEE;
+  background-color: #75C1FF;
 }
 
 /* MAIN VIEW COMPONENTS */
