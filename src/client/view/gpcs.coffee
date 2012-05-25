@@ -12,9 +12,11 @@ class GPCButtonView extends TemplateView
 
   templateData: ->
     console.log "get data"
+    grapheme = (@model.get 'gpc').get 'grapheme'
+
     active: @model.get 'active'
     focus: @model.get 'focus'
-    name: (@model.get 'gpc').get 'name'
+    name: grapheme.get 'name'
 
   onClick: (event) ->
     event.preventDefault()
@@ -38,11 +40,11 @@ class GPCButtonsView extends Backbone.View
     @resetViews()
     @render()
 
-  templateData: ->
-    @collection.map (state) ->
-      active: state.get 'active'
-      focus: state.get 'focus'
-      name: (state.get 'gpc').get 'name'
+  # templateData: ->
+  #   @collection.map (state) ->
+  #     active: state.get 'active'
+  #     focus: state.get 'focus'
+  #     name: (state.get 'gpc').(get 'grapheme').get 'name'
 
   render: ->
     @$el.empty()

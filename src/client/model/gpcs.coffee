@@ -1,6 +1,6 @@
 class GPC extends NamedModel
   constructor: (attributes, options) ->
-    _.bindAll @, 'graphemeName'
+    # _.bindAll @, 'graphemeName'
     super attributes, options
 
   graphemeName: ->

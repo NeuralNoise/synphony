@@ -1,6 +1,6 @@
 class AdminPageView extends PageView
   toolbar: ->
-    'Spelling Patterns': (new GPCButtonsView collection: @gpcs, id: "spelling-patterns")
+    'Spelling Patterns': (new GPCButtonsView collection: @store.gpcs, id: "spelling-patterns")
 
   menu: ->
     'Home': '#'
@@ -8,8 +8,7 @@ class AdminPageView extends PageView
     'Sentences': '#sentences'
 
   constructor: (options) ->
-    @gpcs = new GPCs
-    @gpcs.fetch()
+    @store = options.store
 
     super options
 
@@ -24,8 +23,7 @@ class AdminWordsPageView extends AdminPageView
 
   constructor: (options) ->
     super options
-    @collection = new Words
-    @collection.fetch()
+    @collection = @store.words
     @wordsView = new WordsListView collection: @collection
 
   render: () ->

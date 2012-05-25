@@ -4,14 +4,19 @@ class AdminRouter extends Backbone.Router
     "words": "words"
     "sentences": "sentences"
 
+  constructor: (options) ->
+    @store = options.store
+
+    super options
+
   home: ->
-    @showPage new AdminHomePageView
+    @showPage new AdminHomePageView { @store }
 
   words: ->
-    @showPage new AdminWordsPageView
+    @showPage new AdminWordsPageView { @store }
 
   sentences: ->
-    @showPage new AdminSentencesPageView
+    @showPage new AdminSentencesPageView { @store }
 
   showPage: (pageView) ->
     pageView.render()
