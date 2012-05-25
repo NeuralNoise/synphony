@@ -194,7 +194,38 @@ table#main{
   padding-left:10px;
 }
 #toolbar-content {
-  min-height: 20em;
+}
+#toolbar-content h3{
+	background-color: #9DD3FF;
+	margin: 4px 10px 10px -10px;
+	border-top: 1px solid #9DD3FF;
+	border-bottom: 1px solid #9DD3FF;
+	color: #555;
+	font-family: "Trebuchet MS", sans-serif;
+	font-weight: bold;
+	font-size: 1em;
+	box-shadow: 1px 1px 2px #666;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	text-indent: 20px;
+}
+#toolbar-content h3 a{
+	display: block;
+	text-decoration: none;
+	color: #444;
+}
+#toolbar-content h3:hover{
+	border-top: 1px solid #AAA;
+	border-bottom: 1px solid #9FC8F0;/*AAD9FF*/
+	box-shadow: 3px 3px 3px #888;
+	text-shadow: 0px 0px 5px #FFF, 0px 0px 8px #FFF;
+	background-color: #75C1FF;
+}
+#toolbar-content h3.active a:before {
+	content: '▼[+] ';
+}
+#toolbar-content h3 a:before {
+	content: '►[-] ';
 }
 .header {
   background-color: #9DD3FF;
@@ -233,14 +264,42 @@ form#controls label {
   padding: 0 5px;
   margin: 0 2px;
 }
-#leftside .gpcs label{
-  padding: 0 2px 2px 0;
-  white-space: nowrap;
-
-  width:3.1em;
-  display:inline-block;
-  font-size:1.2em;
-  line-height:1.3em;
+#spelling-patterns button {
+	display: inline-block;
+	font-size: 1.2em;
+	position: relative;
+	line-height: 130%;
+	padding: 0 10px;
+	white-space: nowrap;
+	text-align: center;
+	border: 2px solid #CAE8FF;
+	z-index: 3;
+	border-radius: 7px;
+	background-color: #D7EEFF;/*CAE8FF;*/
+	margin: 3px 0;
+}
+#spelling-patterns button.active {
+	background-color: #77C1FF !important;
+	border: 2px outset #77C1FF;
+	background: #DEEFFF;/*Old browsers IE9 SVG, needs conditional override of 'filter' to 'none'*/
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZGVlZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzc3YzFmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+	background: -moz-linear-gradient(135deg, #deefff 0%, #77c1ff 100%);/*FF3.6+*/
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#deefff), color-stop(100%,#77c1ff));/*Chrome,Safari4+*/
+	background: -webkit-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*Chrome10+,Safari5.1+*/
+	background: -o-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*Opera 11.10+*/
+	background: -ms-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*IE10+*/
+	background: linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*W3C*/
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#77c1ff',GradientType=1 );/*IE6-8 fallback on horizontal gradient*/
+}
+#spelling-patterns button.focus {
+	border: 2px outset #77C1FF;
+	font-weight: bold;
+	text-shadow: 0px 0px 5px #FFF, 0px 0px 8px #FFF;
+	background: #49A5BF;/*Old browsers*/
+	box-shadow: 2px 2px 2px #AAA;
+}
+#spelling-patterns button:hover {
+	border: 2px outset #C1E3FF;
 }
 form#options, form#gpcs {
   padding-left: 5px;
@@ -249,14 +308,15 @@ form#options, form#gpcs {
   margin-left: 5px;
   min-width: 5px;
   width: 7px;
-  height: 95%;
+  height: 100%;
   z-index: 99;
+  border: 1px solid #FFF;
 }
 #left-panel-toggle:hover{
   cursor: w-resize;
   background-color: #F5F5F5;
   border-right: 1px inset #EEE;
-  border-left: 1px solid #EEE;
+  border-left: 1px inset #EEE;
 }
 
 /* MAIN VIEW COMPONENTS */
@@ -323,7 +383,7 @@ form#options, form#gpcs {
 /* =============================================================================
    Print Styles
    ========================================================================== */
- 
+
 @media print {
   * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
   a, a:visited { text-decoration: underline; }
