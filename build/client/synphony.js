@@ -777,10 +777,10 @@
   store = null;
 
   jQuery(function() {
-    ($('#left-panel-toggle')).click(function() {
-      ($('#leftside')).toggle('fast', 'swing');
-      ($('#left-panel')).toggle('fast', 'swing');
-      return ($('#left-panel-toggle')).toggleClass('active');
+    ($('#side-panel-toggle')).click(function() {
+      ($('#control-panel')).toggle('fast', 'swing');
+      ($('#side-panel')).toggle('fast', 'swing');
+      return ($('#side-panel-toggle')).toggleClass('active');
     });
     store = new Store;
     return store.loadAll(function(error) {
