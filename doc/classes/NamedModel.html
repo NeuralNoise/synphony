@@ -100,6 +100,7 @@
       <h1>
         Class:
         NamedModel
+        <span class='note title'>Abstract</span>
       </h1>
       <table class='box'>
         <tr>
@@ -113,6 +114,26 @@
           </td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <div class='abstract note'>
+    <strong>
+      This
+      class
+      is abstract.
+    </strong>
+    
+  </div>
+  <p>Models with a name and some validations for that name. Also has some code to help with translating id numbers into references while parsing. </p> 
+</div>
+<div class='tags'>
+  <h3>See also:</h3>
+  <ul class='see'>
+    <li>
+      <a href='http://backbonejs.org/#Model'>Backbone.Model</a>
+    </li>
+  </ul>
+</div>
       <h2>Direct Known Subclasses</h2>
       <p class='children'>
                 <a href="../classes/GPC.html">GPC</a>,
@@ -128,12 +149,12 @@
   <li>
     <span class='signature'>
       <a href='#constructor-instance'>
-        - (void) <strong>constructor</strong>(attributes, options)
+        - (void) <strong>constructor</strong>(attributes, options = {})
       </a>
     </span>
     <span class='constructor note title'>Constructor</span>
     <span class='desc'>
-      fix @parse not having access to @collection
+      Construct new NamedModel
     </span>
   </li>
   <li>
@@ -143,7 +164,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Basic validation of the name
     </span>
   </li>
   <li>
@@ -153,7 +174,7 @@
       </a>
     </span>
     <span class='desc'>
-      Helper for parse() to look up an id in a collection on the @collection and set the field to an instance instead of an id number.
+      Helper for parse() to convert id numbers into object references in a more delarative way.
     </span>
   </li>
 </ul>
@@ -161,12 +182,51 @@
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='constructor-instance'>
-      - (void) <strong>constructor</strong>(attributes, options)
+      - (void) <strong>constructor</strong>(attributes, options = {})
     </p>
     <div class='docstring'>
-  <p>fix @parse not having access to @collection </p> 
+  <p>Construct new NamedModel </p> 
 </div>
 <div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>attributes</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>Initial attributes of the model</span>
+    </li>
+    <li>
+      <span class='name'>options</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>Options</span>
+    </li>
+  </ul>
+  <h3>
+    Options Hash:
+    (options):
+  </h3>
+  <ul class='options'>
+    <li>
+      <span class='name'>collection</span>
+      <span class='type'>
+        (<tt><a href='../classes/NamedCollection.html'>NamedCollection</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>model's colleciton</span>
+    </li>
+  </ul>
+  <h3>See also:</h3>
+  <ul class='see'>
+    <li>
+      <a href='http://backbonejs.org/#Model-constructor'>Backbone.Model#constructor</a>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
@@ -176,7 +236,16 @@
     <p class='signature' id='validate-instance'>
       - (void) <strong>validate</strong>(attribs)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Basic validation of the name </p> 
+</div>
+<div class='tags'>
+  <h3>See also:</h3>
+  <ul class='see'>
+    <li>
+      <a href='http://backbonejs.org/#Model-validate'>Backbone.Model#validate</a>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
@@ -184,16 +253,43 @@
       - (void) <strong>parseIdLookup</strong>(collectionName, fieldName, data)
     </p>
     <div class='docstring'>
-  <p>Helper for parse() to look up an id in a collection on the @collection and set the field to an instance instead of an id number. Works with arrays too </p> 
+  <p>Helper for parse() to convert id numbers into object references in a more delarative way. Works on arrays of ids too. </p> 
 </div>
 <div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>collectionName</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>name of the collection property of this model's collection</span>
+    </li>
+    <li>
+      <span class='name'>fieldName</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>name of the property in data to look up the id for</span>
+    </li>
+    <li>
+      <span class='name'>data</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the data to change ids to references in</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Fri May 25 2012 12:26:59 GMT-0700 (PDT)
+  Fri May 25 2012 14:21:53 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.7.1

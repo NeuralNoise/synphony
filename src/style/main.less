@@ -1,0 +1,277 @@
+/* ===== Primary Styles ========================================================
+   Author: Norbert Rennert
+   ========================================================================== */
+
+/* GENERAL ITEMS */
+body{
+  margin: 0;
+  padding: 0px;
+  font-family:  "Trebuchet MS",sans-serif;
+}
+
+/* TOP BAR COMPONENTS */
+#main-nav {
+  height: 1.85em;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  background-color: #9DD3FF;
+  border-bottom: 1px solid #79C2FF;
+  box-shadow: 0px 3px 3px #888;
+}
+
+#main-nav .menu {
+  color: #666666;
+  float: right;
+  font-size: 0.9em;
+  margin: 4px 10px;
+  position: absolute;
+  right: 0;
+}
+
+#main-menu, #main-menu ul {
+  display: inline;
+}
+
+#main-nav h1 {
+    float: left;
+    font-family: "Trebuchet MS",sans-serif;
+    font-size: 1.4em;
+    margin: 0 10px;
+    position:absolute;
+}
+
+#main-menu ul li {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 0.8em;
+  border-right: 1px solid black;
+}
+
+#main-menu ul li:last-child {
+  border-right: none;
+}
+
+#main-menu a {
+  text-decoration: none;
+}
+
+#auth {
+  vertical-align: middle;
+  padding-left: 1em;
+}
+
+.hide {
+  display: none;
+}
+
+
+/* MAIN TABLE COMPONENT */
+
+table#main{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 30px;
+}
+
+/* LEFT PANEL COMPONENTS */
+.active {
+  background-color: blue;
+}
+
+.focus {
+  color: red;
+}
+
+
+#left-panel {
+  position: relative;
+  height: 100%;
+  vertical-align: top;
+  width: 250px;
+}
+#leftside{
+  width: 245px;
+  background-color: #C4E4FF;
+  padding: 5px 0 20px 5px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 3px 3px 3px #888;
+  font-size: 90%;
+}
+
+@font-face{font-family:"Andika"; src:url(Andika-R.ttf);}
+.w, .n, .gpcs{font-family:"Andika",Arial,sans-serif;}
+.header_options {float:right;margin:-24px 2px 0 0;font-size:1.5em;}
+.header{position:relative;}
+.header_options a {text-decoration:none;color: #888;}
+.header_options a:hover{color:red;}
+.header_options a:active{text-decoration:none;margin:0;padding:0;}
+
+#gpcs_controls {
+  display:none;
+  position:absolute;
+  top: 20px;
+  width: 240px;
+  height: auto;
+  background-color: #ccc;
+  opacity: .9;
+  z-index:100;
+  padding:10px 0;
+  overflow: hidden;
+}
+#gpcs_controls p{
+  height: auto;
+  padding-left:10px;
+}
+#toolbar-content {
+}
+#toolbar-content h3{
+  background-color: #9DD3FF;
+  margin: 4px 10px 10px -10px;
+  border-top: 1px solid #9DD3FF;
+  border-bottom: 1px solid #9DD3FF;
+  color: #555;
+  font-family: "Trebuchet MS", sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  box-shadow: 1px 1px 2px #666;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-indent: 20px;
+}
+#toolbar-content h3 a{
+  display: block;
+  text-decoration: none;
+  color: #444;
+}
+#toolbar-content h3:hover{
+  border-top: 1px solid #AAA;
+  border-bottom: 1px solid #9FC8F0;/*AAD9FF*/
+  box-shadow: 3px 3px 3px #888;
+  text-shadow: 0px 0px 5px #FFF, 0px 0px 8px #FFF;
+  background-color: #75C1FF;
+}
+#toolbar-content h3.active a:before {
+  content: '▼[+] ';
+}
+#toolbar-content h3 a:before {
+  content: '►[-] ';
+}
+.header {
+  background-color: #9DD3FF;
+  margin: 4px 10px 10px -10px;
+  border-top: 1px solid #9DD3FF;
+  border-bottom: 1px solid #9DD3FF;
+  color: #555;
+  font-family: "Trebuchet MS",sans-serif;
+  font-weight: bold;
+  box-shadow: 1px 1px 2px #666;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-indent: 10px;
+}
+#leftside .header:hover, .gpcs label:hover, #options label:hover, #changeTextSize span:hover {
+  cursor: pointer;
+  background-color: #62B8FF;
+}
+#leftside .header:hover {
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #9FC8F0; /* AAD9FF */
+  box-shadow: 3px 3px 3px #888;
+  text-shadow: 0px 0px 5px #FFF;
+  color: #444;
+}
+form#controls input, form#gpcs input {
+  margin: 3px;
+}
+#leftside form#options {
+  line-height: 150%;
+}
+form#controls label {
+  padding: 2px 5px 0 0 ;
+}
+#changeTextSize span {
+  padding: 0 5px;
+  margin: 0 2px;
+}
+#spelling-patterns button {
+  display: inline-block;
+  font-size: 1.2em;
+  position: relative;
+  line-height: 130%;
+  padding: 0 10px;
+  white-space: nowrap;
+  text-align: center;
+  border: 2px solid #CAE8FF;
+  z-index: 3;
+  border-radius: 7px;
+  background-color: #D7EEFF;/*CAE8FF;*/
+  margin: 3px 0;
+}
+#spelling-patterns button.active {
+  background-color: #77C1FF !important;
+  border: 2px outset #77C1FF;
+  background: #DEEFFF;/*Old browsers IE9 SVG, needs conditional override of 'filter' to 'none'*/
+  background: ~"url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZGVlZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzc3YzFmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=)";
+  background: -moz-linear-gradient(135deg, #deefff 0%, #77c1ff 100%);/*FF3.6+*/
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#deefff), color-stop(100%,#77c1ff));/*Chrome,Safari4+*/
+  background: -webkit-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*Chrome10+,Safari5.1+*/
+  background: -o-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*Opera 11.10+*/
+  background: -ms-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*IE10+*/
+  background: linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*W3C*/
+  filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#77c1ff',GradientType=1 )"; /*IE6-8 fallback on horizontal gradient*/
+}
+#spelling-patterns button.focus {
+  border: 2px outset #77C1FF;
+  font-weight: bold;
+  text-shadow: 0px 0px 5px #FFF, 0px 0px 8px #FFF;
+  background: #49A5BF;/*Old browsers*/
+  box-shadow: 2px 2px 2px #AAA;
+}
+#spelling-patterns button:hover {
+  border: 2px outset #C1E3FF;
+}
+form#options, form#gpcs {
+  padding-left: 5px;
+}
+#left-panel-toggle{
+  margin-left: 5px;
+  min-width: 5px;
+  width: 7px;
+  height: 100%;
+  min-height: 10em;
+  z-index: 99;
+}
+#left-panel-toggle:hover{
+  cursor: w-resize;
+  background-color: #75C1FF;
+}
+
+
+/* MAIN VIEW COMPONENTS */
+#main-view{
+  padding: 0.5em;
+  padding-top: 0;
+  vertical-align: top;
+  background-color: #F9F9F9;
+ }
+
+#lesson-area td .word {
+  padding: 5px 20px;
+  font: 1.2em "Andika", sans-serif;
+}
+
+#main-view h2 {
+  font-size: 1.4em;
+  text-align: center;
+}
+
+#wordlist {
+  width: 20em;
+  height: 20em;
+}
+
+#wordlist-saved {
+  color: green;
+}

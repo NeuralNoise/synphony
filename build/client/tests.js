@@ -31,7 +31,10 @@
     NamedModel.name = 'NamedModel';
 
     function NamedModel(attributes, options) {
-      this.collection = options != null ? options.collection : void 0;
+      if (options == null) {
+        options = {};
+      }
+      this.collection = options.collection;
       NamedModel.__super__.constructor.call(this, attributes, options);
     }
 
@@ -117,6 +120,18 @@
 
     Store.name = 'Store';
 
+    Store.prototype.phonemes = null;
+
+    Store.prototype.graphemes = null;
+
+    Store.prototype.gpcs = null;
+
+    Store.prototype.words = null;
+
+    Store.prototype.sentences = null;
+
+    Store.prototype.sequences = null;
+
     function Store() {
       this.phonemes = new Phonemes;
       this.graphemes = new Graphemes;
@@ -136,6 +151,12 @@
         sentences: this.sentences
       });
     }
+
+    Store.prototype.loadAll = function(callback) {
+      var stack;
+      stack = [this.phonemes, this.graphemes, this.gpcs, this.words, this.sentences, this.sequences];
+      return this.loadStack(stack, callback);
+    };
 
     Store.prototype.fetch = function(collection, callback) {
       var error, success;
@@ -164,12 +185,6 @@
           return _this.loadStack(stack, callback);
         }
       });
-    };
-
-    Store.prototype.loadAll = function(callback) {
-      var stack;
-      stack = [this.phonemes, this.graphemes, this.gpcs, this.words, this.sentences, this.sequences];
-      return this.loadStack(stack, callback);
     };
 
     return Store;

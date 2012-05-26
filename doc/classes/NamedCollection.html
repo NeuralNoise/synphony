@@ -100,6 +100,7 @@
       <h1>
         Class:
         NamedCollection
+        <span class='note title'>Abstract</span>
       </h1>
       <table class='box'>
         <tr>
@@ -113,6 +114,26 @@
           </td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <div class='abstract note'>
+    <strong>
+      This
+      class
+      is abstract.
+    </strong>
+    
+  </div>
+  <p>Collection of NamedModels. </p> 
+</div>
+<div class='tags'>
+  <h3>See also:</h3>
+  <ul class='see'>
+    <li>
+      <a href='http://backbonejs.org/#Collection'>Backbone.Collection</a>
+    </li>
+  </ul>
+</div>
       <h2>Direct Known Subclasses</h2>
       <p class='children'>
                 <a href="../classes/GPCs.html">GPCs</a>,
@@ -132,7 +153,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Fetch a model by its name.
     </span>
   </li>
   <li>
@@ -162,7 +183,21 @@
     <p class='signature' id='getByName-instance'>
       - (void) <strong>getByName</strong>(name)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Fetch a model by its name. This will index the names of the models the first time it&#39;s called, then afterwards this method should be fast. </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>name</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>Name of the model to look up.</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
@@ -170,6 +205,12 @@
       - (void) <strong>add</strong>(models, options)
     </p>
     <div class='tags'>
+  <h3>See also:</h3>
+  <ul class='see'>
+    <li>
+      <a href='http://backbonejs.org/#Collection-add'>Backbone.Collection#add</a>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
@@ -177,13 +218,19 @@
       - (void) <strong>remove</strong>(models, options)
     </p>
     <div class='tags'>
+  <h3>See also:</h3>
+  <ul class='see'>
+    <li>
+      <a href='http://backbonejs.org/#Collection-remove'>Backbone.Collection#remove</a>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Fri May 25 2012 12:26:59 GMT-0700 (PDT)
+  Fri May 25 2012 14:21:53 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.7.1
