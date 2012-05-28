@@ -4,9 +4,6 @@ fs = require 'fs'
 {spawn} = require 'child_process'
 
 spawner = (cmd, opts, callback) ->
-  if process.platform == 'win32'
-    opts = for opt in opts
-      opt.replace(/\//g, '\\')
   coffee = spawn cmd, opts
   coffee.stderr.on 'data', (data) ->
     process.stderr.write data.toString()
@@ -16,10 +13,10 @@ spawner = (cmd, opts, callback) ->
     callback?() if code is 0
 
 spawnCoffee = (opts, callback) ->
-  spawner('coffee', opts, callback)
+  spawner('C:/Users/Norbert/AppData/Roaming/npm/coffee.cmd', opts, callback)
 
 spawnHandlebars = (opts, callback) ->
-  spawner('handlebars', opts, callback)
+  spawner('C:/Users/Norbert/AppData/Roaming/npm/handlebars.cmd', opts, callback)
 
 task 'build', 'Build build/ from src/', ->
   spawnCoffee ['-c', '-o', 'build/server', 'src/server']
