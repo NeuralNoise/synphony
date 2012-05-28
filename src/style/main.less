@@ -2,8 +2,8 @@
    Author: Norbert Rennert
    ========================================================================== */
 
-/* KNOWN CRASH CAUSES (crashes node)
-  border -bottom: 1px solid #79C2FF; // invalid property names; in this case a space between border-bottom
+/* KNOWN CRASH CAUSES (crashes less's parser.js and node.js)
+  invalid property names; eg: border -bottom (a space between border-bottom)
   unmatched curly braces
 */
 
@@ -81,9 +81,10 @@ table#main {
   height: 100%;
   position: relative;
   top: 30px;
+  margin-bottom: 3em;
 }
 
-/* LEFT PANEL COMPONENTS */
+/* SIDE PANEL COMPONENTS */
 .active {
   background-color: @darker-base;
 }
@@ -92,6 +93,10 @@ table#main {
   color: red;
 }
 
+footer {
+  font-size: 90%;
+  padding: .5em;
+}
 
 #side-panel {
   position: relative;
@@ -101,12 +106,12 @@ table#main {
 }
 
 #control-panel {
-  width: 245px;
-  background-color: @base-color;
-  padding: 5px 0 20px 5px;
-  border-bottom-right-radius: 20px;
-  box-shadow: 3px 3px 3px #888;
+  padding: 5px;
   font-size: 90%;
+  box-shadow: 3px 3px 3px #888;
+  border-bottom-right-radius: 20px;
+  background-color: @base-color;
+  margin-bottom: 1em;
 }
 
 #toolbar-content {
@@ -142,46 +147,48 @@ table#main {
   }
 }
 
+#spelling-patterns {
+  padding-left: 5px;
 
-#spelling-patterns button {
-  display: inline-block;
-  font-family: Andika, Arial, sans-serif;
-  font-size: 1.2em;
-  position: relative;
-  line-height: 130%;
-  padding: 0 10px;
-  white-space: nowrap;
-  text-align: center;
-  border: 2px solid #CAE8FF;
-  z-index: 3;
-  border-radius: 7px;
-  background-color: #D7EEFF;/*CAE8FF;*/
-  margin: 3px 0;
-  min-width: 2em;
-}
-#spelling-patterns button.active {
-  background-color: @darker-base !important;
-  border: 2px outset @darker-base;
-  background: #DEEFFF;/*Old browsers IE9 SVG, needs conditional override of 'filter' to 'none'*/
-  background: ~"url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZGVlZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzc3YzFmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=)";
-  background: -moz-linear-gradient(135deg, #deefff 0%, #77c1ff 100%);/*FF3.6+*/
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#deefff), color-stop(100%,#77c1ff));/*Chrome,Safari4+*/
-  background: -webkit-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*Chrome10+,Safari5.1+*/
-  background: -o-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*Opera 11.10+*/
-  background: -ms-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*IE10+*/
-  background: linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*W3C*/
-  filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#77c1ff',GradientType=1 )"; /*IE6-8 fallback on horizontal gradient*/
-}
-#spelling-patterns button.focus {
-  border: 2px outset @darker-base;
-  text-shadow: 0px 0px 5px #FFF, 0px 0px 8px #FFF;
-  background: @hover-base;
-  box-shadow: 2px 2px 2px #AAA;
-}
-#spelling-patterns button:hover {
-  border: 2px outset #C1E3FF;
+  button {
+    display: inline-block;
+    font-family: Andika, Arial, sans-serif;
+    font-size: 1.2em;
+    position: relative;
+    white-space: nowrap;
+    text-align: center;
+    border: 2px solid #CAE8FF;
+    z-index: 3;
+    border-radius: 7px;
+    background-color: #D7EEFF;/*CAE8FF;*/
+    margin: 3px 0;
+    min-width: 2em;
+  }
+  button.active {
+    background-color: @darker-base;
+    border: 2px outset @darker-base;
+    background: #DEEFFF;/*Old browsers IE9 SVG, needs conditional override of 'filter' to 'none'*/
+    background: ~"url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZGVlZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzc3YzFmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=)";
+    background: -moz-linear-gradient(135deg, #deefff 0%, #77c1ff 100%);/*FF3.6+*/
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#deefff), color-stop(100%,#77c1ff));/*Chrome,Safari4+*/
+    background: -webkit-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*Chrome10+,Safari5.1+*/
+    background: -o-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*Opera 11.10+*/
+    background: -ms-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*IE10+*/
+    background: linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*W3C*/
+    filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#77c1ff',GradientType=1 )"; /*IE6-8 fallback on horizontal gradient*/
+  }
+  button.focus {
+    border: 2px outset @darker-base;
+    text-shadow: 0px 0px 5px #FFF, 0px 0px 8px #FFF;
+    background: @hover-base; //#47AFFF; //darken(@hover-base, 20%);
+    box-shadow: 2px 2px 2px #AAA;
+  }
+  button:hover {
+    border: 2px outset #C1E3FF;
+  }
 }
 
+/* SIDE PANEL COMPONENTS */
 #side-panel-toggle{
   margin-left: 5px;
   min-width: 5px;
@@ -189,29 +196,34 @@ table#main {
   height: 100%;
   min-height: 10em;
   z-index: 99;
-}
-#side-panel-toggle:hover{
-  cursor: w-resize;
-  background-color: #75C1FF;
-}
 
+  &:hover{
+    cursor: w-resize;
+    background-color: #75C1FF;
+  }
+}
 
 /* MAIN VIEW COMPONENTS */
 #main-view{
   padding: 0.5em;
-  padding-top: 0;
   vertical-align: top;
   background-color: #F9F9F9;
- }
 
-#lesson-area td .word {
-  padding: 5px 20px;
-  font: 1.2em "Andika", sans-serif;
-}
+  #main-content {
+    h2 {
+      font-size: 1.4em;
+      text-align: center;
+    }
 
-#main-view h2 {
-  font-size: 1.4em;
-  text-align: center;
+    #lesson-area td .word {
+      padding: 5px 20px;
+      font: 1.2em "Andika", sans-serif;
+    }
+
+    #words-list ul {
+      padding: 0;
+    }
+  }
 }
 
 #wordlist {
