@@ -1278,4 +1278,24 @@
     });
   });
 
+  describe("Words searching", function() {
+    var gpcs, graphemes, phonemes, words;
+    graphemes = new Graphemes(DB.graphemes, {
+      parse: true
+    });
+    phonemes = new Phonemes(DB.phonemes, {
+      parse: true
+    });
+    gpcs = new GPCs(DB.gpcs, {
+      parse: true,
+      graphemes: graphemes,
+      phonemes: phonemes
+    });
+    words = new Words(DB.words, {
+      parse: true,
+      gpcs: gpcs
+    });
+    return it("should be able to find words with target GPCs", function() {});
+  });
+
 }).call(this);

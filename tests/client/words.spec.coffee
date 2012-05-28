@@ -23,5 +23,10 @@ describe "Words", ->
   it "should be valid in a collection", ->
     (expect words.models[0].isValid()).toBeTruthy()
 
+describe "Words searching", ->
+  graphemes = new Graphemes DB.graphemes, parse: true
+  phonemes = new Phonemes DB.phonemes, parse: true
+  gpcs = new GPCs DB.gpcs, { parse: true, graphemes, phonemes }
+  words = new Words DB.words, { parse: true, gpcs }
 
-
+  it "should be able to find words with target GPCs", ->
