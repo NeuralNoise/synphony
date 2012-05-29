@@ -8,8 +8,8 @@ jQuery ->
   ($ '#side-panel-toggle').click ->
     # ($ '#control-panel').toggle 'fast', 'swing'
     # ($ '#side-panel').toggle 'fast', 'swing'
-    ($ '#control-panel').toggleClass 'is-collapsed'
-    ($ '#side-panel').toggleClass 'is-collapsed'
+    ($ '#control-panel').toggle()
+    ($ '#side-panel').toggle()
     ($ '#side-panel-toggle').toggleClass 'active'
 
   store = new Store

@@ -8,19 +8,26 @@
 */
 
 
-
 /* GENERAL ITEMS */
 @font-face { font-family:"Andika"; src:url(Andika-R.ttf); }
 
 body {
   font-family:  "Trebuchet MS",sans-serif;
 }
+hr {border-color: @gray2;}
 
 /* COLOUR DEFINITIONS */
-@base-color: #C4E4FF;
-@darker-base: darken(@base-color, 10%);
 @lighter-base: lighten(@base-color, 10%);
+@base-color: #FCD17B;//#F7C251; //#C4E4FF;
+@darker-base: darken(@base-color, 10%);
 @hover-base: darken(@darker-base, 10%);
+@focus: red;
+@super-light-gray: #F9F9F9;
+@gray1: lighten(@gray3, 20); //lightest gray
+@gray2: lighten(@gray3, 10); //med-light gray
+@gray3: #666666; //base gray
+@gray4: darken(@gray3, 10); //dark-gray
+@gray5: darken(@gray3, 20); //darkest-gray
 
 /* TOP BAR COMPONENTS */
 #main-nav {
@@ -29,19 +36,19 @@ body {
   position: fixed;
   z-index: 100;
   background-color: @darker-base;
-  border-bottom: 1px solid #79C2FF;
-  box-shadow: 0px 3px 3px #888;
+  border-bottom: 1px solid @gray3;
+  box-shadow: 0px 3px 3px @gray2;
 
   h1 {
-      float: left;
-      font-family: "Trebuchet MS",sans-serif;
-      font-size: 1.4em;
-      margin: 0 10px;
-      position:absolute;
+    float: left;
+    font-family: "Trebuchet MS",sans-serif;
+    font-size: 1.4em;
+    margin: 0 10px;
+    position:absolute;
   }
 
   .menu {
-    color: #666666;
+    color: @gray3;
     float: right;
     font-size: 0.9em;
     margin: 4px 10px;
@@ -64,6 +71,12 @@ body {
 
       a {
         text-decoration: none;
+        color: @gray3;
+
+        &:hover {
+          color: @gray5;
+          text-shadow: 0px 0px 5px #FFF, 0px 0px 7px #FFF;
+        }
       }
     }
   }
@@ -90,7 +103,7 @@ table#main {
 }
 
 .focus {
-  color: red;
+  color: @focus;
 }
 
 footer {
@@ -103,6 +116,10 @@ footer {
   height: 100%;
   vertical-align: top;
   width: 250px;
+
+  .is-collapsed {
+
+  }
 }
 
 #control-panel {
@@ -112,6 +129,10 @@ footer {
   border-bottom-right-radius: 20px;
   background-color: @base-color;
   margin-bottom: 1em;
+
+  .is-collapsed {
+
+  }
 }
 
 #toolbar-content {
@@ -129,21 +150,21 @@ footer {
       font-weight: bold;
       font-size: .9em;
       text-decoration: none;
-      color: #444;
+      color: @gray4;
     }
     a:hover {
       border-top-right-radius: 10px;
       border-bottom-right-radius: 10px;
       box-shadow: 3px 3px 3px #888;
-      text-shadow: 0px 0px 5px #FFF, 0px 0px 8px #FFF;
+      text-shadow: 0px 0px 5px #FFF;
       background-color: @hover-base;
     }
     a:before {
       content: '► ';
     }
-    .active a:before {
-      content: '▼ ';
-    }
+  }
+  h3.active a:before {
+    content: '▼ ';
   }
 }
 
@@ -157,10 +178,10 @@ footer {
     position: relative;
     white-space: nowrap;
     text-align: center;
-    border: 2px solid #CAE8FF;
+    border: 2px solid @base-color; //#CAE8FF;
     z-index: 3;
     border-radius: 7px;
-    background-color: #D7EEFF;/*CAE8FF;*/
+    background-color: @lighter-base; //#D7EEFF;/*CAE8FF;*/
     margin: 3px 0;
     min-width: 2em;
   }
@@ -169,37 +190,42 @@ footer {
     border: 2px outset @darker-base;
     background: #DEEFFF;/*Old browsers IE9 SVG, needs conditional override of 'filter' to 'none'*/
     background: ~"url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZGVlZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzc3YzFmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=)";
-    background: -moz-linear-gradient(135deg, #deefff 0%, #77c1ff 100%);/*FF3.6+*/
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#deefff), color-stop(100%,#77c1ff));/*Chrome,Safari4+*/
-    background: -webkit-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*Chrome10+,Safari5.1+*/
-    background: -o-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*Opera 11.10+*/
-    background: -ms-linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*IE10+*/
-    background: linear-gradient(135deg, #deefff 0%,#77c1ff 100%);/*W3C*/
-    filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#77c1ff',GradientType=1 )"; /*IE6-8 fallback on horizontal gradient*/
+    background: -moz-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*FF3.6+*/
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,@lighter-base), color-stop(100%,@darker-base));/*Chrome,Safari4+*/
+    background: -webkit-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*Chrome10+,Safari5.1+*/
+    background: -o-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*Opera 11.10+*/
+    background: -ms-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*IE10+*/
+    background: linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*W3C*/
+    filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='@lighter-base', endColorstr='@darker-base',GradientType=1 )"; /*IE6-8 fallback on horizontal gradient*/
   }
   button.focus {
     border: 2px outset @darker-base;
     text-shadow: 0px 0px 5px #FFF, 0px 0px 8px #FFF;
-    background: @hover-base; //#47AFFF; //darken(@hover-base, 20%);
+    background: @hover-base;
     box-shadow: 2px 2px 2px #AAA;
   }
   button:hover {
-    border: 2px outset #C1E3FF;
+    border: 2px outset lighten(@hover-base, 10%);
+    background-color: lighten(@hover-base, 10%);
   }
 }
 
 /* SIDE PANEL COMPONENTS */
-#side-panel-toggle{
-  margin-left: 5px;
+#side-panel-toggle {
   min-width: 5px;
   width: 7px;
+
+}
+#side-panel-toggle-bar{
+  margin-left: 5px;
+  width: 100%;
   height: 100%;
   min-height: 10em;
-  z-index: 99;
+  z-index: 1;
 
   &:hover{
     cursor: w-resize;
-    background-color: #75C1FF;
+    background-color: lighten(@hover-base, 10%);//#75C1FF;
   }
 }
 
@@ -207,7 +233,7 @@ footer {
 #main-view{
   padding: 0.5em;
   vertical-align: top;
-  background-color: #F9F9F9;
+  background-color: @super-light-gray;
 
   #main-content {
     h2 {
