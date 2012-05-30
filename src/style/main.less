@@ -28,6 +28,7 @@ hr {border-color: @gray2;}
 @gray3: #666666; //base gray
 @gray4: darken(@gray3, 10); //dark-gray
 @gray5: darken(@gray3, 20); //darkest-gray
+@white: white;
 
 /* TOP BAR COMPONENTS */
 #main-nav {
@@ -75,7 +76,7 @@ hr {border-color: @gray2;}
 
         &:hover {
           color: @gray5;
-          text-shadow: 0px 0px 5px #FFF, 0px 0px 7px #FFF;
+          text-shadow: 0px 0px 5px @white, 0px 0px 7px @white;
         }
       }
     }
@@ -125,7 +126,7 @@ footer {
 #control-panel {
   padding: 5px;
   font-size: 90%;
-  box-shadow: 3px 3px 3px #888;
+  box-shadow: 3px 3px 3px @gray2;
   border-bottom-right-radius: 20px;
   background-color: @base-color;
   margin-bottom: 1em;
@@ -140,10 +141,14 @@ footer {
     background-color: @darker-base;
     margin: 4px 10px 10px -10px;
     font-family: "Trebuchet MS", sans-serif;
-    box-shadow: 1px 1px 2px #666;
+    box-shadow: 1px 2px 3px @gray2;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     text-indent: 20px;
+
+    &:hover {
+      box-shadow: 2px 3px 3px @gray3;
+    }
 
     a {
       display: block;
@@ -151,12 +156,11 @@ footer {
       font-size: .9em;
       text-decoration: none;
       color: @gray4;
-    }
-    a:hover {
       border-top-right-radius: 10px;
       border-bottom-right-radius: 10px;
-      box-shadow: 3px 3px 3px #888;
-      text-shadow: 0px 0px 5px #FFF;
+    }
+    a:hover {
+      text-shadow: 0px 0px 5px @white;
       background-color: @hover-base;
     }
     a:before {
@@ -188,7 +192,7 @@ footer {
   button.active {
     background-color: @darker-base;
     border: 2px outset @darker-base;
-    background: #DEEFFF;/*Old browsers IE9 SVG, needs conditional override of 'filter' to 'none'*/
+    background: @lighter-base;/*Old browsers IE9 SVG, needs conditional override of 'filter' to 'none'*/
     background: ~"url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZGVlZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzc3YzFmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=)";
     background: -moz-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*FF3.6+*/
     background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,@lighter-base), color-stop(100%,@darker-base));/*Chrome,Safari4+*/
@@ -200,9 +204,9 @@ footer {
   }
   button.focus {
     border: 2px outset @darker-base;
-    text-shadow: 0px 0px 5px #FFF, 0px 0px 8px #FFF;
+    text-shadow: 0px 0px 5px @white, 0px 0px 8px @white;
     background: @hover-base;
-    box-shadow: 2px 2px 2px #AAA;
+    box-shadow: 2px 2px 2px @gray1;
   }
   button:hover {
     border: 2px outset lighten(@hover-base, 10%);
