@@ -26,13 +26,13 @@ class GPCButtonView extends TemplateView
 class GPCButtonsView extends Backbone.View
 
   constructor: (options) ->
-    @gpcs = options.collection
+    @userGPCs = options.collection
     @resetViews()
-    @gpcs.on 'reset', @onGPCsReset, @
+    # @userGPCs.on 'reset', @onGPCsReset, @
     super options
 
   resetViews: ->
-    @collection = new GPCStates @gpcs
+    @collection = new UserGPCs @gpcs
     @views = @collection.map (state) ->
       new GPCButtonView model: state
 

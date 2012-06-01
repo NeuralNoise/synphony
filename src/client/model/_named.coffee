@@ -1,20 +1,11 @@
-# Models with a name and some validations for that name. Also
-# has some code to help with translating id numbers into
-# references while parsing.
+# Models with a name and some validations for that name.
 #
 # @abstract
-# @see http://backbonejs.org/#Model Backbone.Model
-class NamedModel extends Backbone.Model
-  # Construct new NamedModel
+class NamedModel extends BaseModel
+  # Get the name.
   #
-  # @param [Object] attributes Initial attributes of the model
-  # @param [Object] options Options
-  # @option options [NamedCollection] collection model's colleciton
-  #
-  # @see http://backbonejs.org/#Model-constructor Backbone.Model#constructor
-  constructor: (attributes, options = {}) ->
-    @collection = options.collection
-    super attributes, options
+  # @returns [String] name the name of the model
+  name: -> @get 'name'
 
   # Basic validation of the name
   #
@@ -31,35 +22,17 @@ class NamedModel extends Backbone.Model
     else
       null
 
-  # Helper for parse() to convert id numbers into object references in a
-  # more delarative way. Works on arrays of ids too.
-  #
-  # @param collectionName [String] name of the collection property of this
-  #   model's collection
-  # @param fieldName [String] name of the property in data to look up the
-  #   id for
-  # @param data [Object] the data to change ids to references in
-  parseIdLookup: (collectionName, fieldName, data) ->
-    if @collection? and @collection[collectionName]?
-      if data[fieldName] instanceof Array and typeof (_.first data[fieldName]) is "number"
-        # array of ids
-        data[fieldName] = _.map data[fieldName], (id) =>
-          item = @collection[collectionName].get(id)
-          item ? id
-      else if typeof data[fieldName] is "number"
-        item = @collection[collectionName].get(data[fieldName])
-        data[fieldName] = item ? data[fieldName]
-
 # Collection of NamedModels.
 #
 # @abstract
 # @see http://backbonejs.org/#Collection Backbone.Collection
-class NamedCollection extends Backbone.Collection
+class NamedCollection extends BaseCollection
   # Fetch a model by its name. This will index the names of the
   # models the first time it's called, then afterwards this
   # method should be fast.
   #
   # @param [String] name Name of the model to look up.
+  # @returns [NamedModel] model looked up or null if not found.
   getByName: (name) ->
     if not @_byName?
       @_byName = {}

@@ -24,31 +24,42 @@ describe "GPCs", ->
   it "should exist", ->
     (expect gpcs.length).toEqual 3
 
-describe "GPCState", ->
-  state = null
+describe "UserGPC", ->
+  ugpc = null
 
   beforeEach ->
     gpc = new GPC name: "a"
-    state = new GPCState { gpc }
+    ugpc = new UserGPC { gpc }
 
-  it "should make a gpc active but not focused when toggled", ->
-    state.toggle()
-    (expect state.get 'active').toBeTruthy()
-    (expect state.get 'focus').toBeFalsy()
+  it "should make a gpc known but not focused when toggled", ->
+    ugpc.toggle()
+    (expect ugpc.isKnown()).toBeTruthy()
+    (expect ugpc.hasFocus()).toBeFalsy()
 
-  it "should make a gpc active and focused when toggled twice", ->
-    _.times 2, -> state.toggle()
-    (expect state.get 'active').toBeTruthy()
-    (expect state.get 'focus').toBeTruthy()
+  it "should make a gpc known and focused when toggled twice", ->
+    _.times 2, -> ugpc.toggle()
+    (expect ugpc.isKnown()).toBeTruthy()
+    (expect ugpc.hasFocus()).toBeTruthy()
 
-  it "should make a gpc neither active nor focused when toggled thrice", ->
-    _.times 3, -> state.toggle()
-    (expect state.get 'active').toBeFalsy()
-    (expect state.get 'focus').toBeFalsy()
+  it "should make a gpc neither known nor focused when toggled thrice", ->
+    _.times 3, -> ugpc.toggle()
+    (expect ugpc.isKnown()).toBeFalsy()
+    (expect ugpc.hasFocus()).toBeFalsy()
 
-describe "GPCStates", ->
-  states = null
+describe "UserGPCs", ->
+  ugpcs = null
+  gpcs = null
 
   beforeEach ->
     gpcs = _.map ['a', 'b', 'c'], (name) -> new GPC { name }
-    states = new GPCStates gpcs
+    coll = new GPCs gpcs
+    ugpcs = new UserGPCs [], gpcs: coll
+
+  it "should return a list of known GPCs", ->
+    ugpcs.first().toggle()
+    (expect ugpcs.getKnownGPCs()).toEqual([gpcs[0]])
+
+  it "should return a list of focus GPCs", ->
+    ugpcs.last().toggle()
+    ugpcs.last().toggle()
+    (expect ugpcs.getFocusGPCs()).toEqual([gpcs[2]])

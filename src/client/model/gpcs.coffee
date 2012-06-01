@@ -27,27 +27,56 @@ class GPCs extends NamedCollection
 
     super models, options
 
-class GPCState extends Backbone.Model
+class UserGPC extends BaseModel
   defaults:
-    active: false
+    known: false
     focus: false
     gpc: null
 
+  constructor: (attributes={}, options={}) ->
+    super attributes, options
+
+
+  isKnown: -> @get 'known'
+
+  hasFocus: -> @get 'focus'
+
+  gpc: -> @get 'gpc'
+
   toggle: ->
-    if not (@get 'active') and not (@get 'focus')
-      @set active: true
-    else if (@get 'active') and not (@get 'focus')
+    if not @isKnown() and not @hasFocus()
+      @set known: true
+    else if @isKnown() and not @hasFocus()
       @set focus: true
     else
-      @set active: false, focus: false
+      @set known: false, focus: false
 
-class GPCStates extends Backbone.Collection
-  model: GPCState
+class UserGPCs extends BaseCollection
+  model: UserGPC
 
-  constructor: (gpcs, options) ->
-    if gpcs instanceof GPCs
-      gpcs = gpcs.models
-
-    models = _.map gpcs, (gpc) -> new GPCState { gpc }
+  constructor: (models, options = {}) ->
+    @gpcs = options.gpcs
 
     super models, options
+
+    if @gpcs?
+      @gpcs.on 'reset', @onGPCsReset, @
+      @onGPCsReset()
+
+  # @private
+  onGPCsReset: ->
+    @gpcs.each (gpc) =>
+      ugpcs = @where { gpc }
+      if ugpcs.length == 0
+        # ugpc = new UserGPC { gpc }
+        @add {gpc}, silent: true
+    @trigger 'reset', @, {}
+
+
+  getKnownGPCs: ->
+    ugpcs = @filter (ugpc) -> ugpc.isKnown()
+    _.map ugpcs, (ugpc) -> ugpc.gpc()
+
+  getFocusGPCs: ->
+    ugpcs = @filter (ugpc) -> ugpc.hasFocus()
+    _.map ugpcs, (ugpc) -> ugpc.gpc()

@@ -30,3 +30,24 @@ describe "Words searching", ->
   words = new Words DB.words, { parse: true, gpcs }
 
   it "should be able to find words with target GPCs", ->
+    gpc = gpcs.getByName "ei_ei"
+    aword = words.getByName "edukeitim"
+    focus = words.getFocusGPCWords [ gpc ]
+    (expect focus.length).toEqual 5
+    (expect (_.include focus, aword)).toBeTruthy()
+
+  it "should be able to filter words only including certain GPCs", ->
+    gpcE = gpcs.getByName "e_e"
+    gpcM = gpcs.getByName "m_m"
+    avail = words.getKnownGPCWords [ gpcE, gpcM ]
+    (expect avail.length).toEqual 4
+    aword = words.getByName "meme"
+    (expect (_.include avail, aword)).toBeTruthy()
+
+  it "should be able to filter words only including certain GPCs but must have other GPCs", ->
+    gpcE = gpcs.getByName "e_e"
+    gpcM = gpcs.getByName "m_m"
+    avail = words.getKnownFocusGPCWords [ gpcE, gpcM ], [ gpcM ]
+    (expect avail.length).toEqual 3
+    aword = words.getByName "meme"
+    (expect (_.include avail, aword)).toBeTruthy()

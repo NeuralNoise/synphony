@@ -6,6 +6,7 @@ fs = require 'fs'
 LICENSE_FILES = [ 'src/license.coffee' ]
 
 CLIENT_MODEL_FILES = [
+  'src/client/model/_base.coffee'
   'src/client/model/_named.coffee'
   'src/client/model/_store.coffee'
   'src/client/model/gpcs.coffee'

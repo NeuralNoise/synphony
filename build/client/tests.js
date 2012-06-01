@@ -20,9 +20,58 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 (function() {
-  var DEBRIS, GPC, GPCState, GPCStates, GPCs, Grapheme, Graphemes, HYPHEN_APOSTROPHE, NamedCollection, NamedModel, Phoneme, Phonemes, Segmenter, Sentence, Sentences, Sequence, SequenceElement, SequenceElements, Sequences, Store, WHITESPACE, Word, Wordlist, Words, hasUpperCase,
+  var BaseCollection, BaseModel, DEBRIS, GPC, GPCs, Grapheme, Graphemes, HYPHEN_APOSTROPHE, NamedCollection, NamedModel, Phoneme, Phonemes, Segmenter, Sentence, Sentences, Sequence, SequenceElement, SequenceElements, Sequences, Store, UserGPC, UserGPCs, WHITESPACE, Word, Wordlist, Words, hasUpperCase,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  BaseModel = (function(_super) {
+
+    __extends(BaseModel, _super);
+
+    BaseModel.name = 'BaseModel';
+
+    function BaseModel(attributes, options) {
+      if (options == null) {
+        options = {};
+      }
+      this.collection = options.collection;
+      BaseModel.__super__.constructor.call(this, attributes, options);
+    }
+
+    BaseModel.prototype.parseIdLookup = function(collectionName, fieldName, data) {
+      var item,
+        _this = this;
+      if ((this.collection != null) && (this.collection[collectionName] != null)) {
+        if (data[fieldName] instanceof Array && typeof (_.first(data[fieldName])) === "number") {
+          return data[fieldName] = _.map(data[fieldName], function(id) {
+            var item;
+            item = _this.collection[collectionName].get(id);
+            return item != null ? item : id;
+          });
+        } else if (typeof data[fieldName] === "number") {
+          item = this.collection[collectionName].get(data[fieldName]);
+          return data[fieldName] = item != null ? item : data[fieldName];
+        }
+      }
+    };
+
+    return BaseModel;
+
+  })(Backbone.Model);
+
+  BaseCollection = (function(_super) {
+
+    __extends(BaseCollection, _super);
+
+    BaseCollection.name = 'BaseCollection';
+
+    function BaseCollection() {
+      return BaseCollection.__super__.constructor.apply(this, arguments);
+    }
+
+    return BaseCollection;
+
+  })(Backbone.Collection);
 
   NamedModel = (function(_super) {
 
@@ -30,13 +79,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     NamedModel.name = 'NamedModel';
 
-    function NamedModel(attributes, options) {
-      if (options == null) {
-        options = {};
-      }
-      this.collection = options.collection;
-      NamedModel.__super__.constructor.call(this, attributes, options);
+    function NamedModel() {
+      return NamedModel.__super__.constructor.apply(this, arguments);
     }
+
+    NamedModel.prototype.name = function() {
+      return this.get('name');
+    };
 
     NamedModel.prototype.validate = function(attribs) {
       var modelsWithMyName;
@@ -56,26 +105,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       }
     };
 
-    NamedModel.prototype.parseIdLookup = function(collectionName, fieldName, data) {
-      var item,
-        _this = this;
-      if ((this.collection != null) && (this.collection[collectionName] != null)) {
-        if (data[fieldName] instanceof Array && typeof (_.first(data[fieldName])) === "number") {
-          return data[fieldName] = _.map(data[fieldName], function(id) {
-            var item;
-            item = _this.collection[collectionName].get(id);
-            return item != null ? item : id;
-          });
-        } else if (typeof data[fieldName] === "number") {
-          item = this.collection[collectionName].get(data[fieldName]);
-          return data[fieldName] = item != null ? item : data[fieldName];
-        }
-      }
-    };
-
     return NamedModel;
 
-  })(Backbone.Model);
+  })(BaseModel);
 
   NamedCollection = (function(_super) {
 
@@ -114,82 +146,118 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     return NamedCollection;
 
-  })(Backbone.Collection);
+  })(BaseCollection);
 
-  Store = (function() {
+  Store = (function(_super) {
+
+    __extends(Store, _super);
 
     Store.name = 'Store';
 
-    Store.prototype.phonemes = null;
-
-    Store.prototype.graphemes = null;
-
-    Store.prototype.gpcs = null;
-
-    Store.prototype.words = null;
-
-    Store.prototype.sentences = null;
-
-    Store.prototype.sequences = null;
-
-    function Store() {
-      this.phonemes = new Phonemes;
-      this.graphemes = new Graphemes;
-      this.gpcs = new GPCs([], {
-        graphemes: this.graphemes,
-        phonemes: this.phonemes
+    Store.prototype.defaults = function() {
+      var gpcs, graphemes, phonemes, sentences, sequences, userGPCs, words;
+      phonemes = new Phonemes;
+      graphemes = new Graphemes;
+      gpcs = new GPCs([], {
+        graphemes: graphemes,
+        phonemes: phonemes
       });
-      this.words = new Words([], {
-        gpcs: this.gpcs
+      words = new Words([], {
+        gpcs: gpcs
       });
-      this.sentences = new Sentences([], {
-        words: this.words
+      sentences = new Sentences([], {
+        words: words
       });
-      this.sequences = new Sequences([], {
-        gpcs: this.gpcs,
-        words: this.words,
-        sentences: this.sentences
+      sequences = new Sequences([], {
+        gpcs: gpcs,
+        words: words,
+        sentences: sentences
       });
+      userGPCs = new UserGPCs([], {
+        gpcs: gpcs
+      });
+      return {
+        phonemes: phonemes,
+        graphemes: graphemes,
+        gpcs: gpcs,
+        words: words,
+        sentences: sentences,
+        sequences: sequences,
+        userGPCs: userGPCs
+      };
+    };
+
+    Store.prototype.loadOrder = function() {
+      return ['phonemes', 'graphemes', 'gpcs', 'words', 'sentences', 'sequences', 'userGPCs'];
+    };
+
+    function Store(attributes, options) {
+      Store.__super__.constructor.call(this, null, options);
+      if (attributes != null) {
+        this.reset(attributes, options);
+      }
     }
 
-    Store.prototype.loadAll = function(callback) {
-      var stack;
-      stack = [this.phonemes, this.graphemes, this.gpcs, this.words, this.sentences, this.sequences];
-      return this.loadStack(stack, callback);
+    Store.prototype.phonemes = function() {
+      return this.get('phonemes');
     };
 
-    Store.prototype.fetch = function(collection, callback) {
-      var error, success;
-      success = function(collection, response) {
-        return callback();
-      };
-      error = function(collection, response) {
-        return callback("TODO: meaningful error here");
-      };
-      return collection.fetch({
-        success: success,
-        error: error
+    Store.prototype.graphemes = function() {
+      return this.get('graphemes');
+    };
+
+    Store.prototype.gpcs = function() {
+      return this.get('gpcs');
+    };
+
+    Store.prototype.words = function() {
+      return this.get('words');
+    };
+
+    Store.prototype.sentences = function() {
+      return this.get('sentences');
+    };
+
+    Store.prototype.sequences = function() {
+      return this.get('sequences');
+    };
+
+    Store.prototype.userGPCs = function() {
+      return this.get('userGPCs');
+    };
+
+    Store.prototype.fetch = function(options) {
+      return this.loadStack(this.loadOrder(), options);
+    };
+
+    Store.prototype.reset = function(attributes, options) {
+      var _this = this;
+      return _.each(this.loadOrder(), function(collection) {
+        return (_this.get(collection)).reset(attributes[collection], options);
       });
     };
 
-    Store.prototype.loadStack = function(stack, callback) {
-      var collection,
-        _this = this;
-      collection = stack.shift();
-      return this.fetch(collection, function(error) {
-        if (error != null) {
-          return callback(error);
-        } else if (stack.length === 0) {
-          return callback();
+    Store.prototype.fetchOne = function(collection, options) {
+      return collection.fetch(options);
+    };
+
+    Store.prototype.loadStack = function(stack, options) {
+      var collection, myOptions;
+      collection = this.get(stack.shift());
+      myOptions = _.clone(options);
+      myOptions.success = function(collection, response) {
+        if (stack.length === 0) {
+          return typeof options.success === "function" ? options.success(this, response) : void 0;
         } else {
-          return _this.loadStack(stack, callback);
+          return this.loadStack(stack, options);
         }
-      });
+      };
+      return this.fetchOne(collection, myOptions);
     };
 
     return Store;
 
-  })();
+  })(BaseModel);
 
   GPC = (function(_super) {
 
@@ -244,67 +312,122 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
   })(NamedCollection);
 
-  GPCState = (function(_super) {
+  UserGPC = (function(_super) {
 
-    __extends(GPCState, _super);
+    __extends(UserGPC, _super);
 
-    GPCState.name = 'GPCState';
+    UserGPC.name = 'UserGPC';
 
-    function GPCState() {
-      return GPCState.__super__.constructor.apply(this, arguments);
-    }
-
-    GPCState.prototype.defaults = {
-      active: false,
+    UserGPC.prototype.defaults = {
+      known: false,
       focus: false,
       gpc: null
     };
 
-    GPCState.prototype.toggle = function() {
-      if (!(this.get('active')) && !(this.get('focus'))) {
+    function UserGPC(attributes, options) {
+      if (attributes == null) {
+        attributes = {};
+      }
+      if (options == null) {
+        options = {};
+      }
+      UserGPC.__super__.constructor.call(this, attributes, options);
+    }
+
+    UserGPC.prototype.isKnown = function() {
+      return this.get('known');
+    };
+
+    UserGPC.prototype.hasFocus = function() {
+      return this.get('focus');
+    };
+
+    UserGPC.prototype.gpc = function() {
+      return this.get('gpc');
+    };
+
+    UserGPC.prototype.toggle = function() {
+      if (!this.isKnown() && !this.hasFocus()) {
         return this.set({
-          active: true
+          known: true
         });
-      } else if ((this.get('active')) && !(this.get('focus'))) {
+      } else if (this.isKnown() && !this.hasFocus()) {
         return this.set({
           focus: true
         });
       } else {
         return this.set({
-          active: false,
+          known: false,
           focus: false
         });
       }
     };
 
-    return GPCState;
+    return UserGPC;
 
-  })(Backbone.Model);
+  })(BaseModel);
 
-  GPCStates = (function(_super) {
+  UserGPCs = (function(_super) {
 
-    __extends(GPCStates, _super);
+    __extends(UserGPCs, _super);
 
-    GPCStates.name = 'GPCStates';
+    UserGPCs.name = 'UserGPCs';
 
-    GPCStates.prototype.model = GPCState;
+    UserGPCs.prototype.model = UserGPC;
 
-    function GPCStates(gpcs, options) {
-      var models;
-      if (gpcs instanceof GPCs) {
-        gpcs = gpcs.models;
+    function UserGPCs(models, options) {
+      if (options == null) {
+        options = {};
       }
-      models = _.map(gpcs, function(gpc) {
-        return new GPCState({
-          gpc: gpc
-        });
-      });
-      GPCStates.__super__.constructor.call(this, models, options);
+      this.gpcs = options.gpcs;
+      UserGPCs.__super__.constructor.call(this, models, options);
+      if (this.gpcs != null) {
+        this.gpcs.on('reset', this.onGPCsReset, this);
+        this.onGPCsReset();
+      }
     }
 
-    return GPCStates;
+    UserGPCs.prototype.onGPCsReset = function() {
+      var _this = this;
+      this.gpcs.each(function(gpc) {
+        var ugpcs;
+        ugpcs = _this.where({
+          gpc: gpc
+        });
+        if (ugpcs.length === 0) {
+          return _this.add({
+            gpc: gpc
+          }, {
+            silent: true
+          });
+        }
+      });
+      return this.trigger('reset', this, {});
+    };
 
-  })(Backbone.Collection);
+    UserGPCs.prototype.getKnownGPCs = function() {
+      var ugpcs;
+      ugpcs = this.filter(function(ugpc) {
+        return ugpc.isKnown();
+      });
+      return _.map(ugpcs, function(ugpc) {
+        return ugpc.gpc();
+      });
+    };
+
+    UserGPCs.prototype.getFocusGPCs = function() {
+      var ugpcs;
+      ugpcs = this.filter(function(ugpc) {
+        return ugpc.hasFocus();
+      });
+      return _.map(ugpcs, function(ugpc) {
+        return ugpc.gpc();
+      });
+    };
+
+    return UserGPCs;
+
+  })(BaseCollection);
 
   Grapheme = (function(_super) {
 
@@ -677,38 +800,61 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       Words.__super__.constructor.call(this, models, options);
     }
 
+    Words.prototype.getFocusGPCWords = function(focusGPCs, list) {
+      if (list == null) {
+        list = this.models;
+      }
+      return _.filter(list, function(word) {
+        var wordGPCs;
+        wordGPCs = word.get('gpcs');
+        return _.any(wordGPCs, function(wordGPC) {
+          return _.any(focusGPCs, function(focusGPC) {
+            return focusGPC.id === wordGPC.id;
+          });
+        });
+      });
+    };
+
+    Words.prototype.getKnownGPCWords = function(knownGPCs, list) {
+      if (list == null) {
+        list = this.models;
+      }
+      return _.filter(list, function(word) {
+        var wordGPCs;
+        wordGPCs = word.get('gpcs');
+        return _.all(wordGPCs, function(wordGPC) {
+          return _.any(knownGPCs, function(knownGPC) {
+            return knownGPC.id === wordGPC.id;
+          });
+        });
+      });
+    };
+
+    Words.prototype.getKnownFocusGPCWords = function(knownGPCs, focusGPCs, list) {
+      var words;
+      if (list == null) {
+        list = this.models;
+      }
+      words = this.getFocusGPCWords(focusGPCs, list);
+      return this.getKnownGPCWords(knownGPCs, words);
+    };
+
     return Words;
 
   })(NamedCollection);
 
   if (window.DB != null) {
     describe("DB", function() {
-      var gpcs, graphemes, phonemes, sentences, sequences, words;
-      graphemes = new Graphemes(DB.graphemes, {
+      var gpcs, graphemes, phonemes, sentences, sequences, store, words;
+      store = new Store(DB, {
         parse: true
       });
-      phonemes = new Phonemes(DB.phonemes, {
-        parse: true
-      });
-      gpcs = new GPCs(DB.gpcs, {
-        parse: true,
-        graphemes: graphemes,
-        phonemes: phonemes
-      });
-      words = new Words(DB.words, {
-        parse: true,
-        gpcs: gpcs
-      });
-      sentences = new Sentences(DB.sentences, {
-        parse: true,
-        words: words
-      });
-      sequences = new Sequences(DB.sequences, {
-        parse: true,
-        sentences: sentences,
-        words: words,
-        gpcs: gpcs
-      });
+      graphemes = store.graphemes();
+      phonemes = store.phonemes();
+      gpcs = store.gpcs();
+      words = store.words();
+      sentences = store.sentences();
+      sequences = store.sequences();
       describe("graphemes", function() {
         return it("should load", function() {
           return (expect(graphemes.getByName('a'))).not.toBeNull();
@@ -721,40 +867,41 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       });
       describe("GPCs", function() {
         it("should load", function() {
-          return (expect(gpcs.getByName('a_a'))).not.toBeNull();
+          return (expect(gpcs.getByName('s_s'))).not.toBeNull();
         });
         it("should associate grapheme id to graphemes", function() {
           var gpc, grapheme;
-          gpc = gpcs.getByName('a_a');
+          gpc = gpcs.getByName('s_s');
+          console.log(gpc.attributes);
           grapheme = gpc.get('grapheme');
           return (expect(grapheme instanceof Grapheme)).toBeTruthy();
         });
         return it("should associate phoneme id to phonemes", function() {
           var gpc, phoneme;
-          gpc = gpcs.getByName('a_a');
+          gpc = gpcs.getByName('s_s');
           phoneme = gpc.get('phoneme');
           return (expect(phoneme instanceof Phoneme)).toBeTruthy();
         });
       });
       describe("words", function() {
         it("should load", function() {
-          return (expect(words.getByName('ambao'))).not.toBeNull();
+          return (expect(words.getByName('long'))).not.toBeNull();
         });
         return it("should associate gpc ids to gpcs", function() {
-          var ambao, ambaoGpcs, gpc;
-          ambao = words.getByName('ambao');
-          ambaoGpcs = ambao.get('gpcs');
-          gpc = _.first(ambaoGpcs);
-          return (expect(gpc.get('name'))).toEqual('a_a');
+          var gpc, long, longGpcs;
+          long = words.getByName('long');
+          longGpcs = long.get('gpcs');
+          gpc = _.first(longGpcs);
+          return (expect(gpc.get('name'))).toEqual('l_l');
         });
       });
       describe("sentences", function() {
         it("should load", function() {
-          return (expect(sentences.getByName('Warumi 16:24'))).not.toBeNull();
+          return (expect(sentences.getByName('Jhn 3:16'))).not.toBeNull();
         });
         return it("should associate word ids to words", function() {
           var sentence, word;
-          sentence = sentences.getByName('Warumi 16:24');
+          sentence = sentences.getByName('Jhn 3:16');
           word = _.first(sentence.get('words'));
           return (expect(word instanceof Word)).toBeTruthy();
         });
@@ -842,50 +989,63 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     });
   });
 
-  describe("GPCState", function() {
-    var state;
-    state = null;
+  describe("UserGPC", function() {
+    var ugpc;
+    ugpc = null;
     beforeEach(function() {
       var gpc;
       gpc = new GPC({
         name: "a"
       });
-      return state = new GPCState({
+      return ugpc = new UserGPC({
         gpc: gpc
       });
     });
-    it("should make a gpc active but not focused when toggled", function() {
-      state.toggle();
-      (expect(state.get('active'))).toBeTruthy();
-      return (expect(state.get('focus'))).toBeFalsy();
+    it("should make a gpc known but not focused when toggled", function() {
+      ugpc.toggle();
+      (expect(ugpc.isKnown())).toBeTruthy();
+      return (expect(ugpc.hasFocus())).toBeFalsy();
     });
-    it("should make a gpc active and focused when toggled twice", function() {
+    it("should make a gpc known and focused when toggled twice", function() {
       _.times(2, function() {
-        return state.toggle();
+        return ugpc.toggle();
       });
-      (expect(state.get('active'))).toBeTruthy();
-      return (expect(state.get('focus'))).toBeTruthy();
+      (expect(ugpc.isKnown())).toBeTruthy();
+      return (expect(ugpc.hasFocus())).toBeTruthy();
     });
-    return it("should make a gpc neither active nor focused when toggled thrice", function() {
+    return it("should make a gpc neither known nor focused when toggled thrice", function() {
       _.times(3, function() {
-        return state.toggle();
+        return ugpc.toggle();
       });
-      (expect(state.get('active'))).toBeFalsy();
-      return (expect(state.get('focus'))).toBeFalsy();
+      (expect(ugpc.isKnown())).toBeFalsy();
+      return (expect(ugpc.hasFocus())).toBeFalsy();
     });
   });
 
-  describe("GPCStates", function() {
-    var states;
-    states = null;
-    return beforeEach(function() {
-      var gpcs;
+  describe("UserGPCs", function() {
+    var gpcs, ugpcs;
+    ugpcs = null;
+    gpcs = null;
+    beforeEach(function() {
+      var coll;
       gpcs = _.map(['a', 'b', 'c'], function(name) {
         return new GPC({
           name: name
         });
       });
-      return states = new GPCStates(gpcs);
+      coll = new GPCs(gpcs);
+      return ugpcs = new UserGPCs([], {
+        gpcs: coll
+      });
+    });
+    it("should return a list of known GPCs", function() {
+      ugpcs.first().toggle();
+      return (expect(ugpcs.getKnownGPCs())).toEqual([gpcs[0]]);
+    });
+    return it("should return a list of focus GPCs", function() {
+      ugpcs.last().toggle();
+      ugpcs.last().toggle();
+      return (expect(ugpcs.getFocusGPCs())).toEqual([gpcs[2]]);
     });
   });
 
@@ -1295,7 +1455,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       parse: true,
       gpcs: gpcs
     });
-    return it("should be able to find words with target GPCs", function() {});
+    it("should be able to find words with target GPCs", function() {
+      var aword, focus, gpc;
+      gpc = gpcs.getByName("ei_ei");
+      aword = words.getByName("edukeitim");
+      focus = words.getFocusGPCWords([gpc]);
+      (expect(focus.length)).toEqual(5);
+      return (expect(_.include(focus, aword))).toBeTruthy();
+    });
+    it("should be able to filter words only including certain GPCs", function() {
+      var avail, aword, gpcE, gpcM;
+      gpcE = gpcs.getByName("e_e");
+      gpcM = gpcs.getByName("m_m");
+      avail = words.getKnownGPCWords([gpcE, gpcM]);
+      (expect(avail.length)).toEqual(4);
+      aword = words.getByName("meme");
+      return (expect(_.include(avail, aword))).toBeTruthy();
+    });
+    return it("should be able to filter words only including certain GPCs but must have other GPCs", function() {
+      var avail, aword, gpcE, gpcM;
+      gpcE = gpcs.getByName("e_e");
+      gpcM = gpcs.getByName("m_m");
+      avail = words.getKnownFocusGPCWords([gpcE, gpcM], [gpcM]);
+      (expect(avail.length)).toEqual(3);
+      aword = words.getByName("meme");
+      return (expect(_.include(avail, aword))).toBeTruthy();
+    });
   });
 
 }).call(this);

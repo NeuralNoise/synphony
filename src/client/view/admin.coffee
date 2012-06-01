@@ -1,6 +1,6 @@
 class AdminPageView extends PageView
   toolbar: ->
-    'Spelling Patterns': (new GPCButtonsView collection: @store.gpcs, id: "spelling-patterns")
+    'Spelling Patterns': (new GPCButtonsView collection: @store.userGPCs, id: "spelling-patterns")
 
   menu: ->
     'Home': '#'
