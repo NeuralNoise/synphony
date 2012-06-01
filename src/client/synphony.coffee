@@ -6,8 +6,10 @@ jQuery ->
   # making a whole view for them. If you find you need state or
   # access to the model, make a view instead.
   ($ '#side-panel-toggle').click ->
-    ($ '#control-panel').toggle 'fast', 'swing'
-    ($ '#side-panel').toggle 'fast', 'swing'
+    # ($ '#control-panel').toggle 'fast', 'swing'
+    # ($ '#side-panel').toggle 'fast', 'swing'
+    ($ '#control-panel').toggle()
+    ($ '#side-panel').toggle()
     ($ '#side-panel-toggle').toggleClass 'active'
 
   store = new Store
