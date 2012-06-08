@@ -5,19 +5,19 @@ templates['admin/home_page'] = template(function (Handlebars,depth0,helpers,part
   var foundHelper, self=this;
 
 
-  return "<h2>Home</h2>\r\n";});
+  return "<h2>Home</h2>\n";});
 templates['admin/sentences_page'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var foundHelper, self=this;
 
 
-  return "<h2>Sentences</h2>\r\n";});
+  return "<h2>Sentences</h2>\n";});
 templates['admin/words_page'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var foundHelper, self=this;
 
 
-  return "<h2>Words</h2>\r\n<div id=\"words-list\">\r\n</div>";});
+  return "<h2>Words</h2>\n<div id=\"words-list\">\n</div>";});
 templates['common/menu'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression, blockHelperMissing=helpers.blockHelperMissing;
@@ -25,7 +25,7 @@ templates['common/menu'] = template(function (Handlebars,depth0,helpers,partials
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n    <li><a href=\"";
+  buffer += "\n    <li><a href=\"";
   foundHelper = helpers.value;
   stack1 = foundHelper || depth0.value;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -35,10 +35,10 @@ function program1(depth0,data) {
   stack1 = foundHelper || depth0.key;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "key", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</a></li>\r\n  ";
+  buffer += escapeExpression(stack1) + "</a></li>\n  ";
   return buffer;}
 
-  buffer += "<ul>\r\n  ";
+  buffer += "<ul>\n  ";
   foundHelper = helpers.menu;
   stack1 = foundHelper || depth0.menu;
   foundHelper = helpers.each_pair;
@@ -50,7 +50,7 @@ function program1(depth0,data) {
   if(foundHelper && typeof stack2 === functionType) { stack1 = stack2.call(depth0, stack1, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack2, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n</ul>\r\n";
+  buffer += "\n</ul>\n";
   return buffer;});
 templates['common/toolbar'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
@@ -59,17 +59,17 @@ templates['common/toolbar'] = template(function (Handlebars,depth0,helpers,parti
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n  <h3 class=\"active\"><a href=\"#\" class=\"accordion\">";
+  buffer += "\n  <h3 class=\"active\"><a href=\"#\" class=\"accordion\">";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</a></h3>\r\n  <div id=\"";
+  buffer += escapeExpression(stack1) + "</a></h3>\n  <div id=\"";
   foundHelper = helpers.id;
   stack1 = foundHelper || depth0.id;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "id", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\"></div>\r\n";
+  buffer += escapeExpression(stack1) + "\"></div>\n";
   return buffer;}
 
   stack1 = depth0;
@@ -80,9 +80,9 @@ function program1(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n";
+  buffer += "\n";
   return buffer;});
-templates['gpcs/button'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['gpc/button'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
@@ -126,24 +126,24 @@ function program3(depth0,data) {
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</button>\r\n";
+  buffer += escapeExpression(stack1) + "</button>\n";
   return buffer;});
 templates['segmenter/wordlist'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
 
-  buffer += "<label for=\"wordlist\">\r\n  <h3>Word List:</h3>\r\n</label>\r\n<div id=\"wordlist-count\">\r\n  ";
+  buffer += "<label for=\"wordlist\">\n  <h3>Word List:</h3>\n</label>\n<div id=\"wordlist-count\">\n  ";
   foundHelper = helpers.count;
   stack1 = foundHelper || depth0.count;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "count", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\r\n</div>\r\n<div>\r\n  <textarea\r\n      id=\"wordlist\" name=\"wordlist\"\r\n      placeholder=\"Paste the word list here using &lt;ctrl+v&gt; or &lt;cmd+v&gt;\"\r\n    >";
+  buffer += escapeExpression(stack1) + "\n</div>\n<div>\n  <textarea\n      id=\"wordlist\" name=\"wordlist\"\n      placeholder=\"Paste the word list here using &lt;ctrl+v&gt; or &lt;cmd+v&gt;\"\n    >";
   foundHelper = helpers.wordlist;
   stack1 = foundHelper || depth0.wordlist;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "wordlist", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</textarea>\r\n</div><div class=\"buttons\">\r\n  <button id=\"wordlist-clean\">Clean</button>\r\n  <button id=\"wordlist-clean-uppercase\">Clean Uppercase</button>\r\n  <button id=\"wordlist-clean-debris\">Clean \"Debris\"</button>\r\n  <span id=\"wordlist-saved\" style=\"display:none;\">Saved...</span>\r\n</div>\r\n";
+  buffer += escapeExpression(stack1) + "</textarea>\n</div><div class=\"buttons\">\n  <button id=\"wordlist-clean\">Clean</button>\n  <button id=\"wordlist-clean-uppercase\">Clean Uppercase</button>\n  <button id=\"wordlist-clean-debris\">Clean \"Debris\"</button>\n  <span id=\"wordlist-saved\" style=\"display:none;\">Saved...</span>\n</div>\n";
   return buffer;});
 templates['segmenter/wordlist_page'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
@@ -155,7 +155,7 @@ templates['segmenter/wordlist_page'] = template(function (Handlebars,depth0,help
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "wordlist", { hash: {} }); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n";
+  buffer += "\n";
   return buffer;});
 templates['words/plain_word'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
@@ -166,12 +166,12 @@ templates['words/plain_word'] = template(function (Handlebars,depth0,helpers,par
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\r\n";
+  buffer += escapeExpression(stack1) + "\n";
   return buffer;});
 templates['words/words_list'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var foundHelper, self=this;
 
 
-  return "<ul>\r\n</ul>";});
+  return "<ul>\n</ul>";});
 })();

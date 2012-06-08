@@ -80,7 +80,7 @@ task 'build', 'Build build/ from src/', ->
   # spawnCoffee ['-c', '-j', 'build/client/synphony.js'].concat(CLIENT_FILES)
   # spawnCoffee ['-c', '-j', 'build/client/tests.js'].concat(TEST_FILES)
   spawnCoffee ['-c', '-o', 'build/client', 'src/client']
-  spawnCoffee ['-c', '-o', 'build/test', 'src/test']
+  spawnCoffee ['-c', '-o', 'build/test', 'tests']
 
 task 'watch', 'Build build/ from src/', ->
   spawnCoffee ['-w', '-c', '-o', 'build/server', 'src/server']
@@ -92,10 +92,3 @@ task 'watch', 'Build build/ from src/', ->
 task 'precompile', 'Precompile handlebars templates', ->
   spawnHandlebars ['templates', '-f', 'build/client/templates.js']
 
-task 'unicode', 'Downloads and compiles unicode stuffs', ->
-  unicodeCompiler = require './src/server/unicode_compiler'
-  unicodeCompiler.run (err) ->
-    if err?
-      console.log err
-    else
-      console.log "Success"
