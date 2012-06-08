@@ -9,11 +9,13 @@
   <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine-html.js"></script>
 
+  <!--
   <script src="../public/js/libs/jquery-1.7.2.min.js"></script>
   <script src="../public/js/libs/underscore.js"></script>
   <script src="../public/js/libs/backbone.js"></script>
   <script src="../public/js/libs/handlebars.runtime-1.0.0.beta.6.js"></script>
   <script src="../public/js/libs/xregexp-all.js"></script>
+  -->
 
 
   <!-- include source files here... -->
@@ -25,9 +27,11 @@
   </script>
   <script type="text/javascript" src="data/tok_pisin.jsonp"></script>
 
-
   <!-- include spec files here... -->
-  <script type="text/javascript" src="../build/client/tests.js"></script>
+
+  <script type="text/javascript"
+      data-main="../build/tests/tests.js"
+      src="../public/js/libs/require.js"></script>
 
   <script type="text/javascript">
     (function() {

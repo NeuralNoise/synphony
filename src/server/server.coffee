@@ -27,6 +27,27 @@ staticFile = (root, path) ->
       root: __dirname+'/../..'+root
       path: path
 
+staticPath = (root, path) ->
+  (req, res) ->
+    url = req.url
+    if url.indexOf(path) != 0
+      console.log "Orig URL: #{url}"
+      return res.send 404
+    url = url.substring(path.length)
+    console.log "URL: #{url}"
+
+    next = (err) ->
+      if err
+        console.log err
+        res.send 500
+      else
+        res.send 404
+    express.static.send req, res, next,
+      getOnly: true
+      root: __dirname+'/../..'+root
+      path: url
+
+
 compileStyle = (callback) ->
   fs.readFile __dirname+'/../../src/style/synphony.less', 'utf8', (err, data) ->
     if err
@@ -56,6 +77,13 @@ module.exports.run = ->
   # app.get '/js/libs/backbone.js', (staticFile '/node_modules/backbone', 'backbone.js')
   app.get '/js/synphony.js', (staticFile '/build/client', 'synphony.js')
   app.get '/js/templates.js', (staticFile '/build/client', 'templates.js')
+
+  for folder in ['collection', 'model', 'router', 'view', 'view_model']
+    url = "/js/#{folder}"
+    app.get "#{url}/:file.js", (staticPath "/build/client/#{folder}", url)
+  app.get "/js/view/:folder/:file.js", (staticPath "/build/client/view", "/js/view")
+
+  app.get "/templates/:folder/:file.handlebars", (staticPath "/templates", "/templates")
 
   app.get '/css/synphony.css', (req, res) ->
     compileStyle (error, css) ->

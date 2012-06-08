@@ -1,4 +1,6 @@
-if window.DB?
+define ['model/store', 'model/grapheme', 'model/phoneme', 'model/word',
+        'collection/sequence_elements', 'model/gpc', 'model/sentence'],
+(Store, Grapheme, Phoneme, Word, SequenceElements, GPC, Sentence) ->
   describe "DB", ->
     store = new Store DB, parse: true
     graphemes = store.graphemes()

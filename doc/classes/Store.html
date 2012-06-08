@@ -104,12 +104,18 @@
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src/client/model/_store.coffee</td>
+          <td>src/client/model/store.coffee</td>
+        </tr>
+        <tr>
+          <td>Inherits:</td>
+          <td>
+            <a href="../classes/BaseModel.html">BaseModel</a>
+          </td>
         </tr>
       </table>
       <h2>Overview</h2>
       <div class='docstring'>
-  <p>This is the store of all objects required by synphony </p> 
+  <p>This is the store of all collections required by synphony. The primary responsibility of this class is to ensure collections are loaded in the proper order so that dependancies are met. </p> 
 </div>
 <div class='tags'>
 </div>
@@ -118,7 +124,7 @@
   <li>
     <span class='signature'>
       <a href='#constructor-instance'>
-        - (void) <strong>constructor</strong>()
+        - (void) <strong>constructor</strong>(attributes, options)
       </a>
     </span>
     <span class='constructor note title'>Constructor</span>
@@ -128,20 +134,111 @@
   </li>
   <li>
     <span class='signature'>
-      <a href='#loadAll-instance'>
-        - (void) <strong>loadAll</strong>(callback)
+      <a href='#phonemes-instance'>
+        - (void) <strong>phonemes</strong>()
       </a>
     </span>
     <span class='desc'>
-      Load all
+      Get the phonemes collection @returns [Phonemes] phonemes
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#graphemes-instance'>
+        - (void) <strong>graphemes</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Get the graphemes collection @returns [Graphemes] graphemes
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#gpcs-instance'>
+        - (void) <strong>gpcs</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Get the gpcs collection @returns [GPCs] gpcs
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#words-instance'>
+        - (void) <strong>words</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Get the words collection @returns [Words] words
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#sentences-instance'>
+        - (void) <strong>sentences</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Get the sentences collection @returns [Sentences] sentences
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#sequences-instance'>
+        - (void) <strong>sequences</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Get the sequences collection @returns [Sequences] sequences
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#userGPCs-instance'>
+        - (void) <strong>userGPCs</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Get the userGPCs collection @returns [UserGPCs] userGPCs
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#fetch-instance'>
+        - (void) <strong>fetch</strong>(options)
+      </a>
+    </span>
+    <span class='desc'>
+      Fetches each collection individually in the proper order.
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#reset-instance'>
+        - (void) <strong>reset</strong>(attributes, options)
+      </a>
+    </span>
+    <span class='desc'>
+      Take one `Object` with all collections and reset each collection in the proper order.
     </span>
   </li>
 </ul>
+      <h2>
+        <small>Inherited Method Summary</small>
+      </h2>
+      <h3 class='inherited'>
+        Methods inherited from
+        <a href="../classes/BaseModel.html">BaseModel</a>
+      </h3>
+      <p class='inherited'>
+                <a href="../classes/BaseModel.html#constructor-instance">#constructor</a>,
+        <a href="../classes/BaseModel.html#parseIdLookup-instance">#parseIdLookup</a>
+      </p>
       <h2>Constructor Details</h2>
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='constructor-instance'>
-      - (void) <strong>constructor</strong>()
+      - (void) <strong>constructor</strong>(attributes, options)
     </p>
     <div class='tags'>
 </div>
@@ -150,11 +247,91 @@
       <h2>Instance Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='loadAll-instance'>
-      - (void) <strong>loadAll</strong>(callback)
+    <p class='signature' id='phonemes-instance'>
+      - (void) <strong>phonemes</strong>()
     </p>
     <div class='docstring'>
-  <p>Load all  </p> 
+  <p>Get the phonemes collection @returns [Phonemes] phonemes </p> 
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='graphemes-instance'>
+      - (void) <strong>graphemes</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Get the graphemes collection @returns [Graphemes] graphemes </p> 
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='gpcs-instance'>
+      - (void) <strong>gpcs</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Get the gpcs collection @returns [GPCs] gpcs </p> 
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='words-instance'>
+      - (void) <strong>words</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Get the words collection @returns [Words] words </p> 
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='sentences-instance'>
+      - (void) <strong>sentences</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Get the sentences collection @returns [Sentences] sentences </p> 
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='sequences-instance'>
+      - (void) <strong>sequences</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Get the sequences collection @returns [Sequences] sequences </p> 
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='userGPCs-instance'>
+      - (void) <strong>userGPCs</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Get the userGPCs collection @returns [UserGPCs] userGPCs </p> 
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='fetch-instance'>
+      - (void) <strong>fetch</strong>(options)
+    </p>
+    <div class='docstring'>
+  <p>Fetches each collection individually in the proper order. </p> 
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='reset-instance'>
+      - (void) <strong>reset</strong>(attributes, options)
+    </p>
+    <div class='docstring'>
+  <p>Take one <code>Object</code> with all collections and reset each collection in the proper order. </p> 
 </div>
 <div class='tags'>
 </div>
@@ -163,7 +340,7 @@
     </div>
     <div id='footer'>
   Generated on
-  Fri May 25 2012 14:21:53 GMT-0700 (PDT)
+  Mon Jun 04 2012 13:25:21 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.7.1
