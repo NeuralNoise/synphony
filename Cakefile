@@ -6,6 +6,7 @@ fs = require 'fs'
 LICENSE_FILES = [ 'src/license.coffee' ]
 
 CLIENT_MODEL_FILES = [
+  'src/client/model/_base.coffee'
   'src/client/model/_named.coffee'
   'src/client/model/_store.coffee'
   'src/client/model/gpcs.coffee'
@@ -76,13 +77,17 @@ spawnHandlebars = (opts, callback) ->
 
 task 'build', 'Build build/ from src/', ->
   spawnCoffee ['-c', '-o', 'build/server', 'src/server']
-  spawnCoffee ['-c', '-j', 'build/client/synphony.js'].concat(CLIENT_FILES)
-  spawnCoffee ['-c', '-j', 'build/client/tests.js'].concat(TEST_FILES)
+  # spawnCoffee ['-c', '-j', 'build/client/synphony.js'].concat(CLIENT_FILES)
+  # spawnCoffee ['-c', '-j', 'build/client/tests.js'].concat(TEST_FILES)
+  spawnCoffee ['-c', '-o', 'build/client', 'src/client']
+  spawnCoffee ['-c', '-o', 'build/test', 'src/test']
 
 task 'watch', 'Build build/ from src/', ->
   spawnCoffee ['-w', '-c', '-o', 'build/server', 'src/server']
-  spawnCoffee ['-w', '-c', '-j', 'build/client/synphony.js'].concat(CLIENT_FILES)
-  spawnCoffee ['-w', '-c', '-j', 'build/client/tests.js'].concat(TEST_FILES)
+  # spawnCoffee ['-w', '-c', '-j', 'build/client/synphony.js'].concat(CLIENT_FILES)
+  # spawnCoffee ['-w', '-c', '-j', 'build/client/tests.js'].concat(TEST_FILES)
+  spawnCoffee ['-w', '-c', '-o', 'build/client', 'src/client']
+  spawnCoffee ['-w', '-c', '-o', 'build/tests', 'tests']
 
 task 'precompile', 'Precompile handlebars templates', ->
   spawnHandlebars ['templates', '-f', 'build/client/templates.js']

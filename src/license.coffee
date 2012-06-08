@@ -1,6 +1,6 @@
 ###
 SynPhony: Synthetic Phonics tool for early grade literacy teaching
-Copyright (C) 2012  Ryan J. Sanche  <ryan@rj45.ca>
+Copyright (C) 2012  Ryan J. Sanche and Norbert Rennert
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

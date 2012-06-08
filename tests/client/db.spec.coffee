@@ -1,11 +1,14 @@
-if window.DB?
+define ['model/store', 'model/grapheme', 'model/phoneme', 'model/word',
+        'collection/sequence_elements', 'model/gpc', 'model/sentence'],
+(Store, Grapheme, Phoneme, Word, SequenceElements, GPC, Sentence) ->
   describe "DB", ->
-    graphemes = new Graphemes DB.graphemes, parse: true
-    phonemes = new Phonemes DB.phonemes, parse: true
-    gpcs = new GPCs DB.gpcs, { parse: true, graphemes, phonemes }
-    words = new Words DB.words, { parse: true, gpcs }
-    sentences = new Sentences DB.sentences, { parse: true, words }
-    sequences = new Sequences DB.sequences, { parse: true, sentences, words, gpcs }
+    store = new Store DB, parse: true
+    graphemes = store.graphemes()
+    phonemes = store.phonemes()
+    gpcs = store.gpcs()
+    words = store.words()
+    sentences = store.sentences()
+    sequences = store.sequences()
 
     describe "graphemes", ->
       it "should load", ->
@@ -17,34 +20,35 @@ if window.DB?
 
     describe "GPCs", ->
       it "should load", ->
-        (expect gpcs.getByName 'a_a').not.toBeNull()
+        (expect gpcs.getByName 's_s').not.toBeNull()
 
       it "should associate grapheme id to graphemes", ->
-        gpc = gpcs.getByName 'a_a'
+        gpc = gpcs.getByName 's_s'
+        console.log gpc.attributes
         grapheme = gpc.get 'grapheme'
         (expect grapheme instanceof Grapheme).toBeTruthy()
 
       it "should associate phoneme id to phonemes", ->
-        gpc = gpcs.getByName 'a_a'
+        gpc = gpcs.getByName 's_s'
         phoneme = gpc.get 'phoneme'
         (expect phoneme instanceof Phoneme).toBeTruthy()
 
     describe "words", ->
       it "should load", ->
-        (expect words.getByName 'ambao').not.toBeNull()
+        (expect words.getByName 'long').not.toBeNull()
 
       it "should associate gpc ids to gpcs", ->
-        ambao = words.getByName 'ambao'
-        ambaoGpcs = ambao.get 'gpcs'
-        gpc = _.first ambaoGpcs
-        (expect gpc.get 'name').toEqual 'a_a'
+        long = words.getByName 'long'
+        longGpcs = long.get 'gpcs'
+        gpc = _.first longGpcs
+        (expect gpc.get 'name').toEqual 'l_l'
 
     describe "sentences", ->
       it "should load", ->
-        (expect sentences.getByName 'Warumi 16:24').not.toBeNull()
+        (expect sentences.getByName 'Jhn 3:16').not.toBeNull()
 
       it "should associate word ids to words", ->
-        sentence = sentences.getByName 'Warumi 16:24'
+        sentence = sentences.getByName 'Jhn 3:16'
         word = _.first sentence.get 'words'
         (expect word instanceof Word).toBeTruthy()
 
