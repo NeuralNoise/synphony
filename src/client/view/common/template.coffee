@@ -1,6 +1,7 @@
-define ['backbone', 'handlebars', 'view/common/helpers'], (Backbone, Handlebars, helpers) ->
+define ['view/common/base', 'handlebars', 'view/common/helpers'],
+(BaseView, Handlebars, helpers) ->
   # Basic view which renders a template
-  class TemplateView extends Backbone.View
+  class TemplateView extends BaseView
     template: ""
 
     constructor: (options = {}) ->
@@ -9,7 +10,10 @@ define ['backbone', 'handlebars', 'view/common/helpers'], (Backbone, Handlebars,
       @subviews = {}
 
     templateData: ->
-      @model?.attributes ? {}
+      if @model?
+        @model.toJSON()
+      else if @collection?
+        items: @collection.toJSON()
 
     toHTML: ->
       @compiledTemplate ?= Handlebars.compile(@template)

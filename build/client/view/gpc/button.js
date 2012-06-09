@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['view/common/template', 'text!templates/gpc/button.handlebars'], function(TemplateView, hbs_template) {
+  define(['view/common/template', 'text!templates/gpc/button.handlebars'], function(TemplateView, hbsTemplate) {
     var GPCButtonView;
     return GPCButtonView = (function(_super) {
 
@@ -11,7 +11,7 @@
 
       GPCButtonView.name = 'GPCButtonView';
 
-      GPCButtonView.prototype.template = hbs_template;
+      GPCButtonView.prototype.template = hbsTemplate;
 
       GPCButtonView.prototype.tagName = 'span';
 
@@ -25,12 +25,10 @@
       }
 
       GPCButtonView.prototype.templateData = function() {
-        var grapheme;
-        grapheme = (this.model.get('gpc')).get('grapheme');
         return {
-          active: this.model.isKnown(),
+          known: this.model.isKnown(),
           focus: this.model.hasFocus(),
-          name: grapheme.name()
+          name: this.model.graphemeName()
         };
       };
 

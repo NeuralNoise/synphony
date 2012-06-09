@@ -1,7 +1,7 @@
 define ['view/common/template', 'text!templates/gpc/button.handlebars'],
-(TemplateView, hbs_template) ->
+(TemplateView, hbsTemplate) ->
   class GPCButtonView extends TemplateView
-    template: hbs_template
+    template: hbsTemplate
     tagName: 'span'
 
     events:
@@ -13,11 +13,9 @@ define ['view/common/template', 'text!templates/gpc/button.handlebars'],
       @model.on 'change', @render, @
 
     templateData: ->
-      grapheme = (@model.get 'gpc').get 'grapheme'
-
-      active: @model.isKnown()
+      known: @model.isKnown()
       focus: @model.hasFocus()
-      name: grapheme.name()
+      name: @model.graphemeName()
 
     onClick: (event) ->
       event.preventDefault()

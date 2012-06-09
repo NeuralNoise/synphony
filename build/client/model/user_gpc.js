@@ -43,6 +43,10 @@
         return this.get('gpc');
       };
 
+      UserGPC.prototype.graphemeName = function() {
+        return this.gpc().graphemeName();
+      };
+
       UserGPC.prototype.toggle = function() {
         if (!this.isKnown() && !this.hasFocus()) {
           return this.set({

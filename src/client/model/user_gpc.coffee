@@ -16,6 +16,9 @@ define ['model/base'], (BaseModel) ->
 
     gpc: -> @get 'gpc'
 
+    graphemeName: ->
+      @gpc().graphemeName()
+
     toggle: ->
       if not @isKnown() and not @hasFocus()
         @set known: true

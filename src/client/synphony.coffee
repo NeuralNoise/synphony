@@ -48,6 +48,7 @@ define ['jquery', 'backbone', 'model/store', 'router/admin'],
     store = new Store
     store.fetch
       success: ->
+        console.log "Loaded, starting router"
         adminRouter = new AdminRouter { store }
         Backbone.history.start()
       error: ->

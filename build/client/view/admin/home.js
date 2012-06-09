@@ -3,23 +3,23 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['view/admin/page', 'text!templates/admin/home_page.handlebars'], function(AdminPageView, hbs_template) {
-    var AdminHomePageView;
-    return AdminHomePageView = (function(_super) {
+  define(['view/common/template', 'text!templates/admin/home_page.handlebars'], function(TemplateView, hbsTemplate) {
+    var AdminHomeView;
+    return AdminHomeView = (function(_super) {
 
-      __extends(AdminHomePageView, _super);
+      __extends(AdminHomeView, _super);
 
-      AdminHomePageView.name = 'AdminHomePageView';
+      AdminHomeView.name = 'AdminHomeView';
 
-      function AdminHomePageView() {
-        return AdminHomePageView.__super__.constructor.apply(this, arguments);
+      function AdminHomeView() {
+        return AdminHomeView.__super__.constructor.apply(this, arguments);
       }
 
-      AdminHomePageView.prototype.template = hbs_template;
+      AdminHomeView.prototype.template = hbsTemplate;
 
-      return AdminHomePageView;
+      return AdminHomeView;
 
-    })(AdminPageView);
+    })(TemplateView);
   });
 
 }).call(this);

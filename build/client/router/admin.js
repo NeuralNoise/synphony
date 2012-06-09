@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['backbone', 'view/admin/home'], function(Backbone, AdminHomePageView) {
+  define(['backbone', 'view/common/layout', 'view/common/menu', 'view/common/sidebar', 'view/admin/home', 'view/admin/words', 'view/admin/sentences', 'view/gpc/button', 'view/common/collection'], function(Backbone, Layout, MenuView, SidebarView, HomeView, WordsView, SentencesView, GPCButtonView, CollectionView) {
     var AdminRouter;
     return AdminRouter = (function(_super) {
 
@@ -17,23 +17,78 @@
         "sentences": "sentences"
       };
 
+      AdminRouter.prototype.menu = {
+        "Home": "#",
+        "Words": "#words",
+        "Sentences": "#sentences"
+      };
+
+      AdminRouter.prototype.sidebar = function() {
+        return {
+          'Spelling Patterns': this.makeSpellingPatterns()
+        };
+      };
+
       function AdminRouter(options) {
-        this.store = options.store;
         AdminRouter.__super__.constructor.call(this, options);
+        this.store = options.store;
+        this.layout = new Layout({
+          menu: "#main-menu",
+          content: "#main-content",
+          sidebar: "#toolbar-content"
+        });
+        this.setup = false;
       }
 
       AdminRouter.prototype.home = function() {
-        return this.showPage(new AdminHomePageView({
+        console.log("Showing admin home page");
+        return this.showContent(new HomeView({
           store: this.store
         }));
       };
 
-      AdminRouter.prototype.words = function() {};
+      AdminRouter.prototype.words = function() {
+        console.log("Showing admin words page");
+        return this.showContent(new WordsView({
+          store: this.store
+        }));
+      };
 
-      AdminRouter.prototype.sentences = function() {};
+      AdminRouter.prototype.sentences = function() {
+        console.log("Showing admin sentences page");
+        return this.showContent(new SentencesView({
+          store: this.store
+        }));
+      };
 
-      AdminRouter.prototype.showPage = function(pageView) {
-        return pageView.render();
+      AdminRouter.prototype.makeSpellingPatterns = function() {
+        return new CollectionView({
+          id: 'spelling-patterns',
+          collection: this.store.userGPCs(),
+          modelView: GPCButtonView
+        });
+      };
+
+      AdminRouter.prototype.setupDefaultViews = function() {
+        if (this.setup) {
+          return;
+        }
+        this.setup = true;
+        this.layout.menu.render(new MenuView({
+          model: {
+            menu: this.menu
+          }
+        }));
+        return this.layout.sidebar.render(new SidebarView({
+          model: {
+            sections: this.sidebar()
+          }
+        }));
+      };
+
+      AdminRouter.prototype.showContent = function(view) {
+        this.setupDefaultViews();
+        return this.layout.content.render(view);
       };
 
       return AdminRouter;

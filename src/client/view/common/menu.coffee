@@ -1,7 +1,7 @@
 define ['view/common/template', 'text!templates/common/menu.handlebars'],
-(TemplateView, hbs_template) ->
+(TemplateView, hbsTemplate) ->
   class MenuView extends TemplateView
-    template: hbs_template
-    el: '#main-menu'
+    template: hbsTemplate
+    tagName: 'span'
 
     templateData: -> @model

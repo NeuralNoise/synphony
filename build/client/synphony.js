@@ -42,6 +42,7 @@
       store = new Store;
       return store.fetch({
         success: function() {
+          console.log("Loaded, starting router");
           adminRouter = new AdminRouter({
             store: store
           });

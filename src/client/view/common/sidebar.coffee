@@ -1,9 +1,8 @@
 define ['underscore', 'jquery', 'view/common/template',
-        'text!templates/common/toolbar.handlebars'],
-(_, $, TemplateView, hbs_template) ->
-  class ToolbarView extends TemplateView
-    template: hbs_template
-    el: '#toolbar-content'
+        'text!templates/common/sidebar.handlebars'],
+(_, $, TemplateView, hbsTemplate) ->
+  class SidebarView extends TemplateView
+    template: hbsTemplate
 
     events:
       "click .accordion": "accordion"
@@ -15,12 +14,12 @@ define ['underscore', 'jquery', 'view/common/template',
       parent.next().toggle 'fast'
 
     templateData: ->
-      _.map @model.toolbar, (value, key) ->
+      _.map @model.sections, (value, key) ->
         { name: key, id: value.id }
 
     render: ->
       super
-      console.log "Rendering toolbar view "
-      _.each @model.toolbar, (view) =>
+      console.log "Rendering sidebar view "
+      _.each @model.sections, (view) =>
         (@$ '#'+view.id).replaceWith view.render().el
       @
