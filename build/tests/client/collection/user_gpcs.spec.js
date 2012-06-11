@@ -22,10 +22,15 @@
         ugpcs.first().toggle();
         return (expect(ugpcs.getKnownGPCs())).toEqual([gpcs[0]]);
       });
-      return it("should return a list of focus GPCs", function() {
+      it("should return a list of focus GPCs", function() {
         ugpcs.last().toggle();
         ugpcs.last().toggle();
         return (expect(ugpcs.getFocusGPCs())).toEqual([gpcs[2]]);
+      });
+      return it("should take a list of gpcs and convert them to user gpcs", function() {
+        var mapped;
+        mapped = ugpcs.mapGPCs(gpcs);
+        return (expect(mapped)).toEqual(ugpcs.models);
       });
     });
   });

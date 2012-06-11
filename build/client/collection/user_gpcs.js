@@ -46,6 +46,12 @@
         return this.trigger('reset', this, {});
       };
 
+      UserGPCs.prototype.getByGpc = function(gpc) {
+        return this.find(function(ugpc) {
+          return ugpc.gpc().cid === gpc.cid;
+        });
+      };
+
       UserGPCs.prototype.getKnownGPCs = function() {
         var ugpcs;
         ugpcs = this.filter(function(ugpc) {
@@ -63,6 +69,13 @@
         });
         return _.map(ugpcs, function(ugpc) {
           return ugpc.gpc();
+        });
+      };
+
+      UserGPCs.prototype.mapGPCs = function(gpcs) {
+        var _this = this;
+        return _.map(gpcs, function(gpc) {
+          return _this.getByGpc(gpc);
         });
       };
 

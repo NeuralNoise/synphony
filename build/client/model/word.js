@@ -15,6 +15,14 @@
         return Word.__super__.constructor.apply(this, arguments);
       }
 
+      Word.prototype.gpcs = function() {
+        return this.get('gpcs');
+      };
+
+      Word.prototype.name = function() {
+        return this.get('name');
+      };
+
       Word.prototype.parse = function(data) {
         this.parseIdLookup('gpcs', 'gpcs', data);
         return data;

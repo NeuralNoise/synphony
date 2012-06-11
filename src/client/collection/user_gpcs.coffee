@@ -22,6 +22,8 @@ define ['underscore', 'collection/base', 'model/user_gpc'], (_, BaseCollection, 
       console.log "user gpcs reset because gpcs reset:", @length
       @trigger 'reset', @, {}
 
+    getByGpc: (gpc) ->
+      @find (ugpc) -> ugpc.gpc().cid == gpc.cid
 
     getKnownGPCs: ->
       ugpcs = @filter (ugpc) -> ugpc.isKnown()
@@ -30,3 +32,6 @@ define ['underscore', 'collection/base', 'model/user_gpc'], (_, BaseCollection, 
     getFocusGPCs: ->
       ugpcs = @filter (ugpc) -> ugpc.hasFocus()
       _.map ugpcs, (ugpc) -> ugpc.gpc()
+
+    mapGPCs: (gpcs) ->
+      _.map gpcs, (gpc) => @getByGpc(gpc)

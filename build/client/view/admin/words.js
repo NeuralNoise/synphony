@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['view/common/template', 'view/common/collection', 'view/word/plain', 'text!templates/admin/words_page.handlebars'], function(TemplateView, CollectionView, PlainWordView, hbsTemplate) {
+  define(['view/common/template', 'view/common/collection', 'view/word/list', 'text!templates/admin/words_page.handlebars'], function(TemplateView, CollectionView, WordListView, hbsTemplate) {
     var AdminWordsView;
     return AdminWordsView = (function(_super) {
 
@@ -15,10 +15,18 @@
 
       function AdminWordsView(options) {
         AdminWordsView.__super__.constructor.call(this, options);
+        this.store = options.store;
+        this.collection = this.store.words();
+        this.userGPCs = this.store.userGPCs();
+        this.listView = new WordListView({
+          collection: this.collection,
+          userGPCs: this.userGPCs
+        });
       }
 
       AdminWordsView.prototype.render = function() {
         AdminWordsView.__super__.render.call(this);
+        (this.$('#words-list')).html(this.listView.render().el);
         return this;
       };
 

@@ -10,9 +10,13 @@ define ['model/gpc', 'collection/gpcs', 'collection/user_gpcs'], (GPC, GPCs, Use
 
     it "should return a list of known GPCs", ->
       ugpcs.first().toggle()
-      (expect ugpcs.getKnownGPCs()).toEqual([gpcs[0]])
+      (expect ugpcs.getKnownGPCs()).toEqual [gpcs[0]]
 
     it "should return a list of focus GPCs", ->
       ugpcs.last().toggle()
       ugpcs.last().toggle()
-      (expect ugpcs.getFocusGPCs()).toEqual([gpcs[2]])
+      (expect ugpcs.getFocusGPCs()).toEqual [gpcs[2]]
+
+    it "should take a list of gpcs and convert them to user gpcs", ->
+      mapped = ugpcs.mapGPCs gpcs
+      (expect mapped).toEqual ugpcs.models
