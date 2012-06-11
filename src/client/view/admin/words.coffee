@@ -8,10 +8,15 @@ define ['view/common/template', 'view/common/collection', 'view/word/list', 'tex
       @store = options.store
       @collection = @store.words()
       @userGPCs = @store.userGPCs()
-      @listView = new WordListView { @collection, @userGPCs }
+      @listView = new WordListView { @collection, @userGPCs, filter: => @filterWords() }
       # @wordsView = new CollectionView
       #   collection: @collection
       #   modelView: PlainWordView
+
+    filterWords: ->
+      knownGPCs = @userGPCs.getKnownGPCs()
+      focusGPCs = @userGPCs.getFocusGPCs()
+      @collection.getKnownFocusGPCWords knownGPCs, focusGPCs
 
     render: () ->
       super()

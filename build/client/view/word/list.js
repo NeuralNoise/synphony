@@ -57,7 +57,6 @@
         column = 0;
         html = "<tr>";
         _.each(words, function(word) {
-          console.log(word.name());
           html += "<td>" + _this.wordHTML(word) + "</td>";
           column += 1;
           if (column >= _this.columns) {

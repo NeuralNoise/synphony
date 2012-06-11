@@ -14,15 +14,26 @@
       AdminWordsView.prototype.template = hbsTemplate;
 
       function AdminWordsView(options) {
+        var _this = this;
         AdminWordsView.__super__.constructor.call(this, options);
         this.store = options.store;
         this.collection = this.store.words();
         this.userGPCs = this.store.userGPCs();
         this.listView = new WordListView({
           collection: this.collection,
-          userGPCs: this.userGPCs
+          userGPCs: this.userGPCs,
+          filter: function() {
+            return _this.filterWords();
+          }
         });
       }
+
+      AdminWordsView.prototype.filterWords = function() {
+        var focusGPCs, knownGPCs;
+        knownGPCs = this.userGPCs.getKnownGPCs();
+        focusGPCs = this.userGPCs.getFocusGPCs();
+        return this.collection.getKnownFocusGPCWords(knownGPCs, focusGPCs);
+      };
 
       AdminWordsView.prototype.render = function() {
         AdminWordsView.__super__.render.call(this);

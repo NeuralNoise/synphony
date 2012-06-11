@@ -31,7 +31,7 @@ define ['underscore', 'view/common/base'], (_, BaseView) ->
       column = 0
       html = "<tr>"
       _.each words, (word) =>
-        console.log word.name()
+        # console.log word.name()
         html += "<td>"+@wordHTML(word)+"</td>"
         column += 1
         if column >= @columns
