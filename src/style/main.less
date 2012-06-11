@@ -14,7 +14,13 @@
 body {
   font-family:  "Trebuchet MS",sans-serif;
 }
-hr {border-color: @gray2;}
+hr {
+  border-color: @gray2;
+}
+.rtl {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
 
 /* COLOUR DEFINITIONS */
 @lighter-base: lighten(@base-color, 10%);
@@ -263,18 +269,26 @@ footer {
   background-color: @super-light-gray;
 
   #main-content {
+
     h2 {
       font-size: 1.4em;
       text-align: center;
     }
 
-    #lesson-area td .word {
-      padding: 5px 20px;
-      font: 1.2em "Andika", sans-serif;
-    }
+    #words-list {
 
-    #words-list ul {
-      padding: 0;
+      table#word-list {
+        margin-right: auto;
+        margin-left: auto;
+
+        .word {
+          display: block;
+          text-align: left;
+          margin-right: 30px;
+          font: 2em "Andika", sans-serif;
+          position: relative;
+        }
+      }
     }
   }
 }
