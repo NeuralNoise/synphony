@@ -30,7 +30,6 @@
         it("should associate grapheme id to graphemes", function() {
           var gpc, grapheme;
           gpc = gpcs.getByName('s_s');
-          console.log(gpc.attributes);
           grapheme = gpc.get('grapheme');
           return (expect(grapheme instanceof Grapheme)).toBeTruthy();
         });

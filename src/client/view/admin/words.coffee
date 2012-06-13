@@ -7,15 +7,15 @@ define ['view/common/template', 'view/common/collection', 'view/word/list', 'tex
       super options
       @store = options.store
       @collection = @store.words()
-      @userGPCs = @store.userGPCs()
-      @listView = new WordListView { @collection, @userGPCs, filter: => @filterWords() }
+      @knownGPCs = @store.knownGPCs()
+      @listView = new WordListView { @collection, @knownGPCs, filter: => @filterWords() }
       # @wordsView = new CollectionView
       #   collection: @collection
       #   modelView: PlainWordView
 
     filterWords: ->
-      knownGPCs = @userGPCs.getKnownGPCs()
-      focusGPCs = @userGPCs.getFocusGPCs()
+      knownGPCs = @knownGPCs.models
+      focusGPCs = if @knownGPCs.isEmpty() then [] else [ @knownGPCs.last() ]
       @collection.getKnownFocusGPCWords knownGPCs, focusGPCs
 
     render: () ->

@@ -23,7 +23,7 @@
         this.rendered = false;
         if (this.collection) {
           this.collection.each(function(model) {
-            return _this.addModelView(model);
+            return _this.addModelView(model, -1, options);
           });
           this.collection.on('add', this.onCollectionAdd, this);
           this.collection.on('remove', this.onCollectionRemove, this);
@@ -45,9 +45,9 @@
           options = {};
         }
         modelView = this.options.modelView || this.modelView;
-        options = _.extend(options, {
+        options = _.extend({
           model: model
-        });
+        }, options);
         view = new modelView(options);
         if (this.rendered) {
           view.render();

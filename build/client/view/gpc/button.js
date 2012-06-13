@@ -20,21 +20,26 @@
       };
 
       function GPCButtonView(options) {
+        if (options == null) {
+          options = {};
+        }
         GPCButtonView.__super__.constructor.call(this, options);
-        this.model.on('change', this.render, this);
+        this.model = this.model.gpc();
+        this.knownGPCs = options.knownGPCs;
+        this.knownGPCs.on('update', this.render, this);
       }
 
       GPCButtonView.prototype.templateData = function() {
         return {
-          known: this.model.isKnown(),
-          focus: this.model.hasFocus(),
+          known: this.knownGPCs.isKnown(this.model),
+          focus: this.knownGPCs.hasFocus(this.model),
           name: this.model.graphemeName()
         };
       };
 
-      GPCButtonView.prototype.onClick = function(event) {
-        event.preventDefault();
-        return this.model.toggle();
+      GPCButtonView.prototype.onClick = function(e) {
+        e.preventDefault();
+        return this.knownGPCs.toggle(this.model);
       };
 
       return GPCButtonView;

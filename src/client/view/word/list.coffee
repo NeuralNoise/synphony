@@ -6,25 +6,25 @@ define ['underscore', 'view/common/base'], (_, BaseView) ->
     constructor: (options) ->
       super options
       @filter = options.filter || (collection) -> collection.models
-      @userGPCs = options.userGPCs
+      @knownGPCs = options.knownGPCs
       @columns = options.columns || 3
 
-      @userGPCs.on 'change', @render, @
+      @knownGPCs.on 'update', @render, @
 
     wordHTML: (word) ->
       html = "<span class='word'>"
-      ugpcs = @userGPCs.mapGPCs word.gpcs()
-      _.each ugpcs, (ugpc) =>
-        html += @userGpcHTML ugpc
+      gpcs = word.gpcs()
+      _.each gpcs, (gpc) =>
+        html += @gpcHTML gpc
       html += "</span>"
       html
 
-    userGpcHTML: (ugpc) ->
+    gpcHTML: (gpc) ->
       known = ""
-      known = "known" if ugpc.isKnown()
+      known = "known" if @knownGPCs.isKnown gpc
       focus = ""
-      focus = "focus" if ugpc.hasFocus()
-      "<span class='#{known} #{focus}'>#{ugpc.graphemeName()}</span>"
+      focus = "focus" if @knownGPCs.hasFocus gpc
+      "<span class='#{known} #{focus}'>#{gpc.graphemeName()}</span>"
 
     render: ->
       words = @filter(@collection)

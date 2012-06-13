@@ -15,6 +15,10 @@
         return SequenceElement.__super__.constructor.apply(this, arguments);
       }
 
+      SequenceElement.prototype.gpc = function() {
+        return this.get('gpc');
+      };
+
       SequenceElement.prototype.parse = function(data) {
         this.parseIdLookup('gpcs', 'gpc', data);
         this.parseIdLookup('words', 'new_words', data);

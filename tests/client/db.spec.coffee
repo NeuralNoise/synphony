@@ -24,7 +24,6 @@ define ['model/store', 'model/grapheme', 'model/phoneme', 'model/word',
 
       it "should associate grapheme id to graphemes", ->
         gpc = gpcs.getByName 's_s'
-        console.log gpc.attributes
         grapheme = gpc.get 'grapheme'
         (expect grapheme instanceof Grapheme).toBeTruthy()
 

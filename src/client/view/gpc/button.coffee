@@ -7,16 +7,18 @@ define ['view/common/template', 'text!templates/gpc/button.handlebars'],
     events:
       'click button': 'onClick'
 
-    constructor: (options) ->
+    constructor: (options={}) ->
       super options
+      @model = @model.gpc()
+      @knownGPCs = options.knownGPCs
 
-      @model.on 'change', @render, @
+      @knownGPCs.on 'update', @render, @
 
     templateData: ->
-      known: @model.isKnown()
-      focus: @model.hasFocus()
+      known: @knownGPCs.isKnown(@model)
+      focus: @knownGPCs.hasFocus(@model)
       name: @model.graphemeName()
 
-    onClick: (event) ->
-      event.preventDefault()
-      @model.toggle()
+    onClick: (e) ->
+      e.preventDefault()
+      @knownGPCs.toggle(@model)

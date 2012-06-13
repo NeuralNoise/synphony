@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['collection/phonemes', 'collection/graphemes', 'collection/gpcs', 'collection/words', 'collection/sentences', 'collection/sequences', 'collection/user_gpcs', 'model/base', 'underscore'], function(Phonemes, Graphemes, GPCs, Words, Sentences, Sequences, UserGPCs, BaseModel, _) {
+  define(['collection/phonemes', 'collection/graphemes', 'collection/gpcs', 'collection/words', 'collection/sentences', 'collection/sequences', 'collection/known_gpcs', 'model/base', 'underscore'], function(Phonemes, Graphemes, GPCs, Words, Sentences, Sequences, KnownGPCs, BaseModel, _) {
     var Store;
     return Store = (function(_super) {
 
@@ -12,7 +12,7 @@
       Store.name = 'Store';
 
       Store.prototype.defaults = function() {
-        var gpcs, graphemes, phonemes, sentences, sequences, userGPCs, words;
+        var gpcs, graphemes, knownGPCs, phonemes, sentences, sequences, words;
         phonemes = new Phonemes;
         graphemes = new Graphemes;
         gpcs = new GPCs([], {
@@ -30,7 +30,7 @@
           words: words,
           sentences: sentences
         });
-        userGPCs = new UserGPCs([], {
+        knownGPCs = new KnownGPCs([], {
           gpcs: gpcs
         });
         return {
@@ -40,12 +40,12 @@
           words: words,
           sentences: sentences,
           sequences: sequences,
-          userGPCs: userGPCs
+          knownGPCs: knownGPCs
         };
       };
 
       Store.prototype.loadOrder = function() {
-        return ['phonemes', 'graphemes', 'gpcs', 'words', 'sentences', 'sequences'];
+        return ['phonemes', 'graphemes', 'gpcs', 'words', 'sentences', 'sequences', 'knownGPCs'];
       };
 
       function Store(attributes, options) {
@@ -79,8 +79,8 @@
         return this.get('sequences');
       };
 
-      Store.prototype.userGPCs = function() {
-        return this.get('userGPCs');
+      Store.prototype.knownGPCs = function() {
+        return this.get('knownGPCs');
       };
 
       Store.prototype.fetch = function(options) {

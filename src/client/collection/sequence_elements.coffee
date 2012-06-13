@@ -9,3 +9,6 @@ define ['collection/named', 'model/sequence_element'], (NamedCollection, Sequenc
       @gpcs = options.collection?.collection?.gpcs
 
       super models, options
+
+    getGpcs: ->
+      @map (element) -> element.gpc()

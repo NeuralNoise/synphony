@@ -15,6 +15,14 @@
         return Sequence.__super__.constructor.apply(this, arguments);
       }
 
+      Sequence.prototype.elements = function() {
+        return this.get('elements');
+      };
+
+      Sequence.prototype.gpcs = function() {
+        return this.elements().getGpcs();
+      };
+
       Sequence.prototype.parse = function(data) {
         if (data.elements != null) {
           data.elements = new SequenceElements(data.elements, {

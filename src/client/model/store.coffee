@@ -1,7 +1,7 @@
 define ['collection/phonemes', 'collection/graphemes', 'collection/gpcs',
         'collection/words', 'collection/sentences', 'collection/sequences',
-        'collection/user_gpcs', 'model/base', 'underscore'],
-(Phonemes, Graphemes, GPCs, Words, Sentences, Sequences, UserGPCs, BaseModel, _) ->
+        'collection/known_gpcs', 'model/base', 'underscore'],
+(Phonemes, Graphemes, GPCs, Words, Sentences, Sequences, KnownGPCs, BaseModel, _) ->
   # This is the store of all collections required by synphony. The
   # primary responsibility of this class is to ensure collections
   # are loaded in the proper order so that dependancies are met.
@@ -16,9 +16,9 @@ define ['collection/phonemes', 'collection/graphemes', 'collection/gpcs',
       words = new Words [], { gpcs }
       sentences = new Sentences [], { words }
       sequences = new Sequences [], { gpcs, words, sentences }
-      userGPCs = new UserGPCs [], { gpcs }
+      knownGPCs = new KnownGPCs [], { gpcs }
 
-      { phonemes, graphemes, gpcs, words, sentences, sequences, userGPCs }
+      { phonemes, graphemes, gpcs, words, sentences, sequences, knownGPCs }
 
     # This is the load order of each collection
     # @private
@@ -30,7 +30,7 @@ define ['collection/phonemes', 'collection/graphemes', 'collection/gpcs',
         'words'
         'sentences'
         'sequences'
-        # 'userGPCs'
+        'knownGPCs'
       ]
 
     constructor: (attributes, options) ->
@@ -62,9 +62,9 @@ define ['collection/phonemes', 'collection/graphemes', 'collection/gpcs',
     # @returns [Sequences] sequences
     sequences: -> @get 'sequences'
 
-    # Get the userGPCs collection
-    # @returns [UserGPCs] userGPCs
-    userGPCs: -> @get 'userGPCs'
+    # Get the knownGPCs collection
+    # @returns [KnownGPCs] knownGPCs
+    knownGPCs: -> @get 'knownGPCs'
 
     # Fetches each collection individually in the
     # proper order.

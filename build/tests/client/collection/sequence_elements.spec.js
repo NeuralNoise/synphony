@@ -8,18 +8,24 @@
       _ref = [null, null, null], element1 = _ref[0], element2 = _ref[1], element3 = _ref[2];
       beforeEach(function() {
         element1 = new SequenceElement({
-          name: 'a'
+          name: 'a',
+          gpc: 'a_a'
         });
         element2 = new SequenceElement({
-          name: 'b'
+          name: 'b',
+          gpc: 'b_b'
         });
         element3 = new SequenceElement({
-          name: 'c'
+          name: 'c',
+          gpc: 'c_c'
         });
         return elements = new SequenceElements([element1, element2, element3]);
       });
-      return it("should exist", function() {
+      it("should exist", function() {
         return (expect(elements.length)).toEqual(3);
+      });
+      return it("should list gpcs", function() {
+        return (expect(elements.getGpcs())).toEqual(['a_a', 'b_b', 'c_c']);
       });
     });
   });

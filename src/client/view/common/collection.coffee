@@ -18,7 +18,7 @@ define ['underscore', 'view/common/base'],
 
       if @collection
         @collection.each (model) =>
-          @addModelView model
+          @addModelView model, -1, options
 
         @collection.on 'add', @onCollectionAdd, @
         @collection.on 'remove', @onCollectionRemove, @
@@ -31,7 +31,7 @@ define ['underscore', 'view/common/base'],
 
     makeModelView: (model, options = {}) ->
       modelView = @options.modelView || @modelView
-      options = _.extend options, { model }
+      options = _.extend { model }, options
       view = new modelView options
       if @rendered
         view.render()

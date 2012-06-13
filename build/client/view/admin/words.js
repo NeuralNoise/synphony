@@ -18,10 +18,10 @@
         AdminWordsView.__super__.constructor.call(this, options);
         this.store = options.store;
         this.collection = this.store.words();
-        this.userGPCs = this.store.userGPCs();
+        this.knownGPCs = this.store.knownGPCs();
         this.listView = new WordListView({
           collection: this.collection,
-          userGPCs: this.userGPCs,
+          knownGPCs: this.knownGPCs,
           filter: function() {
             return _this.filterWords();
           }
@@ -30,8 +30,8 @@
 
       AdminWordsView.prototype.filterWords = function() {
         var focusGPCs, knownGPCs;
-        knownGPCs = this.userGPCs.getKnownGPCs();
-        focusGPCs = this.userGPCs.getFocusGPCs();
+        knownGPCs = this.knownGPCs.models;
+        focusGPCs = this.knownGPCs.isEmpty() ? [] : [this.knownGPCs.last()];
         return this.collection.getKnownFocusGPCWords(knownGPCs, focusGPCs);
       };
 

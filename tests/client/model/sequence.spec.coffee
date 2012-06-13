@@ -1,9 +1,12 @@
-define ['model/sequence'], (Sequence) ->
+define ['model/sequence', 'collection/sequence_elements'], (Sequence, SequenceElements) ->
   describe "Sequence", ->
     sequence = null
 
     beforeEach ->
-      sequence = new Sequence
+      elements = new SequenceElements [{gpc: '1'}, {gpc: '2'}]
+      sequence = new Sequence { elements }
 
     it "should exist", ->
-      (expect sequence).not.toBeNull()
+      gpcs = sequence.gpcs()
+      sgpcs = sequence.elements().getGpcs()
+      (expect gpcs).toEqual sgpcs

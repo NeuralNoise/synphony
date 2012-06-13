@@ -24,6 +24,12 @@
         SequenceElements.__super__.constructor.call(this, models, options);
       }
 
+      SequenceElements.prototype.getGpcs = function() {
+        return this.map(function(element) {
+          return element.gpc();
+        });
+      };
+
       return SequenceElements;
 
     })(NamedCollection);

@@ -20,34 +20,34 @@
         this.filter = options.filter || function(collection) {
           return collection.models;
         };
-        this.userGPCs = options.userGPCs;
+        this.knownGPCs = options.knownGPCs;
         this.columns = options.columns || 3;
-        this.userGPCs.on('change', this.render, this);
+        this.knownGPCs.on('update', this.render, this);
       }
 
       WordListView.prototype.wordHTML = function(word) {
-        var html, ugpcs,
+        var gpcs, html,
           _this = this;
         html = "<span class='word'>";
-        ugpcs = this.userGPCs.mapGPCs(word.gpcs());
-        _.each(ugpcs, function(ugpc) {
-          return html += _this.userGpcHTML(ugpc);
+        gpcs = word.gpcs();
+        _.each(gpcs, function(gpc) {
+          return html += _this.gpcHTML(gpc);
         });
         html += "</span>";
         return html;
       };
 
-      WordListView.prototype.userGpcHTML = function(ugpc) {
+      WordListView.prototype.gpcHTML = function(gpc) {
         var focus, known;
         known = "";
-        if (ugpc.isKnown()) {
+        if (this.knownGPCs.isKnown(gpc)) {
           known = "known";
         }
         focus = "";
-        if (ugpc.hasFocus()) {
+        if (this.knownGPCs.hasFocus(gpc)) {
           focus = "focus";
         }
-        return "<span class='" + known + " " + focus + "'>" + (ugpc.graphemeName()) + "</span>";
+        return "<span class='" + known + " " + focus + "'>" + (gpc.graphemeName()) + "</span>";
       };
 
       WordListView.prototype.render = function() {

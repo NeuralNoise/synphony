@@ -21,7 +21,7 @@
     enforceDefine: true
   });
 
-  define(['../tests/client/db.spec', '../tests/client/model/named.spec', '../tests/client/model/grapheme.spec', '../tests/client/model/phoneme.spec', '../tests/client/model/gpc.spec', '../tests/client/model/user_gpc.spec', '../tests/client/model/word.spec', '../tests/client/model/sentence.spec', '../tests/client/model/sequence.spec', '../tests/client/model/sequence_element.spec', '../tests/client/collection/named.spec', '../tests/client/collection/graphemes.spec', '../tests/client/collection/phonemes.spec', '../tests/client/collection/gpcs.spec', '../tests/client/collection/user_gpcs.spec', '../tests/client/collection/words.spec', '../tests/client/collection/sentences.spec', '../tests/client/collection/sequences.spec', '../tests/client/collection/sequence_elements.spec'], function() {
+  define(['../tests/client/db.spec', '../tests/client/model/named.spec', '../tests/client/model/grapheme.spec', '../tests/client/model/phoneme.spec', '../tests/client/model/gpc.spec', '../tests/client/model/word.spec', '../tests/client/model/sentence.spec', '../tests/client/model/sequence.spec', '../tests/client/model/sequence_element.spec', '../tests/client/collection/named.spec', '../tests/client/collection/graphemes.spec', '../tests/client/collection/phonemes.spec', '../tests/client/collection/gpcs.spec', '../tests/client/collection/known_gpcs.spec', '../tests/client/collection/words.spec', '../tests/client/collection/sentences.spec', '../tests/client/collection/sequences.spec', '../tests/client/collection/sequence_elements.spec'], function() {
     return {};
   });
 

@@ -15,6 +15,36 @@
         return BaseCollection.__super__.constructor.apply(this, arguments);
       }
 
+      BaseCollection.prototype.add = function(models, options) {
+        if (options == null) {
+          options = {};
+        }
+        BaseCollection.__super__.add.call(this, models, options);
+        if (!options.silent) {
+          return this.trigger('update', this);
+        }
+      };
+
+      BaseCollection.prototype.remove = function(models, options) {
+        if (options == null) {
+          options = {};
+        }
+        BaseCollection.__super__.remove.call(this, models, options);
+        if (!options.silent) {
+          return this.trigger('update', this);
+        }
+      };
+
+      BaseCollection.prototype.reset = function(models, options) {
+        if (options == null) {
+          options = {};
+        }
+        BaseCollection.__super__.reset.call(this, models, options);
+        if (!options.silent) {
+          return this.trigger('update', this);
+        }
+      };
+
       return BaseCollection;
 
     })(Backbone.Collection);

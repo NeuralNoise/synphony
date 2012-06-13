@@ -64,7 +64,8 @@
       AdminRouter.prototype.makeSpellingPatterns = function() {
         return new CollectionView({
           id: 'spelling-patterns',
-          collection: this.store.userGPCs(),
+          collection: this.store.sequences().first().elements(),
+          knownGPCs: this.store.knownGPCs(),
           modelView: GPCButtonView
         });
       };

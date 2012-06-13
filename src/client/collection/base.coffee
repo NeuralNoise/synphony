@@ -6,3 +6,14 @@ define ['backbone'], (Backbone) ->
   # @see http://backbonejs.org/#Collection Backbone.Collection
   class BaseCollection extends Backbone.Collection
 
+    add: (models, options={}) ->
+      super models, options
+      @trigger 'update', @ if not options.silent
+
+    remove: (models, options={}) ->
+      super models, options
+      @trigger 'update', @ if not options.silent
+
+    reset: (models, options={}) ->
+      super models, options
+      @trigger 'update', @ if not options.silent

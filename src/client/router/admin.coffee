@@ -41,7 +41,8 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
     makeSpellingPatterns: ->
       new CollectionView
         id: 'spelling-patterns'
-        collection: @store.userGPCs()
+        collection: @store.sequences().first().elements()
+        knownGPCs: @store.knownGPCs()
         modelView: GPCButtonView
 
     setupDefaultViews: ->
