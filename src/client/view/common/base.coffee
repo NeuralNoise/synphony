@@ -25,6 +25,7 @@ define ['underscore', 'backbone'],
 
       # remove all event listeners
       @off()
+      console.log "Destroyed"
 
     # @private
     delegateEvents: (events = @events) ->

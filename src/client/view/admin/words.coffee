@@ -1,24 +1,17 @@
-define ['view/common/template', 'view/common/collection', 'view/word/list', 'text!templates/admin/words_page.handlebars'],
-(TemplateView, CollectionView, WordListView, hbsTemplate) ->
-  class AdminWordsView extends TemplateView
-    template: hbsTemplate
+define ['view/common/template', 'view/common/composite', 'view/common/collection', 'view/word/list', 'text!templates/admin/words_page.handlebars'],
+(TemplateView, CompositeView, CollectionView, WordListView, hbsTemplate) ->
+  class AdminWordsView extends CompositeView
+    id: 'words-page'
 
     constructor: (options) ->
       super options
       @store = options.store
       @collection = @store.words()
       @knownGPCs = @store.knownGPCs()
-      @listView = new WordListView { @collection, @knownGPCs, filter: => @filterWords() }
-      # @wordsView = new CollectionView
-      #   collection: @collection
-      #   modelView: PlainWordView
+      @addView new TemplateView template: hbsTemplate
+      @addView new WordListView { @collection, @knownGPCs, filter: => @filterWords() }
 
     filterWords: ->
       knownGPCs = @knownGPCs.models
       focusGPCs = if @knownGPCs.isEmpty() then [] else [ @knownGPCs.last() ]
       @collection.getKnownFocusGPCWords knownGPCs, focusGPCs
-
-    render: () ->
-      super()
-      (@$ '#words-list').html @listView.render().el
-      @

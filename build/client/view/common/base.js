@@ -19,7 +19,8 @@
         this.undelegateEvents();
         this.remove();
         this.trigger('destroy');
-        return this.off();
+        this.off();
+        return console.log("Destroyed");
       };
 
       BaseView.prototype.delegateEvents = function(events) {

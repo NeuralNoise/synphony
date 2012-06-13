@@ -1,20 +1,16 @@
-define ['underscore', 'view/common/base'],
-(_, BaseView) ->
+define ['underscore', 'view/common/composite', 'view/common/base'],
+(_, CompositeView, BaseView) ->
   # A view that can render a collection of models with a
   # specific view.
   # Initially the element is empty until render is called
   # then once render is called, any add/remove/change events
   # on the collection will rerender.
   # Idea from Backbone.Marionette
-  class CollectionView extends BaseView
+  class CollectionView extends CompositeView
     modelView: BaseView
 
     constructor: (options={}) ->
       super options
-
-      @views = []
-
-      @rendered = false
 
       if @collection
         @collection.each (model) =>
@@ -37,24 +33,6 @@ define ['underscore', 'view/common/base'],
         view.render()
       view
 
-    addView: (view, index=-1) ->
-      if index < 0 || index >= @views.length
-        @views.push view
-        if @rendered
-          @$el.append view.el
-      else
-        @views.splice index, 0, view
-        if @rendered
-          @$el.children()[index].insertBefore view.el
-
-    removeView: (view) ->
-      index = @views.indexOf view
-      if index >= 0
-        @views.splice index, 1
-        view.destroy()
-      else
-        throw new Error "View isn't in ViewCollection"
-
     addModelView: (model, index=-1, options={}) ->
       view = @makeModelView model, options
       @addView view, index
@@ -62,15 +40,6 @@ define ['underscore', 'view/common/base'],
     removeModelView: (model) ->
       views = _.select @views, (view) -> view.model.cid == model.cid
       _.each views, (view) -> @removeView view
-
-    render: ->
-      if @rendered
-        _.each @views, (view) -> view.remove()
-      @rendered = true
-      _.each @views, (view) =>
-        @$el.append view.render().el
-      console.log "collection rendered"
-      @
 
     # @private
     onCollectionAdd: (model) ->
