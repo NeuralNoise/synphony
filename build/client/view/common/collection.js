@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['underscore', 'view/common/base'], function(_, BaseView) {
+  define(['underscore', 'view/common/composite', 'view/common/base'], function(_, CompositeView, BaseView) {
     var CollectionView;
     return CollectionView = (function(_super) {
 
@@ -19,8 +19,6 @@
           options = {};
         }
         CollectionView.__super__.constructor.call(this, options);
-        this.views = [];
-        this.rendered = false;
         if (this.collection) {
           this.collection.each(function(model) {
             return _this.addModelView(model, -1, options);
@@ -55,34 +53,6 @@
         return view;
       };
 
-      CollectionView.prototype.addView = function(view, index) {
-        if (index == null) {
-          index = -1;
-        }
-        if (index < 0 || index >= this.views.length) {
-          this.views.push(view);
-          if (this.rendered) {
-            return this.$el.append(view.el);
-          }
-        } else {
-          this.views.splice(index, 0, view);
-          if (this.rendered) {
-            return this.$el.children()[index].insertBefore(view.el);
-          }
-        }
-      };
-
-      CollectionView.prototype.removeView = function(view) {
-        var index;
-        index = this.views.indexOf(view);
-        if (index >= 0) {
-          this.views.splice(index, 1);
-          return view.destroy();
-        } else {
-          throw new Error("View isn't in ViewCollection");
-        }
-      };
-
       CollectionView.prototype.addModelView = function(model, index, options) {
         var view;
         if (index == null) {
@@ -103,21 +73,6 @@
         return _.each(views, function(view) {
           return this.removeView(view);
         });
-      };
-
-      CollectionView.prototype.render = function() {
-        var _this = this;
-        if (this.rendered) {
-          _.each(this.views, function(view) {
-            return view.remove();
-          });
-        }
-        this.rendered = true;
-        _.each(this.views, function(view) {
-          return _this.$el.append(view.render().el);
-        });
-        console.log("collection rendered");
-        return this;
       };
 
       CollectionView.prototype.onCollectionAdd = function(model) {
@@ -143,7 +98,7 @@
 
       return CollectionView;
 
-    })(BaseView);
+    })(CompositeView);
   });
 
 }).call(this);
