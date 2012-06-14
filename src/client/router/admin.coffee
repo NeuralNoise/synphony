@@ -1,7 +1,7 @@
 define ['backbone', 'view/common/layout', 'view/common/menu',
-        'view/common/sidebar', 'view/admin/home', 'view/admin/words',
+        'view/common/sidebar', 'view/admin/words',
         'view/admin/sentences', 'view/gpc/button', 'view/common/collection'],
-(Backbone, Layout, MenuView, SidebarView, HomeView, WordsView, SentencesView, GPCButtonView, CollectionView) ->
+(Backbone, Layout, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView) ->
   class AdminRouter extends Backbone.Router
     routes:
       "": "home"
@@ -9,7 +9,6 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
       "sentences": "sentences"
 
     menu:
-      "Home": "#"
       "Words": "#words"
       "Sentences": "#sentences"
 
@@ -27,8 +26,7 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
 
 
     home: ->
-      console.log "Showing admin home page"
-      @showContent new HomeView { @store }
+      @navigate 'words', trigger: true, replace: true
 
     words: ->
       console.log "Showing admin words page"

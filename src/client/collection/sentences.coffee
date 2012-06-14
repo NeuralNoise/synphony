@@ -3,8 +3,7 @@ define ['collection/named', 'model/sentence'], (NamedCollection, Sentence) ->
     model: Sentence
     url: '/api/v1/sentences/'
 
-    constructor: (models, options) ->
-      options ?= {}
+    constructor: (models, options={}) ->
       @words = options.words
 
       super models, options

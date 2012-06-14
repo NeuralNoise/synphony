@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['view/common/template', 'text!templates/admin/sentences_page.handlebars'], function(TemplateView, hbsTemplate) {
+  define(['view/common/template', 'view/common/composite', 'view/common/collection', 'view/sentence/list', 'model/known_focus_search', 'text!templates/admin/sentences_page.handlebars'], function(TemplateView, CompositeView, CollectionView, SentenceListView, KnownFocusSearch, hbsTemplate) {
     var AdminSentencesView;
     return AdminSentencesView = (function(_super) {
 
@@ -11,15 +11,37 @@
 
       AdminSentencesView.name = 'AdminSentencesView';
 
-      function AdminSentencesView() {
-        return AdminSentencesView.__super__.constructor.apply(this, arguments);
+      AdminSentencesView.prototype.id = 'sentences-page';
+
+      function AdminSentencesView(options) {
+        var _this = this;
+        AdminSentencesView.__super__.constructor.call(this, options);
+        this.store = options.store;
+        this.collection = this.store.sentences();
+        this.knownGPCs = this.store.knownGPCs();
+        this.search = new KnownFocusSearch(this.collection);
+        this.addView(new TemplateView({
+          template: hbsTemplate
+        }));
+        this.addView(new SentenceListView({
+          collection: this.collection,
+          knownGPCs: this.knownGPCs,
+          filter: function() {
+            return _this.filterSentences();
+          }
+        }));
       }
 
-      AdminSentencesView.prototype.template = hbsTemplate;
+      AdminSentencesView.prototype.filterSentences = function() {
+        var focusGPCs, knownGPCs;
+        knownGPCs = this.knownGPCs.models;
+        focusGPCs = this.knownGPCs.isEmpty() ? [] : [this.knownGPCs.last()];
+        return this.search.getKnownFocusItems(knownGPCs, focusGPCs);
+      };
 
       return AdminSentencesView;
 
-    })(TemplateView);
+    })(CompositeView);
   });
 
 }).call(this);

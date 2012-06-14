@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['backbone', 'view/common/layout', 'view/common/menu', 'view/common/sidebar', 'view/admin/home', 'view/admin/words', 'view/admin/sentences', 'view/gpc/button', 'view/common/collection'], function(Backbone, Layout, MenuView, SidebarView, HomeView, WordsView, SentencesView, GPCButtonView, CollectionView) {
+  define(['backbone', 'view/common/layout', 'view/common/menu', 'view/common/sidebar', 'view/admin/words', 'view/admin/sentences', 'view/gpc/button', 'view/common/collection'], function(Backbone, Layout, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView) {
     var AdminRouter;
     return AdminRouter = (function(_super) {
 
@@ -18,7 +18,6 @@
       };
 
       AdminRouter.prototype.menu = {
-        "Home": "#",
         "Words": "#words",
         "Sentences": "#sentences"
       };
@@ -41,10 +40,10 @@
       }
 
       AdminRouter.prototype.home = function() {
-        console.log("Showing admin home page");
-        return this.showContent(new HomeView({
-          store: this.store
-        }));
+        return this.navigate('words', {
+          trigger: true,
+          replace: true
+        });
       };
 
       AdminRouter.prototype.words = function() {

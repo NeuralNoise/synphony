@@ -27,45 +27,6 @@
         Words.__super__.constructor.call(this, models, options);
       }
 
-      Words.prototype.getFocusGPCWords = function(focusGPCs, list) {
-        if (list == null) {
-          list = this.models;
-        }
-        return _.filter(list, function(word) {
-          var wordGPCs;
-          wordGPCs = word.get('gpcs');
-          return _.any(wordGPCs, function(wordGPC) {
-            return _.any(focusGPCs, function(focusGPC) {
-              return focusGPC.id === wordGPC.id;
-            });
-          });
-        });
-      };
-
-      Words.prototype.getKnownGPCWords = function(knownGPCs, list) {
-        if (list == null) {
-          list = this.models;
-        }
-        return _.filter(list, function(word) {
-          var wordGPCs;
-          wordGPCs = word.get('gpcs');
-          return _.all(wordGPCs, function(wordGPC) {
-            return _.any(knownGPCs, function(knownGPC) {
-              return knownGPC.id === wordGPC.id;
-            });
-          });
-        });
-      };
-
-      Words.prototype.getKnownFocusGPCWords = function(knownGPCs, focusGPCs, list) {
-        var words;
-        if (list == null) {
-          list = this.models;
-        }
-        words = this.getFocusGPCWords(focusGPCs, list);
-        return this.getKnownGPCWords(knownGPCs, words);
-      };
-
       return Words;
 
     })(NamedCollection);

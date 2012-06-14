@@ -20,10 +20,21 @@
       }
 
       BaseModel.prototype.parseIdLookup = function(collectionName, fieldName, data) {
-        var item,
+        var datum, item,
           _this = this;
-        if ((this.collection != null) && (this.collection[collectionName] != null)) {
-          if ((_.isArray(data[fieldName])) && (_.isNumber(_.first(data[fieldName])))) {
+        if (!(this.collection != null)) {
+          console.log("Warning: no collection");
+          return;
+        }
+        if (this.collection[collectionName] != null) {
+          if (!(data[fieldName] != null)) {
+            console.log("Warning: data has no filed " + fieldName);
+            return;
+          }
+          datum = data[fieldName];
+          if ((_.isArray(datum)) && (_.any(datum, function(thing) {
+            return _.isNumber(thing);
+          }))) {
             return data[fieldName] = _.map(data[fieldName], function(id) {
               var item;
               item = _this.collection[collectionName].get(id);
@@ -33,6 +44,8 @@
             item = this.collection[collectionName].get(data[fieldName]);
             return data[fieldName] = item != null ? item : data[fieldName];
           }
+        } else {
+          return console.log("Warning: no " + collectionName + " property on collection");
         }
       };
 

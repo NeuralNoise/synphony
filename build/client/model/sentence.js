@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['model/named'], function(NamedModel) {
+  define(['underscore', 'model/named'], function(_, NamedModel) {
     var Sentence;
     return Sentence = (function(_super) {
 
@@ -18,6 +18,22 @@
       Sentence.prototype.parse = function(data) {
         this.parseIdLookup('words', 'words', data);
         return data;
+      };
+
+      Sentence.prototype.gpcs = function() {
+        var _ref;
+        return (_ref = this.cachedGPCs) != null ? _ref : this.cachedGPCs = this.findGPCs();
+      };
+
+      Sentence.prototype.findGPCs = function() {
+        var gpcs, words;
+        words = this.get('words');
+        gpcs = _.collect(words, function(word) {
+          return word != null ? word.gpcs() : void 0;
+        });
+        gpcs = _.flatten(gpcs);
+        gpcs = _.compact(gpcs);
+        return _.unique(gpcs);
       };
 
       return Sentence;

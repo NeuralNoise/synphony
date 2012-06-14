@@ -26,8 +26,15 @@ define ['backbone', 'underscore'], (Backbone, _) ->
     #   id for
     # @param data [Object] the data to change ids to references in
     parseIdLookup: (collectionName, fieldName, data) ->
-      if @collection? and @collection[collectionName]?
-        if (_.isArray data[fieldName]) and (_.isNumber _.first data[fieldName])
+      if not @collection?
+        console.log "Warning: no collection"
+        return
+      if @collection[collectionName]?
+        if not data[fieldName]?
+          console.log "Warning: data has no filed #{fieldName}"
+          return
+        datum = data[fieldName]
+        if (_.isArray datum) and (_.any datum, (thing) -> (_.isNumber thing))
           # array of ids
           data[fieldName] = _.map data[fieldName], (id) =>
             item = @collection[collectionName].get id
@@ -35,3 +42,7 @@ define ['backbone', 'underscore'], (Backbone, _) ->
         else if _.isNumber data[fieldName]
           item = @collection[collectionName].get data[fieldName]
           data[fieldName] = item ? data[fieldName]
+        #else
+          #console.log "Warning: asked to translate #{fieldName} which is not a number: #{datum}"
+      else
+        console.log "Warning: no #{collectionName} property on collection"

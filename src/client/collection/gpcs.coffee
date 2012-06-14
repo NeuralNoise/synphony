@@ -3,8 +3,7 @@ define ['collection/named', 'model/gpc'], (NamedCollection, GPC) ->
     model: GPC
     url: '/api/v1/gpcs/'
 
-    constructor: (models, options) ->
-      options ?= {}
+    constructor: (models, options={}) ->
       @graphemes = options.graphemes
       @phonemes = options.phonemes
 
