@@ -25,6 +25,10 @@
         return (_ref = this.cachedGPCs) != null ? _ref : this.cachedGPCs = this.findGPCs();
       };
 
+      Sentence.prototype.words = function() {
+        return this.get('words');
+      };
+
       Sentence.prototype.findGPCs = function() {
         var gpcs, words;
         words = this.get('words');

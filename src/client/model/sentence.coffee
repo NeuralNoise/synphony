@@ -7,6 +7,8 @@ define ['underscore', 'model/named'], (_, NamedModel) ->
     gpcs: ->
       @cachedGPCs ?= @findGPCs()
 
+    words: -> @get 'words'
+
     # @private
     findGPCs: ->
       words = @get 'words'

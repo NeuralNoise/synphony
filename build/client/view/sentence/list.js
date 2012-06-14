@@ -21,8 +21,39 @@
           return collection.models;
         };
         this.knownGPCs = options.knownGPCs;
+        this.bug = false;
         this.knownGPCs.on('update', this.render, this);
       }
+
+      SentenceListView.prototype.wordHTML = function(word) {
+        var gpcs, html,
+          _this = this;
+        html = "<span class='word'>";
+        if (word != null) {
+          gpcs = word.gpcs();
+          _.each(gpcs, function(gpc) {
+            return html += _this.gpcHTML(gpc);
+          });
+        } else {
+          this.bug = true;
+          html += "<span class='bug'>[NULL]</span>";
+        }
+        html += "</span>";
+        return html;
+      };
+
+      SentenceListView.prototype.gpcHTML = function(gpc) {
+        var focus, known;
+        known = "";
+        if (this.knownGPCs.isKnown(gpc)) {
+          known = "known";
+        }
+        focus = "";
+        if (this.knownGPCs.hasFocus(gpc)) {
+          focus = "focus";
+        }
+        return "<span class='" + known + " " + focus + "'>" + (gpc.graphemeName()) + "</span>";
+      };
 
       SentenceListView.prototype.render = function() {
         var html, sentences,
@@ -30,9 +61,16 @@
         sentences = this.filter(this.collection);
         html = "";
         _.each(sentences, function(sentence) {
-          var text;
-          text = sentence.get('text');
-          return html += "<p>" + text + "</p>";
+          var words;
+          words = _.map(sentence.words(), function(word) {
+            return _this.wordHTML(word);
+          });
+          html += "<p>" + (words.join(' '));
+          if (_this.bug) {
+            _this.bug = false;
+            html += "<br /><span class='bug-info'>(" + (_.escape(sentence.get('text'))) + ")</span>";
+          }
+          return html += "</p>";
         });
         this.$el.html(html);
         return this;

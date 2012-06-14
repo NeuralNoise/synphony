@@ -7,31 +7,39 @@ define ['underscore', 'view/common/base'], (_, BaseView) ->
       super options
       @filter = options.filter || (collection) -> collection.models
       @knownGPCs = options.knownGPCs
+      @bug = false
 
       @knownGPCs.on 'update', @render, @
 
-    # wordHTML: (word) ->
-    #   html = "<span class='word'>"
-    #   gpcs = word.gpcs()
-    #   _.each gpcs, (gpc) =>
-    #     html += @gpcHTML gpc
-    #   html += "</span>"
-    #   html
+    wordHTML: (word) ->
+      html = "<span class='word'>"
+      if word?
+        gpcs = word.gpcs()
+        _.each gpcs, (gpc) =>
+          html += @gpcHTML gpc
+      else
+        @bug = true
+        html += "<span class='bug'>[NULL]</span>"
+      html += "</span>"
+      html
 
-    # gpcHTML: (gpc) ->
-    #   known = ""
-    #   known = "known" if @knownGPCs.isKnown gpc
-    #   focus = ""
-    #   focus = "focus" if @knownGPCs.hasFocus gpc
-    #   "<span class='#{known} #{focus}'>#{gpc.graphemeName()}</span>"
+    gpcHTML: (gpc) ->
+      known = ""
+      known = "known" if @knownGPCs.isKnown gpc
+      focus = ""
+      focus = "focus" if @knownGPCs.hasFocus gpc
+      "<span class='#{known} #{focus}'>#{gpc.graphemeName()}</span>"
 
     render: ->
       sentences = @filter(@collection)
       html = ""
       _.each sentences, (sentence) =>
-        # console.log word.name()
-        text = sentence.get 'text'
-        html += "<p>"+text+"</p>"
+        words = _.map sentence.words(), (word) => @wordHTML(word)
+        html += "<p>#{words.join ' '}"
+        if @bug
+          @bug = false
+          html += "<br /><span class='bug-info'>(#{_.escape sentence.get 'text'})</span>"
+        html += "</p>"
 
       @$el.html html
       @
