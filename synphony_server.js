@@ -1,6 +1,6 @@
 /*
 SynPhony: Synthetic Phonics tool for early grade literacy teaching
-Copyright (C) 2012  Ryan J. Sanche  <ryan@rj45.ca>
+Copyright (C) 2012  Canada Institute of Linguistics
 
 See LICENSE.txt distributed in the code base for more details
 

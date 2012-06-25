@@ -11,6 +11,8 @@
 
       BaseModel.name = 'BaseModel';
 
+      BaseModel.prototype.idAttribute = "_id";
+
       function BaseModel(attributes, options) {
         if (options == null) {
           options = {};
@@ -20,7 +22,7 @@
       }
 
       BaseModel.prototype.parseIdLookup = function(collectionName, fieldName, data) {
-        var datum, item,
+        var datum, isArrayOfIds, item,
           _this = this;
         if (!(this.collection != null)) {
           console.log("Warning: no collection");
@@ -32,15 +34,16 @@
             return;
           }
           datum = data[fieldName];
-          if ((_.isArray(datum)) && (_.any(datum, function(thing) {
-            return _.isNumber(thing);
-          }))) {
+          isArrayOfIds = (_.isArray(datum)) && _.any(datum, function(thing) {
+            return (_.isNumber(thing)) || (_.isString(thing));
+          });
+          if (isArrayOfIds) {
             return data[fieldName] = _.map(data[fieldName], function(id) {
               var item;
               item = _this.collection[collectionName].get(id);
               return item != null ? item : id;
             });
-          } else if (_.isNumber(data[fieldName])) {
+          } else if ((_.isNumber(data[fieldName])) || (_.isString(data[fieldName]))) {
             item = this.collection[collectionName].get(data[fieldName]);
             return data[fieldName] = item != null ? item : data[fieldName];
           }

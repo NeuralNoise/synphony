@@ -9,10 +9,12 @@
 # The rest is in the public folder.
 
 express = require 'express'
-jsondb = require './jsondb'
+thedb = require './db'
 less = require 'less'
 fs = require 'fs'
 path = require 'path'
+auth = require './auth'
+{_} = require 'underscore'
 
 staticFile = (root, path) ->
   (req, res) ->
@@ -64,17 +66,48 @@ compileStyle = (callback) ->
 
 module.exports.run = ->
   app = express.createServer()
-  db = new jsondb.JsonDb __dirname+'/../../data/db.json'
-  db.load()
+  db = new thedb.Db 'synphony'
+  db.load (err) ->
+    if err?
+      console.error err.toString()
+    else
+      db.ensureCollections [
+        'users', 'phonemes', 'graphemes', 'gpcs', 'known_gpcs'
+        'words', 'sentences', 'sequences'
+      ], (err) ->
+        if err?
+          console.error err.toString()
+
+  port = 3000
+  baseUrl = "http://localhost:#{port}/"
+
+  findOrCreateUser = (identifier, profile, done) ->
+    user = _.clone profile
+    user.open_id = identifier
+
+    db.put 'users', {'open_id': identifier}, user, (err, user) ->
+      if err?
+        console.log err
+      done err, user
+
+  serializeUser = (user, done) ->
+    done null, user._id.toString()
+
+  deserializeUser = (id, done) ->
+    user = db.get 'users', {_id: id}, (err, user) ->
+      if err?
+        console.log err
+      done err, user
 
   app.use express.favicon()
-  app.use express.logger()
   app.use express.static __dirname+'/../../public'
+  app.use express.logger()
   app.use express.bodyParser()
   app.use express.methodOverride()
+  app.use express.cookieParser process.env.COOKIE_SECRET ? 'fRqnPNEZ5QH3BPKMtasPjQgTLjBAnJgzE8fS7lof'
+  app.use express.session()
+  passport = auth.setup baseUrl, app, findOrCreateUser, serializeUser, deserializeUser
 
-  # app.get '/js/libs/underscore.js', (staticFile '/node_modules/underscore', 'underscore.js')
-  # app.get '/js/libs/backbone.js', (staticFile '/node_modules/backbone', 'backbone.js')
   app.get '/js/synphony.js', (staticFile '/build/client', 'synphony.js')
   app.get '/js/templates.js', (staticFile '/build/client', 'templates.js')
 
@@ -94,21 +127,42 @@ module.exports.run = ->
         res.send css
 
   app.get '/api/v1/:collection/?', (req, res) ->
-    res.json db.all req.params.collection
+    db.all req.params.collection, null, (err, docs) ->
+      if err?
+        res.send 500, err
+      else
+        res.json docs
 
   app.post '/api/v1/:collection/?', (req, res) ->
-    res.json db.put req.params.collection, req.body
+    db.put req.params.collection, null, req.body, (err, doc) ->
+      if err?
+        res.send 500, error
+      else
+        res.json doc
 
   app.get '/api/v1/:collection/:id/?', (req, res) ->
-    res.json db.get req.params.collection, req.params.id
+    db.get req.params.collection, {_id: req.params.id}, (err, doc) ->
+      if err?
+        res.send 500, error
+      else if doc?
+        res.json doc
+      else
+        res.send 404, "No such document"
 
   app.put '/api/v1/:collection/:id/?', (req, res) ->
-    req.body.id = req.params.id
-    res.json db.put req.params.collection, req.body
+    req.body._id = req.params.id
+    db.put req.params.collection, {_id: req.params.id}, req.body, (err, doc) ->
+      if err?
+        res.send 500, error
+      else
+        res.json doc
 
   app.delete '/api/v1/:collection/:id/?', (req, res) ->
-    res.json db.delete req.params.collection, req.params.id
+    db.delete req.params.collection, {_id: req.params.id}, (err) ->
+      if err?
+        res.send 500, error
+      else
+        res.send 204
 
-  port = 3000
   app.listen port
-  console.log "You may go to http://localhost:#{port}/ in your browser"
+  console.log "You may go to #{baseUrl} in your browser"
