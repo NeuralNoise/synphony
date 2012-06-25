@@ -6,6 +6,9 @@ define ['backbone', 'underscore'], (Backbone, _) ->
   # @abstract
   # @see http://backbonejs.org/#Model Backbone.Model
   class BaseModel extends Backbone.Model
+    # WARNING: this is mongo db (and couchdb?) specific
+    idAttribute: "_id"
+
     # Construct new model
     #
     # @param [Object] attributes Initial attributes of the model
@@ -34,15 +37,17 @@ define ['backbone', 'underscore'], (Backbone, _) ->
           console.log "Warning: data has no filed #{fieldName}"
           return
         datum = data[fieldName]
-        if (_.isArray datum) and (_.any datum, (thing) -> (_.isNumber thing))
+        isArrayOfIds = (_.isArray datum) and _.any datum, (thing) ->
+          (_.isNumber thing) or (_.isString thing)
+        if isArrayOfIds
           # array of ids
           data[fieldName] = _.map data[fieldName], (id) =>
             item = @collection[collectionName].get id
             item ? id
-        else if _.isNumber data[fieldName]
+        else if (_.isNumber data[fieldName]) or (_.isString data[fieldName])
           item = @collection[collectionName].get data[fieldName]
           data[fieldName] = item ? data[fieldName]
-        #else
-          #console.log "Warning: asked to translate #{fieldName} which is not a number: #{datum}"
+        # else
+        #   console.log "Warning: asked to translate #{fieldName} which is not a number: #{datum}"
       else
         console.log "Warning: no #{collectionName} property on collection"
