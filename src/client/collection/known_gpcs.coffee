@@ -1,7 +1,7 @@
 define ['collection/named', 'model/gpc'], (NamedCollection, GPC) ->
   class KnownGPCs extends NamedCollection
     model: GPC
-    url: '/api/v1/known_gpcs/'
+    collectionUrl: 'known_gpcs'
 
     isKnown: (gpc) ->
       @include gpc

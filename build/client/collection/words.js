@@ -11,9 +11,9 @@
 
       Words.name = 'Words';
 
-      Words.prototype.url = '/api/v1/words/';
-
       Words.prototype.model = Word;
+
+      Words.prototype.collectionUrl = 'words';
 
       Words.prototype.comparator = function(word) {
         return word.get('name');

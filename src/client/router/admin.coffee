@@ -1,54 +1,35 @@
-define ['backbone', 'view/common/layout', 'view/common/menu',
-        'view/common/sidebar', 'view/admin/words',
-        'view/admin/sentences', 'view/gpc/button', 'view/common/collection'],
-(Backbone, Layout, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView) ->
+define ['backbone', 'view/common/menu', 'view/common/template',
+        'view/common/hider', 'view/common/collection',
+        'text!templates/admin/home.handlebars'],
+(Backbone, MenuView, TemplateView, HiderView, CollectionView, homeTemplate) ->
   class AdminRouter extends Backbone.Router
     routes:
       "": "home"
-      "words": "words"
-      "sentences": "sentences"
 
-    menu:
-      "Words": "#words"
-      "Sentences": "#sentences"
-
-    sidebar: ->
-      'Spelling Patterns': @makeSpellingPatterns()
+    menu: -> {}
 
     constructor: (options) ->
       super options
       @store = options.store
-      @layout = new Layout
-        menu: "#main-menu"
-        content: "#main-content"
-        sidebar: "#toolbar-content"
-      @setup = false
-
+      @layout = options.layout
 
     home: ->
-      @navigate 'words', trigger: true, replace: true
+      @showContent 'home', ->
+        new TemplateView template: homeTemplate
 
-    words: ->
-      console.log "Showing admin words page"
-      @showContent new WordsView { @store }
+    redirect: (page) ->
+      @navigate page, trigger: true, replace: true
 
-    sentences: ->
-      console.log "Showing admin sentences page"
-      @showContent new SentencesView { @store }
-
-    makeSpellingPatterns: ->
-      new CollectionView
-        id: 'spelling-patterns'
-        collection: @store.sequences().first().elements()
-        knownGPCs: @store.knownGPCs()
-        modelView: GPCButtonView
-
+    # @private
     setupDefaultViews: ->
-      return if @setup
-      @setup = true
-      @layout.menu.render new MenuView model: { @menu }
-      @layout.sidebar.render new SidebarView model: {sections: @sidebar()}
+      @layout.menu.render "admin/menu", =>
+        new MenuView model: { menu: @menu() }
+      @layout.sidebar.render "admin/sidebar", =>
+        new HiderView selector: "#side-panel, #side-panel-toggle"
 
-    showContent: (view) ->
+    # @private
+    showContent: (name, viewBuilder) ->
+      contentName = "admin/#{name}"
+      console.log "Showing #{contentName}"
       @setupDefaultViews()
-      @layout.content.render(view)
+      @layout.content.render contentName, viewBuilder

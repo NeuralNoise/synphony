@@ -29,29 +29,34 @@
     enforceDefine: true
   });
 
-  define(['jquery', 'backbone', 'model/store', 'router/admin'], function($, Backbone, Store, AdminRouter) {
-    var adminRouter, store;
+  define(['jquery', 'backbone', 'model/store', 'view/common/layout', 'router/admin', 'router/demo'], function($, Backbone, Store, Layout, AdminRouter, DemoRouter) {
+    var adminRouter, demoRouter, store;
     adminRouter = null;
+    demoRouter = null;
     store = null;
     return $(function() {
+      var layout;
       ($('#side-panel-toggle')).click(function() {
         ($('#control-panel')).toggle();
         ($('#side-panel')).toggle();
         return ($('#side-panel-toggle')).toggleClass('active');
       });
-      store = new Store;
-      return store.fetch({
-        success: function() {
-          console.log("Loaded, starting router");
-          adminRouter = new AdminRouter({
-            store: store
-          });
-          return Backbone.history.start();
-        },
-        error: function() {
-          return alert("Load failed");
-        }
+      layout = new Layout({
+        menu: "#main-menu",
+        content: "#main-content",
+        sidebar: "#toolbar-content"
       });
+      store = new Store;
+      console.log("Loaded, starting router");
+      adminRouter = new AdminRouter({
+        store: store,
+        layout: layout
+      });
+      demoRouter = new DemoRouter({
+        store: store,
+        layout: layout
+      });
+      return Backbone.history.start();
     });
   });
 

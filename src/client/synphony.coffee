@@ -29,9 +29,10 @@ requirejs.config
   # urlArgs: "bust=" +  (new Date).getTime()
   enforceDefine: true
 
-define ['jquery', 'backbone', 'model/store', 'router/admin'],
-($, Backbone, Store, AdminRouter) ->
+define ['jquery', 'backbone', 'model/store', 'view/common/layout', 'router/admin', 'router/demo'],
+($, Backbone, Store, Layout, AdminRouter, DemoRouter) ->
   adminRouter = null
+  demoRouter = null
   store = null
 
   $ ->
@@ -45,11 +46,12 @@ define ['jquery', 'backbone', 'model/store', 'router/admin'],
       ($ '#side-panel').toggle()
       ($ '#side-panel-toggle').toggleClass 'active'
 
+    layout = new Layout
+        menu: "#main-menu"
+        content: "#main-content"
+        sidebar: "#toolbar-content"
     store = new Store
-    store.fetch
-      success: ->
-        console.log "Loaded, starting router"
-        adminRouter = new AdminRouter { store }
-        Backbone.history.start()
-      error: ->
-        alert("Load failed")
+    console.log "Loaded, starting router"
+    adminRouter = new AdminRouter { store, layout }
+    demoRouter = new DemoRouter { store, layout }
+    Backbone.history.start()

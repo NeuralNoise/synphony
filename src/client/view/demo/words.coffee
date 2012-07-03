@@ -1,8 +1,8 @@
 define ['view/common/template', 'view/common/composite',
   'view/common/collection', 'view/word/list', 'model/known_focus_search'
-  'text!templates/admin/words_page.handlebars'],
+  'text!templates/demo/words.handlebars'],
 (TemplateView, CompositeView, CollectionView, WordListView, KnownFocusSearch, hbsTemplate) ->
-  class AdminWordsView extends CompositeView
+  class WordsView extends CompositeView
     id: 'words-page'
 
     constructor: (options) ->

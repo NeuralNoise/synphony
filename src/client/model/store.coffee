@@ -35,8 +35,11 @@ define ['collection/phonemes', 'collection/graphemes', 'collection/gpcs',
 
     constructor: (attributes, options) ->
       super null, options
+      @project = "synphony"
+      @fetched = false
       if attributes?
         @reset attributes, options
+        @fetched = true
 
     # Get the phonemes collection
     # @returns [Phonemes] phonemes
@@ -66,10 +69,20 @@ define ['collection/phonemes', 'collection/graphemes', 'collection/gpcs',
     # @returns [KnownGPCs] knownGPCs
     knownGPCs: -> @get 'knownGPCs'
 
+    setProject: (name) ->
+      if name isnt @project
+        @project = name
+        for key, collection of @attributes
+          collection.project = name
+        @fetched = false
+
     # Fetches each collection individually in the
     # proper order.
     fetch: (options) ->
-      @loadStack @loadOrder(), options
+      if @fetched
+        options.success? @
+      else
+        @loadStack @loadOrder(), options
 
     # Take one `Object` with all collections and reset each
     # collection in the proper order.
@@ -87,6 +100,7 @@ define ['collection/phonemes', 'collection/graphemes', 'collection/gpcs',
       myOptions = _.clone options
       myOptions.success = (collection, response) =>
         if stack.length == 0
+          @fetched = true
           options.success?(@, response)
         else
           @loadStack stack, options

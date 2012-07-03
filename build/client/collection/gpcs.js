@@ -13,7 +13,7 @@
 
       GPCs.prototype.model = GPC;
 
-      GPCs.prototype.url = '/api/v1/gpcs/';
+      GPCs.prototype.collectionUrl = 'gpcs';
 
       function GPCs(models, options) {
         if (options == null) {

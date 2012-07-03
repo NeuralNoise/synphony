@@ -13,7 +13,7 @@
 
       Sentences.prototype.model = Sentence;
 
-      Sentences.prototype.url = '/api/v1/sentences/';
+      Sentences.prototype.collectionUrl = 'sentences';
 
       function Sentences(models, options) {
         if (options == null) {

@@ -17,7 +17,9 @@
       if (port == null) {
         port = 27017;
       }
+      this.adminDatabase = database;
       this.db_connector = new mongo.Db(database, new mongo.Server(host, port, {}));
+      this.dbCache = {};
     }
 
     Db.prototype.load = function(done) {
@@ -36,9 +38,12 @@
       });
     };
 
-    Db.prototype.ensureCollections = function(collectionNames, done) {
+    Db.prototype.ensureCollections = function(database, collectionNames, done) {
       var _this = this;
-      return this.db.collectionNames(function(err, existingNames) {
+      if (database == null) {
+        database = this.adminDatabase;
+      }
+      return this.selectDatabase(database).collectionNames(function(err, existingNames) {
         var col, nonexistingNames;
         existingNames = (function() {
           var _i, _len, _results;
@@ -52,30 +57,36 @@
           return _results;
         })();
         nonexistingNames = _.difference(collectionNames, existingNames);
-        return _this.createCollections(nonexistingNames, done);
+        return _this.createCollections(database, nonexistingNames, done);
       });
     };
 
-    Db.prototype.createCollections = function(collectionNames, done) {
+    Db.prototype.createCollections = function(database, collectionNames, done) {
       var collectionName,
         _this = this;
+      if (database == null) {
+        database = this.adminDatabase;
+      }
       if (collectionNames.length === 0) {
         return done(null);
       }
       collectionName = collectionNames.shift();
-      return this.db.createCollection(collectionName, {
+      return this.selectDatabase(database).createCollection(collectionName, {
         safe: true
       }, function(err) {
         if (err != null) {
           return done(err);
         }
-        return _this.createCollections(collectionNames, done);
+        return _this.createCollections(database, collectionNames, done);
       });
     };
 
-    Db.prototype.all = function(collectionName, query, done) {
+    Db.prototype.all = function(database, collectionName, query, done) {
+      if (database == null) {
+        database = this.adminDatabase;
+      }
       query = this.patchObjectID(query);
-      return this.db.collection(collectionName, function(err, collection) {
+      return this.selectDatabase(database).collection(collectionName, function(err, collection) {
         if (err != null) {
           return done(err);
         }
@@ -85,9 +96,12 @@
       });
     };
 
-    Db.prototype.get = function(collectionName, query, done) {
+    Db.prototype.get = function(database, collectionName, query, done) {
+      if (database == null) {
+        database = this.adminDatabase;
+      }
       query = this.patchObjectID(query);
-      return this.db.collection(collectionName, function(err, collection) {
+      return this.selectDatabase(database).collection(collectionName, function(err, collection) {
         if (err != null) {
           return done(err);
         }
@@ -97,10 +111,13 @@
       });
     };
 
-    Db.prototype.put = function(collectionName, query, doc, done) {
+    Db.prototype.put = function(database, collectionName, query, doc, done) {
+      if (database == null) {
+        database = this.adminDatabase;
+      }
       query = this.patchObjectID(query);
       doc = this.patchObjectID(doc);
-      return this.db.collection(collectionName, function(err, collection) {
+      return this.selectDatabase(database).collection(collectionName, function(err, collection) {
         if (err != null) {
           return done(err);
         }
@@ -127,9 +144,12 @@
       });
     };
 
-    Db.prototype["delete"] = function(collectionName, query, done) {
+    Db.prototype["delete"] = function(database, collectionName, query, done) {
+      if (database == null) {
+        database = this.adminDatabase;
+      }
       query = this.patchObjectID(query);
-      return this.db.collection(collectionName, function(err, collection) {
+      return this.selectDatabase(database).collection(collectionName, function(err, collection) {
         if (err != null) {
           return done(err);
         }
@@ -143,6 +163,16 @@
 
     Db.prototype.close = function() {
       return this.db.close();
+    };
+
+    Db.prototype.selectDatabase = function(database) {
+      if (this.adminDatabase === database) {
+        return this.db;
+      } else if (this.dbCache[database]) {
+        return this.dbCache[database];
+      } else {
+        return this.dbCache[database] = this.db.db(database);
+      }
     };
 
     Db.prototype.patchObjectID = function(obj) {
@@ -160,7 +190,5 @@
   })();
 
   exports.Db = Db;
-
-  exports.ObjectID = mongo.ObjectID;
 
 }).call(this);

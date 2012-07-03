@@ -63,7 +63,7 @@
 
     Importer.prototype.ensureCollections = function() {
       this.collectionNames = _.keys(this.data);
-      return this.db.ensureCollections(this.collectionNames, this.whenDone("collections-ensured"));
+      return this.db.ensureCollections(null, this.collectionNames, this.whenDone("collections-ensured"));
     };
 
     Importer.prototype.nextCollection = function() {
@@ -109,8 +109,8 @@
           name: this.document.name
         };
       }
-      return this.db.put(this.collectionName, query, this.document, this.whenDone("document-inserted", function(result) {
-        _this.objectIds[id] = result._id;
+      return this.db.put(null, this.collectionName, query, this.document, this.whenDone("document-inserted", function(result) {
+        _this.objectIds[id] = result._id.toString();
         return console.log("    " + id + " => " + result._id);
       }));
     };

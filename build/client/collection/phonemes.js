@@ -17,7 +17,7 @@
 
       Phonemes.prototype.model = Phoneme;
 
-      Phonemes.prototype.url = '/api/v1/phonemes/';
+      Phonemes.prototype.collectionUrl = 'phonemes';
 
       return Phonemes;
 

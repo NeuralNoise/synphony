@@ -3,43 +3,43 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['view/common/template', 'view/common/composite', 'view/common/collection', 'view/sentence/list', 'model/known_focus_search', 'text!templates/admin/sentences_page.handlebars'], function(TemplateView, CompositeView, CollectionView, SentenceListView, KnownFocusSearch, hbsTemplate) {
-    var AdminSentencesView;
-    return AdminSentencesView = (function(_super) {
+  define(['view/common/template', 'view/common/composite', 'view/common/collection', 'view/word/list', 'model/known_focus_search', 'text!templates/demo/words.handlebars'], function(TemplateView, CompositeView, CollectionView, WordListView, KnownFocusSearch, hbsTemplate) {
+    var WordsView;
+    return WordsView = (function(_super) {
 
-      __extends(AdminSentencesView, _super);
+      __extends(WordsView, _super);
 
-      AdminSentencesView.name = 'AdminSentencesView';
+      WordsView.name = 'WordsView';
 
-      AdminSentencesView.prototype.id = 'sentences-page';
+      WordsView.prototype.id = 'words-page';
 
-      function AdminSentencesView(options) {
+      function WordsView(options) {
         var _this = this;
-        AdminSentencesView.__super__.constructor.call(this, options);
+        WordsView.__super__.constructor.call(this, options);
         this.store = options.store;
-        this.collection = this.store.sentences();
+        this.collection = this.store.words();
         this.knownGPCs = this.store.knownGPCs();
         this.search = new KnownFocusSearch(this.collection);
         this.addView(new TemplateView({
           template: hbsTemplate
         }));
-        this.addView(new SentenceListView({
+        this.addView(new WordListView({
           collection: this.collection,
           knownGPCs: this.knownGPCs,
           filter: function() {
-            return _this.filterSentences();
+            return _this.filterWords();
           }
         }));
       }
 
-      AdminSentencesView.prototype.filterSentences = function() {
+      WordsView.prototype.filterWords = function() {
         var focusGPCs, knownGPCs;
         knownGPCs = this.knownGPCs.models;
         focusGPCs = this.knownGPCs.isEmpty() ? [] : [this.knownGPCs.last()];
         return this.search.getKnownFocusItems(knownGPCs, focusGPCs);
       };
 
-      return AdminSentencesView;
+      return WordsView;
 
     })(CompositeView);
   });
