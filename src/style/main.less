@@ -28,7 +28,7 @@ hr {
 @darker-base: darken(@base-color, 10%);
 @hover-base: darken(@darker-base, 10%);
 @focus: red;
-@super-light-gray: #F9F9F9;
+@super-light-gray: #FAFAFA;
 @gray1: lighten(@gray3, 20); //lightest gray
 @gray2: lighten(@gray3, 10); //med-light gray
 @gray3: #666666; //base gray
@@ -114,11 +114,15 @@ table#main {
 }
 
 footer {
-  font-size: 90%;
-  padding: .5em;
+  font-size: 70%;
+  padding: 1em;
   text-align: center;
-  width: 100%;
-  background-color: darken(@super-light-gray, 10%);
+  width: 98%;
+  margin: 1em auto;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  background-color: @white;
+  color: darken(@super-light-gray, 15);
 }
 
 #side-panel {
@@ -225,8 +229,9 @@ footer {
 
 /* SIDE PANEL COMPONENTS */
 #side-panel-toggle {
-  width: 10px;
+  width: 20px;
   background-color: @white;
+  height: 100%;
 
   #side-panel-toggle-bar{
     margin-left: 5px;
@@ -234,11 +239,11 @@ footer {
     height: 100%;
     min-height: 10em;
     z-index: 1;
-    width: 10px;
+    width: 15px;
 
     &:hover{
       cursor: w-resize;
-      background-color: lighten(@hover-base, 10%);//#75C1FF;
+      background-color: @lighter-base;//#75C1FF;
     }
   }
 
@@ -275,7 +280,7 @@ footer {
 
     #words-page {
 
-      table#word-list {
+      #word-list {
         margin-right: auto;
         margin-left: auto;
 
@@ -286,6 +291,41 @@ footer {
           font: 2em "Andika", sans-serif;
           position: relative;
         }
+      }
+    }
+
+    #sentences-page {
+
+      #sentence-list {
+        font-family: "Andika", Arial, sans-serif;
+
+        p {
+          margin: 0;
+          padding-left: 10px;
+          word-spacing: 5px;
+
+          .word {
+            font-size: 1.2em;
+            line-height: 2em;
+          }
+
+          .bug {
+            background-color: #F8ABB3;
+            //display: none;
+          }
+
+          .bug-info {
+            background-color: #D5A5E7;
+            //display: none;
+          }
+          //.bug-info:after{
+          //  content: '   class=bug-info';
+          //}
+
+        }
+      p:nth-child(odd) {
+        background: #E4E4E4;
+      }
       }
     }
   }
