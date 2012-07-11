@@ -104,26 +104,42 @@
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src/client/view/_template.coffee</td>
+          <td>src/client/view/common/template.coffee</td>
         </tr>
         <tr>
           <td>Inherits:</td>
           <td>
-            <a href="../classes/Backbone/View.html">Backbone.View</a>
+            <a href='../classes/BaseView.html'>BaseView</a>
           </td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>Basic view which renders a template </p> 
+</div>
+<div class='tags'>
+</div>
       <h2>Direct Known Subclasses</h2>
       <p class='children'>
-                <a href="../classes/ToolbarView.html">ToolbarView</a>,
-                <a href="../classes/PageView.html">PageView</a>,
-                <a href="../classes/GPCButtonView.html">GPCButtonView</a>,
-                <a href="../classes/WordlistView.html">WordlistView</a>,
-                <a href="../classes/WordsListView.html">WordsListView</a>,
-        <a href="../classes/PlainWordView.html">PlainWordView</a>
+                <a href='../classes/MenuView.html'>MenuView</a>,
+                <a href='../classes/SidebarView.html'>SidebarView</a>,
+                <a href='../classes/GPCButtonView.html'>GPCButtonView</a>,
+                <a href='../classes/PlainWordView.html'>PlainWordView</a>,
+        <a href='../classes/WordlistView.html'>WordlistView</a>
       </p>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
+  <li>
+    <span class='signature'>
+      <a href='#constructor-instance'>
+        - (void) <strong>constructor</strong>(options = {})
+      </a>
+    </span>
+    <span class='constructor note title'>Constructor</span>
+    <span class='desc'>
+      
+    </span>
+  </li>
   <li>
     <span class='signature'>
       <a href='#templateData-instance'>
@@ -146,6 +162,16 @@
   </li>
   <li>
     <span class='signature'>
+      <a href='#renderSubviews-instance'>
+        - (void) <strong>renderSubviews</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
       <a href='#render-instance'>
         - (void) <strong>render</strong>()
       </a>
@@ -155,6 +181,26 @@
     </span>
   </li>
 </ul>
+      <h2>
+        <small>Inherited Method Summary</small>
+      </h2>
+      <h3 class='inherited'>
+        Methods inherited from
+        <a href='../classes/BaseView.html'>BaseView</a>
+      </h3>
+      <p class='inherited'>
+        <a href='../classes/BaseView.html#destroy-instance'>#destroy</a>
+      </p>
+      <h2>Constructor Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='constructor-instance'>
+      - (void) <strong>constructor</strong>(options = {})
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+</div>
       <h2>Instance Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
@@ -172,6 +218,13 @@
 </div>
   </div>
   <div class='method_details'>
+    <p class='signature' id='renderSubviews-instance'>
+      - (void) <strong>renderSubviews</strong>()
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
     <p class='signature' id='render-instance'>
       - (void) <strong>render</strong>()
     </p>
@@ -182,10 +235,10 @@
     </div>
     <div id='footer'>
   Generated on
-  Mon Jun 04 2012 13:25:21 GMT-0700 (PDT)
+  Wed Jul 11 2012 13:08:18 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
-  v0.7.1
+  v0.9.0
   (Node.js v0.6.12).
   &#10034;
   Press Ctrl-h to see the keyboard shortcuts

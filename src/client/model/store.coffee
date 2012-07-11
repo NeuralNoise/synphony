@@ -42,31 +42,31 @@ define ['collection/phonemes', 'collection/graphemes', 'collection/gpcs',
         @fetched = true
 
     # Get the phonemes collection
-    # @returns [Phonemes] phonemes
+    # @return [Phonemes] phonemes
     phonemes: -> @get 'phonemes'
 
     # Get the graphemes collection
-    # @returns [Graphemes] graphemes
+    # @return [Graphemes] graphemes
     graphemes: -> @get 'graphemes'
 
     # Get the gpcs collection
-    # @returns [GPCs] gpcs
+    # @return [GPCs] gpcs
     gpcs: -> @get 'gpcs'
 
     # Get the words collection
-    # @returns [Words] words
+    # @return [Words] words
     words: -> @get 'words'
 
     # Get the sentences collection
-    # @returns [Sentences] sentences
+    # @return [Sentences] sentences
     sentences: -> @get 'sentences'
 
     # Get the sequences collection
-    # @returns [Sequences] sequences
+    # @return [Sequences] sequences
     sequences: -> @get 'sequences'
 
     # Get the knownGPCs collection
-    # @returns [KnownGPCs] knownGPCs
+    # @return [KnownGPCs] knownGPCs
     knownGPCs: -> @get 'knownGPCs'
 
     setProject: (name) ->

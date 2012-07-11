@@ -12,7 +12,7 @@
   <div id='menu'>
     <a href='../class_index.html' title='Index'>Index</a>
     &raquo;
-    <span class='title'>NamedCollection</span>
+    <span class='title'>WordsView</span>
     <nav>
       <ul>
         <li class='noframes'>
@@ -99,78 +99,37 @@
     <div id='content'>
       <h1>
         Class:
-        NamedCollection
-        <span class='note title'>Abstract</span>
+        WordsView
       </h1>
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src/client/collection/named.coffee</td>
+          <td>src/client/view/demo/words.coffee</td>
         </tr>
         <tr>
           <td>Inherits:</td>
           <td>
-            <a href='../classes/BaseCollection.html'>BaseCollection</a>
+            <a href='../classes/CompositeView.html'>CompositeView</a>
           </td>
         </tr>
       </table>
-      <h2>Overview</h2>
-      <div class='docstring'>
-  <div class='abstract note'>
-    <strong>
-      This
-      class
-      is abstract.
-    </strong>
-    
-  </div>
-  <p>Collection of NamedModels. </p> 
-</div>
-<div class='tags'>
-  <h3>See also:</h3>
-  <ul class='see'>
-    <li>
-      <a href='http://backbonejs.org/#Collection'>Backbone.Collection</a>
-    </li>
-  </ul>
-</div>
-      <h2>Direct Known Subclasses</h2>
-      <p class='children'>
-                <a href='../classes/GPCs.html'>GPCs</a>,
-                <a href='../classes/Graphemes.html'>Graphemes</a>,
-                <a href='../classes/KnownGPCs.html'>KnownGPCs</a>,
-                <a href='../classes/Phonemes.html'>Phonemes</a>,
-                <a href='../classes/Sentences.html'>Sentences</a>,
-                <a href='../classes/SequenceElements.html'>SequenceElements</a>,
-                <a href='../classes/Sequences.html'>Sequences</a>,
-        <a href='../classes/Words.html'>Words</a>
-      </p>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
   <li>
     <span class='signature'>
-      <a href='#getByName-instance'>
-        - (void) <strong>getByName</strong>(name)
+      <a href='#constructor-instance'>
+        - (void) <strong>constructor</strong>(options)
       </a>
     </span>
-    <span class='desc'>
-      Fetch a model by its name.
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#add-instance'>
-        - (void) <strong>add</strong>(models, options)
-      </a>
-    </span>
+    <span class='constructor note title'>Constructor</span>
     <span class='desc'>
       
     </span>
   </li>
   <li>
     <span class='signature'>
-      <a href='#remove-instance'>
-        - (void) <strong>remove</strong>(models, options)
+      <a href='#filterWords-instance'>
+        - (void) <strong>filterWords</strong>()
       </a>
     </span>
     <span class='desc'>
@@ -183,61 +142,39 @@
       </h2>
       <h3 class='inherited'>
         Methods inherited from
-        <a href='../classes/BaseCollection.html'>BaseCollection</a>
+        <a href='../classes/CompositeView.html'>CompositeView</a>
       </h3>
       <p class='inherited'>
-                <a href='../classes/BaseCollection.html#url-instance'>#url</a>,
-                <a href='../classes/BaseCollection.html#add-instance'>#add</a>,
-                <a href='../classes/BaseCollection.html#remove-instance'>#remove</a>,
-        <a href='../classes/BaseCollection.html#reset-instance'>#reset</a>
+                <a href='../classes/CompositeView.html#constructor-instance'>#constructor</a>,
+                <a href='../classes/CompositeView.html#destroy-instance'>#destroy</a>,
+                <a href='../classes/CompositeView.html#addView-instance'>#addView</a>,
+                <a href='../classes/CompositeView.html#removeView-instance'>#removeView</a>,
+        <a href='../classes/CompositeView.html#render-instance'>#render</a>
       </p>
+      <h3 class='inherited'>
+        Methods inherited from
+        <a href='../classes/BaseView.html'>BaseView</a>
+      </h3>
+      <p class='inherited'>
+        <a href='../classes/BaseView.html#destroy-instance'>#destroy</a>
+      </p>
+      <h2>Constructor Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='constructor-instance'>
+      - (void) <strong>constructor</strong>(options)
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+</div>
       <h2>Instance Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='getByName-instance'>
-      - (void) <strong>getByName</strong>(name)
-    </p>
-    <div class='docstring'>
-  <p>Fetch a model by its name. This will index the names of the models the first time it&#39;s called, then afterwards this method should be fast. </p> <p>@returns [NamedModel] model looked up or null if not found. </p> 
-</div>
-<div class='tags'>
-  <h3>Parameters:</h3>
-  <ul class='param'>
-    <li>
-      <span class='name'>name</span>
-      <span class='type'>
-        (<tt>String</tt>)
-      </span>
-      &mdash;
-      <span class='desc'>Name of the model to look up.</span>
-    </li>
-  </ul>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='add-instance'>
-      - (void) <strong>add</strong>(models, options)
+    <p class='signature' id='filterWords-instance'>
+      - (void) <strong>filterWords</strong>()
     </p>
     <div class='tags'>
-  <h3>See also:</h3>
-  <ul class='see'>
-    <li>
-      <a href='http://backbonejs.org/#Collection-add'>Backbone.Collection#add</a>
-    </li>
-  </ul>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='remove-instance'>
-      - (void) <strong>remove</strong>(models, options)
-    </p>
-    <div class='tags'>
-  <h3>See also:</h3>
-  <ul class='see'>
-    <li>
-      <a href='http://backbonejs.org/#Collection-remove'>Backbone.Collection#remove</a>
-    </li>
-  </ul>
 </div>
   </div>
 </div>

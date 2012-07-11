@@ -109,7 +109,7 @@
         <tr>
           <td>Inherits:</td>
           <td>
-            <a href="../classes/BaseModel.html">BaseModel</a>
+            <a href='../classes/BaseModel.html'>BaseModel</a>
           </td>
         </tr>
       </table>
@@ -135,71 +135,81 @@
   <li>
     <span class='signature'>
       <a href='#phonemes-instance'>
-        - (void) <strong>phonemes</strong>()
+        - (Phonemes) <strong>phonemes</strong>()
       </a>
     </span>
     <span class='desc'>
-      Get the phonemes collection @returns [Phonemes] phonemes
+      Get the phonemes collection
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#graphemes-instance'>
-        - (void) <strong>graphemes</strong>()
+        - (Graphemes) <strong>graphemes</strong>()
       </a>
     </span>
     <span class='desc'>
-      Get the graphemes collection @returns [Graphemes] graphemes
+      Get the graphemes collection
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#gpcs-instance'>
-        - (void) <strong>gpcs</strong>()
+        - (GPCs) <strong>gpcs</strong>()
       </a>
     </span>
     <span class='desc'>
-      Get the gpcs collection @returns [GPCs] gpcs
+      Get the gpcs collection
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#words-instance'>
-        - (void) <strong>words</strong>()
+        - (Words) <strong>words</strong>()
       </a>
     </span>
     <span class='desc'>
-      Get the words collection @returns [Words] words
+      Get the words collection
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#sentences-instance'>
-        - (void) <strong>sentences</strong>()
+        - (Sentences) <strong>sentences</strong>()
       </a>
     </span>
     <span class='desc'>
-      Get the sentences collection @returns [Sentences] sentences
+      Get the sentences collection
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#sequences-instance'>
-        - (void) <strong>sequences</strong>()
+        - (Sequences) <strong>sequences</strong>()
       </a>
     </span>
     <span class='desc'>
-      Get the sequences collection @returns [Sequences] sequences
+      Get the sequences collection
     </span>
   </li>
   <li>
     <span class='signature'>
-      <a href='#userGPCs-instance'>
-        - (void) <strong>userGPCs</strong>()
+      <a href='#knownGPCs-instance'>
+        - (KnownGPCs) <strong>knownGPCs</strong>()
       </a>
     </span>
     <span class='desc'>
-      Get the userGPCs collection @returns [UserGPCs] userGPCs
+      Get the knownGPCs collection
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#setProject-instance'>
+        - (void) <strong>setProject</strong>(name)
+      </a>
+    </span>
+    <span class='desc'>
+      
     </span>
   </li>
   <li>
@@ -228,11 +238,11 @@
       </h2>
       <h3 class='inherited'>
         Methods inherited from
-        <a href="../classes/BaseModel.html">BaseModel</a>
+        <a href='../classes/BaseModel.html'>BaseModel</a>
       </h3>
       <p class='inherited'>
-                <a href="../classes/BaseModel.html#constructor-instance">#constructor</a>,
-        <a href="../classes/BaseModel.html#parseIdLookup-instance">#parseIdLookup</a>
+                <a href='../classes/BaseModel.html#constructor-instance'>#constructor</a>,
+        <a href='../classes/BaseModel.html#parseIdLookup-instance'>#parseIdLookup</a>
       </p>
       <h2>Constructor Details</h2>
       <div class='methods'>
@@ -248,72 +258,149 @@
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='phonemes-instance'>
-      - (void) <strong>phonemes</strong>()
+      - (Phonemes) <strong>phonemes</strong>()
     </p>
     <div class='docstring'>
-  <p>Get the phonemes collection @returns [Phonemes] phonemes </p> 
+  <p>Get the phonemes collection </p> 
 </div>
 <div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt><a href='../classes/Phonemes.html'>Phonemes</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>phonemes</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='graphemes-instance'>
-      - (void) <strong>graphemes</strong>()
+      - (Graphemes) <strong>graphemes</strong>()
     </p>
     <div class='docstring'>
-  <p>Get the graphemes collection @returns [Graphemes] graphemes </p> 
+  <p>Get the graphemes collection </p> 
 </div>
 <div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt><a href='../classes/Graphemes.html'>Graphemes</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>graphemes</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='gpcs-instance'>
-      - (void) <strong>gpcs</strong>()
+      - (GPCs) <strong>gpcs</strong>()
     </p>
     <div class='docstring'>
-  <p>Get the gpcs collection @returns [GPCs] gpcs </p> 
+  <p>Get the gpcs collection </p> 
 </div>
 <div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt><a href='../classes/GPCs.html'>GPCs</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>gpcs</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='words-instance'>
-      - (void) <strong>words</strong>()
+      - (Words) <strong>words</strong>()
     </p>
     <div class='docstring'>
-  <p>Get the words collection @returns [Words] words </p> 
+  <p>Get the words collection </p> 
 </div>
 <div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt><a href='../classes/Words.html'>Words</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>words</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='sentences-instance'>
-      - (void) <strong>sentences</strong>()
+      - (Sentences) <strong>sentences</strong>()
     </p>
     <div class='docstring'>
-  <p>Get the sentences collection @returns [Sentences] sentences </p> 
+  <p>Get the sentences collection </p> 
 </div>
 <div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt><a href='../classes/Sentences.html'>Sentences</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>sentences</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='sequences-instance'>
-      - (void) <strong>sequences</strong>()
+      - (Sequences) <strong>sequences</strong>()
     </p>
     <div class='docstring'>
-  <p>Get the sequences collection @returns [Sequences] sequences </p> 
+  <p>Get the sequences collection </p> 
 </div>
 <div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt><a href='../classes/Sequences.html'>Sequences</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>sequences</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='userGPCs-instance'>
-      - (void) <strong>userGPCs</strong>()
+    <p class='signature' id='knownGPCs-instance'>
+      - (KnownGPCs) <strong>knownGPCs</strong>()
     </p>
     <div class='docstring'>
-  <p>Get the userGPCs collection @returns [UserGPCs] userGPCs </p> 
+  <p>Get the knownGPCs collection </p> 
 </div>
 <div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt><a href='../classes/KnownGPCs.html'>KnownGPCs</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>knownGPCs</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='setProject-instance'>
+      - (void) <strong>setProject</strong>(name)
+    </p>
+    <div class='tags'>
 </div>
   </div>
   <div class='method_details'>
@@ -340,10 +427,10 @@
     </div>
     <div id='footer'>
   Generated on
-  Mon Jun 04 2012 13:25:21 GMT-0700 (PDT)
+  Wed Jul 11 2012 13:08:18 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
-  v0.7.1
+  v0.9.0
   (Node.js v0.6.12).
   &#10034;
   Press Ctrl-h to see the keyboard shortcuts

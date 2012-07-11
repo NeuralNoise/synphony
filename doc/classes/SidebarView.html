@@ -12,7 +12,7 @@
   <div id='menu'>
     <a href='../class_index.html' title='Index'>Index</a>
     &raquo;
-    <span class='title'>WordlistView</span>
+    <span class='title'>SidebarView</span>
     <nav>
       <ul>
         <li class='noframes'>
@@ -99,12 +99,12 @@
     <div id='content'>
       <h1>
         Class:
-        WordlistView
+        SidebarView
       </h1>
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src/client/view/wordlist.coffee</td>
+          <td>src/client/view/common/sidebar.coffee</td>
         </tr>
         <tr>
           <td>Inherits:</td>
@@ -113,18 +113,12 @@
           </td>
         </tr>
       </table>
-      <h2>Overview</h2>
-      <div class='docstring'>
-  <p>View for the wordlist form. </p> 
-</div>
-<div class='tags'>
-</div>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
   <li>
     <span class='signature'>
-      <a href='#initialize-instance'>
-        - (void) <strong>initialize</strong>()
+      <a href='#accordion-instance'>
+        - (void) <strong>accordion</strong>(event)
       </a>
     </span>
     <span class='desc'>
@@ -133,48 +127,8 @@
   </li>
   <li>
     <span class='signature'>
-      <a href='#onKeyUp-instance'>
-        - (void) <strong>onKeyUp</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when the form is updated, set the wordlist on the model to the text box contents
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onModelChange-instance'>
-        - (void) <strong>onModelChange</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      When the model changes update the text box contents to match
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onClickClean-instance'>
-        - (void) <strong>onClickClean</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when someone clicks the clean button, call clean() on the model
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onClickCleanUpperCase-instance'>
-        - (void) <strong>onClickCleanUpperCase</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when someone clicks the clean uppercase button, call cleanUpperCase() on the model
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onClickCleanDebris-instance'>
-        - (void) <strong>onClickCleanDebris</strong>()
+      <a href='#templateData-instance'>
+        - (void) <strong>templateData</strong>()
       </a>
     </span>
     <span class='desc'>
@@ -183,22 +137,12 @@
   </li>
   <li>
     <span class='signature'>
-      <a href='#save-instance'>
-        - (void) <strong>save</strong>()
+      <a href='#render-instance'>
+        - (void) <strong>render</strong>()
       </a>
     </span>
     <span class='desc'>
-      save the model
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onModelSaved-instance'>
-        - (void) <strong>onModelSaved</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when model is saved briefly flash a message to the user
+      
     </span>
   </li>
 </ul>
@@ -226,77 +170,24 @@
       <h2>Instance Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='initialize-instance'>
-      - (void) <strong>initialize</strong>()
+    <p class='signature' id='accordion-instance'>
+      - (void) <strong>accordion</strong>(event)
     </p>
     <div class='tags'>
 </div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='onKeyUp-instance'>
-      - (void) <strong>onKeyUp</strong>()
-    </p>
-    <div class='docstring'>
-  <p>when the form is updated, set the wordlist on the model to the text box contents </p> 
-</div>
-<div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onModelChange-instance'>
-      - (void) <strong>onModelChange</strong>()
-    </p>
-    <div class='docstring'>
-  <p>When the model changes update the text box contents to match </p> 
-</div>
-<div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onClickClean-instance'>
-      - (void) <strong>onClickClean</strong>()
-    </p>
-    <div class='docstring'>
-  <p>when someone clicks the clean button, call clean() on the model </p> 
-</div>
-<div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onClickCleanUpperCase-instance'>
-      - (void) <strong>onClickCleanUpperCase</strong>()
-    </p>
-    <div class='docstring'>
-  <p>when someone clicks the clean uppercase button, call cleanUpperCase() on the model </p> 
-</div>
-<div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onClickCleanDebris-instance'>
-      - (void) <strong>onClickCleanDebris</strong>()
+    <p class='signature' id='templateData-instance'>
+      - (void) <strong>templateData</strong>()
     </p>
     <div class='tags'>
 </div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='save-instance'>
-      - (void) <strong>save</strong>()
+    <p class='signature' id='render-instance'>
+      - (void) <strong>render</strong>()
     </p>
-    <div class='docstring'>
-  <p>save the model </p> 
-</div>
-<div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onModelSaved-instance'>
-      - (void) <strong>onModelSaved</strong>()
-    </p>
-    <div class='docstring'>
-  <p>when model is saved briefly flash a message to the user </p> 
-</div>
-<div class='tags'>
+    <div class='tags'>
 </div>
   </div>
 </div>

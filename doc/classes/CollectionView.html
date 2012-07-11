@@ -12,7 +12,7 @@
   <div id='menu'>
     <a href='../class_index.html' title='Index'>Index</a>
     &raquo;
-    <span class='title'>WordlistView</span>
+    <span class='title'>CollectionView</span>
     <nav>
       <ul>
         <li class='noframes'>
@@ -99,23 +99,23 @@
     <div id='content'>
       <h1>
         Class:
-        WordlistView
+        CollectionView
       </h1>
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src/client/view/wordlist.coffee</td>
+          <td>src/client/view/common/collection.coffee</td>
         </tr>
         <tr>
           <td>Inherits:</td>
           <td>
-            <a href='../classes/TemplateView.html'>TemplateView</a>
+            <a href='../classes/CompositeView.html'>CompositeView</a>
           </td>
         </tr>
       </table>
       <h2>Overview</h2>
       <div class='docstring'>
-  <p>View for the wordlist form. </p> 
+  <p>A view that can render a collection of models with a specific view. Initially the element is empty until render is called then once render is called, any add/remove/change events on the collection will rerender. Idea from Backbone.Marionette </p> 
 </div>
 <div class='tags'>
 </div>
@@ -123,8 +123,19 @@
       <ul class='summary'>
   <li>
     <span class='signature'>
-      <a href='#initialize-instance'>
-        - (void) <strong>initialize</strong>()
+      <a href='#constructor-instance'>
+        - (void) <strong>constructor</strong>(options = {})
+      </a>
+    </span>
+    <span class='constructor note title'>Constructor</span>
+    <span class='desc'>
+      
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#destroy-instance'>
+        - (void) <strong>destroy</strong>()
       </a>
     </span>
     <span class='desc'>
@@ -133,48 +144,8 @@
   </li>
   <li>
     <span class='signature'>
-      <a href='#onKeyUp-instance'>
-        - (void) <strong>onKeyUp</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when the form is updated, set the wordlist on the model to the text box contents
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onModelChange-instance'>
-        - (void) <strong>onModelChange</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      When the model changes update the text box contents to match
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onClickClean-instance'>
-        - (void) <strong>onClickClean</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when someone clicks the clean button, call clean() on the model
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onClickCleanUpperCase-instance'>
-        - (void) <strong>onClickCleanUpperCase</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when someone clicks the clean uppercase button, call cleanUpperCase() on the model
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onClickCleanDebris-instance'>
-        - (void) <strong>onClickCleanDebris</strong>()
+      <a href='#makeModelView-instance'>
+        - (void) <strong>makeModelView</strong>(model, options = {})
       </a>
     </span>
     <span class='desc'>
@@ -183,22 +154,22 @@
   </li>
   <li>
     <span class='signature'>
-      <a href='#save-instance'>
-        - (void) <strong>save</strong>()
+      <a href='#addModelView-instance'>
+        - (void) <strong>addModelView</strong>(model, index = -1, options = {})
       </a>
     </span>
     <span class='desc'>
-      save the model
+      
     </span>
   </li>
   <li>
     <span class='signature'>
-      <a href='#onModelSaved-instance'>
-        - (void) <strong>onModelSaved</strong>()
+      <a href='#removeModelView-instance'>
+        - (void) <strong>removeModelView</strong>(model)
       </a>
     </span>
     <span class='desc'>
-      when model is saved briefly flash a message to the user
+      
     </span>
   </li>
 </ul>
@@ -207,14 +178,14 @@
       </h2>
       <h3 class='inherited'>
         Methods inherited from
-        <a href='../classes/TemplateView.html'>TemplateView</a>
+        <a href='../classes/CompositeView.html'>CompositeView</a>
       </h3>
       <p class='inherited'>
-                <a href='../classes/TemplateView.html#constructor-instance'>#constructor</a>,
-                <a href='../classes/TemplateView.html#templateData-instance'>#templateData</a>,
-                <a href='../classes/TemplateView.html#toHTML-instance'>#toHTML</a>,
-                <a href='../classes/TemplateView.html#renderSubviews-instance'>#renderSubviews</a>,
-        <a href='../classes/TemplateView.html#render-instance'>#render</a>
+                <a href='../classes/CompositeView.html#constructor-instance'>#constructor</a>,
+                <a href='../classes/CompositeView.html#destroy-instance'>#destroy</a>,
+                <a href='../classes/CompositeView.html#addView-instance'>#addView</a>,
+                <a href='../classes/CompositeView.html#removeView-instance'>#removeView</a>,
+        <a href='../classes/CompositeView.html#render-instance'>#render</a>
       </p>
       <h3 class='inherited'>
         Methods inherited from
@@ -223,80 +194,44 @@
       <p class='inherited'>
         <a href='../classes/BaseView.html#destroy-instance'>#destroy</a>
       </p>
+      <h2>Constructor Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='constructor-instance'>
+      - (void) <strong>constructor</strong>(options = {})
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+</div>
       <h2>Instance Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='initialize-instance'>
-      - (void) <strong>initialize</strong>()
+    <p class='signature' id='destroy-instance'>
+      - (void) <strong>destroy</strong>()
     </p>
     <div class='tags'>
 </div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='onKeyUp-instance'>
-      - (void) <strong>onKeyUp</strong>()
-    </p>
-    <div class='docstring'>
-  <p>when the form is updated, set the wordlist on the model to the text box contents </p> 
-</div>
-<div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onModelChange-instance'>
-      - (void) <strong>onModelChange</strong>()
-    </p>
-    <div class='docstring'>
-  <p>When the model changes update the text box contents to match </p> 
-</div>
-<div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onClickClean-instance'>
-      - (void) <strong>onClickClean</strong>()
-    </p>
-    <div class='docstring'>
-  <p>when someone clicks the clean button, call clean() on the model </p> 
-</div>
-<div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onClickCleanUpperCase-instance'>
-      - (void) <strong>onClickCleanUpperCase</strong>()
-    </p>
-    <div class='docstring'>
-  <p>when someone clicks the clean uppercase button, call cleanUpperCase() on the model </p> 
-</div>
-<div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onClickCleanDebris-instance'>
-      - (void) <strong>onClickCleanDebris</strong>()
+    <p class='signature' id='makeModelView-instance'>
+      - (void) <strong>makeModelView</strong>(model, options = {})
     </p>
     <div class='tags'>
 </div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='save-instance'>
-      - (void) <strong>save</strong>()
+    <p class='signature' id='addModelView-instance'>
+      - (void) <strong>addModelView</strong>(model, index = -1, options = {})
     </p>
-    <div class='docstring'>
-  <p>save the model </p> 
-</div>
-<div class='tags'>
+    <div class='tags'>
 </div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='onModelSaved-instance'>
-      - (void) <strong>onModelSaved</strong>()
+    <p class='signature' id='removeModelView-instance'>
+      - (void) <strong>removeModelView</strong>(model)
     </p>
-    <div class='docstring'>
-  <p>when model is saved briefly flash a message to the user </p> 
-</div>
-<div class='tags'>
+    <div class='tags'>
 </div>
   </div>
 </div>

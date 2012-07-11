@@ -12,7 +12,7 @@
   <div id='menu'>
     <a href='../class_index.html' title='Index'>Index</a>
     &raquo;
-    <span class='title'>SequenceElement</span>
+    <span class='title'>BaseView</span>
     <nav>
       <ul>
         <li class='noframes'>
@@ -99,76 +99,58 @@
     <div id='content'>
       <h1>
         Class:
-        SequenceElement
+        BaseView
       </h1>
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src/client/model/sequence_element.coffee</td>
+          <td>src/client/view/common/base.coffee</td>
         </tr>
         <tr>
           <td>Inherits:</td>
           <td>
-            <a href='../classes/NamedModel.html'>NamedModel</a>
+            <a href='../classes/Backbone/View.html'>Backbone.View</a>
           </td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>Base view with some extensions that make sense. Most stolen from Backbone.Marionette. </p> <p>Subclasses have a easy way to destroy which will clean up the DOM and events. </p> <p>Also there&#39;s <code>triggers</code> which can be used to forward DOM events to anyone listening to this view. </p> 
+</div>
+<div class='tags'>
+</div>
+      <h2>Direct Known Subclasses</h2>
+      <p class='children'>
+                <a href='../classes/CompositeView.html'>CompositeView</a>,
+                <a href='../classes/Hardpoint.html'>Hardpoint</a>,
+                <a href='../classes/HiderView.html'>HiderView</a>,
+                <a href='../classes/TemplateView.html'>TemplateView</a>,
+                <a href='../classes/SentenceListView.html'>SentenceListView</a>,
+        <a href='../classes/WordListView.html'>WordListView</a>
+      </p>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
   <li>
     <span class='signature'>
-      <a href='#gpc-instance'>
-        - (void) <strong>gpc</strong>()
+      <a href='#destroy-instance'>
+        - (void) <strong>destroy</strong>()
       </a>
     </span>
     <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#parse-instance'>
-        - (void) <strong>parse</strong>(data)
-      </a>
-    </span>
-    <span class='desc'>
-      
+      Destroy the view taking care to remove event handlers so it will be garbage collected properly, as well as removing it from the DOM.
     </span>
   </li>
 </ul>
-      <h2>
-        <small>Inherited Method Summary</small>
-      </h2>
-      <h3 class='inherited'>
-        Methods inherited from
-        <a href='../classes/NamedModel.html'>NamedModel</a>
-      </h3>
-      <p class='inherited'>
-                <a href='../classes/NamedModel.html#name-instance'>#name</a>,
-        <a href='../classes/NamedModel.html#validate-instance'>#validate</a>
-      </p>
-      <h3 class='inherited'>
-        Methods inherited from
-        <a href='../classes/BaseModel.html'>BaseModel</a>
-      </h3>
-      <p class='inherited'>
-                <a href='../classes/BaseModel.html#constructor-instance'>#constructor</a>,
-        <a href='../classes/BaseModel.html#parseIdLookup-instance'>#parseIdLookup</a>
-      </p>
       <h2>Instance Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='gpc-instance'>
-      - (void) <strong>gpc</strong>()
+    <p class='signature' id='destroy-instance'>
+      - (void) <strong>destroy</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Destroy the view taking care to remove event handlers so it will be garbage collected properly, as well as removing it from the DOM. A <code>destroy</code> event is triggered immediately prior to removing all listeners. </p> 
 </div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='parse-instance'>
-      - (void) <strong>parse</strong>(data)
-    </p>
-    <div class='tags'>
+<div class='tags'>
 </div>
   </div>
 </div>
