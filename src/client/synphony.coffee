@@ -29,10 +29,11 @@ requirejs.config
   # urlArgs: "bust=" +  (new Date).getTime()
   enforceDefine: true
 
-define ['jquery', 'backbone', 'model/store', 'view/common/layout', 'router/admin', 'router/demo'],
-($, Backbone, Store, Layout, AdminRouter, DemoRouter) ->
+define ['jquery', 'backbone', 'model/store', 'view/common/layout', 'router/admin', 'router/demo', 'router/designer'],
+($, Backbone, Store, Layout, AdminRouter, DemoRouter, DesignerRouter) ->
   adminRouter = null
   demoRouter = null
+  designerRouter = null
   store = null
 
   $ ->
@@ -54,4 +55,5 @@ define ['jquery', 'backbone', 'model/store', 'view/common/layout', 'router/admin
     console.log "Loaded, starting router"
     adminRouter = new AdminRouter { store, layout }
     demoRouter = new DemoRouter { store, layout }
+    designerRouter = new DesignerRouter {store, layout }
     Backbone.history.start()
