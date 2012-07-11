@@ -14,24 +14,28 @@
       function Hardpoint(options) {
         Hardpoint.__super__.constructor.call(this, options);
         this.view = null;
+        this.name = null;
       }
 
-      Hardpoint.prototype.setView = function(view) {
-        if (this.view) {
-          this.view.destroy();
+      Hardpoint.prototype.setView = function(name, viewBuilder) {
+        if (name !== this.name) {
+          if (!(name != null)) {
+            throw new Error("Name should not be nil");
+          }
+          this.name = name;
+          if (this.view) {
+            this.view.destroy();
+          }
+          this.view = viewBuilder();
         }
-        this.view = view;
         return this;
       };
 
-      Hardpoint.prototype.render = function(view) {
-        if (view == null) {
-          view = null;
+      Hardpoint.prototype.render = function(name, viewBuilder) {
+        if (name !== this.name) {
+          this.setView(name, viewBuilder);
+          return this.$el.html(this.view.render().el);
         }
-        if (view) {
-          this.setView(view);
-        }
-        return this.$el.html(this.view.render().el);
       };
 
       Hardpoint.prototype.destroy = function() {

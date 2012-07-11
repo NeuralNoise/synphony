@@ -40,7 +40,7 @@ class Importer extends EventEmitter
 
   ensureCollections: ->
     @collectionNames = _.keys @data
-    @db.ensureCollections @collectionNames, @whenDone "collections-ensured"
+    @db.ensureCollections null, @collectionNames, @whenDone "collections-ensured"
 
   nextCollection: ->
     @collectionName = @collectionNames.shift()
@@ -75,8 +75,8 @@ class Importer extends EventEmitter
     delete @document.id
     query = null
     query = { name: @document.name } if @document.name?
-    @db.put @collectionName, query, @document, @whenDone "document-inserted", (result) =>
-      @objectIds[id] = result._id
+    @db.put null, @collectionName, query, @document, @whenDone "document-inserted", (result) =>
+      @objectIds[id] = result._id.toString()
       console.log "    #{id} => #{result._id}"
 
   done: ->

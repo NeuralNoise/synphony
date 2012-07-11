@@ -1,7 +1,7 @@
 define ['collection/named', 'model/sentence'], (NamedCollection, Sentence) ->
   class Sentences extends NamedCollection
     model: Sentence
-    url: '/api/v1/sentences/'
+    collectionUrl: 'sentences'
 
     constructor: (models, options={}) ->
       @words = options.words

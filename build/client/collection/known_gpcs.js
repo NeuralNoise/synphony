@@ -17,7 +17,7 @@
 
       KnownGPCs.prototype.model = GPC;
 
-      KnownGPCs.prototype.url = '/api/v1/known_gpcs/';
+      KnownGPCs.prototype.collectionUrl = 'known_gpcs';
 
       KnownGPCs.prototype.isKnown = function(gpc) {
         return this.include(gpc);

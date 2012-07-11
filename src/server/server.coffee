@@ -16,6 +16,8 @@ path = require 'path'
 auth = require './auth'
 {_} = require 'underscore'
 
+ADMINDB = 'admin'
+
 staticFile = (root, path) ->
   (req, res) ->
     next = (err) ->
@@ -66,14 +68,13 @@ compileStyle = (callback) ->
 
 module.exports.run = ->
   app = express.createServer()
-  db = new thedb.Db 'synphony'
+  db = new thedb.Db ADMINDB
   db.load (err) ->
     if err?
       console.error err.toString()
     else
-      db.ensureCollections [
-        'users', 'phonemes', 'graphemes', 'gpcs', 'known_gpcs'
-        'words', 'sentences', 'sequences'
+      db.ensureCollections ADMINDB, [
+        'users', 'projects'
       ], (err) ->
         if err?
           console.error err.toString()
@@ -85,7 +86,7 @@ module.exports.run = ->
     user = _.clone profile
     user.open_id = identifier
 
-    db.put 'users', {'open_id': identifier}, user, (err, user) ->
+    db.put ADMINDB, 'users', {'open_id': identifier}, user, (err, user) ->
       if err?
         console.log err
       done err, user
@@ -94,7 +95,7 @@ module.exports.run = ->
     done null, user._id.toString()
 
   deserializeUser = (id, done) ->
-    user = db.get 'users', {_id: id}, (err, user) ->
+    user = db.get ADMINDB, 'users', {_id: id}, (err, user) ->
       if err?
         console.log err
       done err, user
@@ -126,22 +127,22 @@ module.exports.run = ->
         res.contentType 'text/css'
         res.send css
 
-  app.get '/api/v1/:collection/?', (req, res) ->
-    db.all req.params.collection, null, (err, docs) ->
+  app.get '/api/v1/:project/:collection/?', (req, res) ->
+    db.all req.params.project, req.params.collection, null, (err, docs) ->
       if err?
         res.send 500, err
       else
         res.json docs
 
-  app.post '/api/v1/:collection/?', (req, res) ->
-    db.put req.params.collection, null, req.body, (err, doc) ->
+  app.post '/api/v1/:project/:collection/?', (req, res) ->
+    db.put req.params.project, req.params.collection, null, req.body, (err, doc) ->
       if err?
         res.send 500, error
       else
         res.json doc
 
-  app.get '/api/v1/:collection/:id/?', (req, res) ->
-    db.get req.params.collection, {_id: req.params.id}, (err, doc) ->
+  app.get '/api/v1/:project/:collection/:id/?', (req, res) ->
+    db.get req.params.project, req.params.collection, {_id: req.params.id}, (err, doc) ->
       if err?
         res.send 500, error
       else if doc?
@@ -149,16 +150,16 @@ module.exports.run = ->
       else
         res.send 404, "No such document"
 
-  app.put '/api/v1/:collection/:id/?', (req, res) ->
+  app.put '/api/v1/:project/:collection/:id/?', (req, res) ->
     req.body._id = req.params.id
-    db.put req.params.collection, {_id: req.params.id}, req.body, (err, doc) ->
+    db.put req.params.project, req.params.collection, {_id: req.params.id}, req.body, (err, doc) ->
       if err?
         res.send 500, error
       else
         res.json doc
 
-  app.delete '/api/v1/:collection/:id/?', (req, res) ->
-    db.delete req.params.collection, {_id: req.params.id}, (err) ->
+  app.delete '/api/v1/:project/:collection/:id/?', (req, res) ->
+    db.delete req.params.project, req.params.collection, {_id: req.params.id}, (err) ->
       if err?
         res.send 500, error
       else

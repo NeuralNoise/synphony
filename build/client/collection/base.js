@@ -15,6 +15,12 @@
         return BaseCollection.__super__.constructor.apply(this, arguments);
       }
 
+      BaseCollection.prototype.project = "synphony";
+
+      BaseCollection.prototype.url = function() {
+        return "/api/v1/" + this.project + "/" + this.collectionUrl + "/";
+      };
+
       BaseCollection.prototype.add = function(models, options) {
         if (options == null) {
           options = {};

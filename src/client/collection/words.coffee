@@ -1,7 +1,7 @@
 define ['underscore', 'collection/named', 'model/word'], (_, NamedCollection, Word) ->
   class Words extends NamedCollection
-    url: '/api/v1/words/'
     model: Word
+    collectionUrl: 'words'
     comparator: (word) -> word.get('name')
 
     constructor: (models, options={}) ->

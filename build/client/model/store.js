@@ -50,8 +50,11 @@
 
       function Store(attributes, options) {
         Store.__super__.constructor.call(this, null, options);
+        this.project = "synphony";
+        this.fetched = false;
         if (attributes != null) {
           this.reset(attributes, options);
+          this.fetched = true;
         }
       }
 
@@ -83,8 +86,25 @@
         return this.get('knownGPCs');
       };
 
+      Store.prototype.setProject = function(name) {
+        var collection, key, _ref;
+        if (name !== this.project) {
+          this.project = name;
+          _ref = this.attributes;
+          for (key in _ref) {
+            collection = _ref[key];
+            collection.project = name;
+          }
+          return this.fetched = false;
+        }
+      };
+
       Store.prototype.fetch = function(options) {
-        return this.loadStack(this.loadOrder(), options);
+        if (this.fetched) {
+          return typeof options.success === "function" ? options.success(this) : void 0;
+        } else {
+          return this.loadStack(this.loadOrder(), options);
+        }
       };
 
       Store.prototype.reset = function(attributes, options) {
@@ -105,6 +125,7 @@
         myOptions = _.clone(options);
         myOptions.success = function(collection, response) {
           if (stack.length === 0) {
+            _this.fetched = true;
             return typeof options.success === "function" ? options.success(_this, response) : void 0;
           } else {
             return _this.loadStack(stack, options);

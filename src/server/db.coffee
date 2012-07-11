@@ -3,7 +3,9 @@ mongo = require 'mongodb'
 
 class Db
   constructor: (database, host="127.0.0.1", port=27017) ->
+    @adminDatabase = database
     @db_connector = new mongo.Db(database, new mongo.Server(host, port, {}))
+    @dbCache = {}
 
   load: (done) ->
     if @db?
@@ -14,37 +16,37 @@ class Db
       @db = db
       done err if done?
 
-  ensureCollections: (collectionNames, done) ->
-    @db.collectionNames (err, existingNames) =>
+  ensureCollections: (database=@adminDatabase, collectionNames, done) ->
+    @selectDatabase(database).collectionNames (err, existingNames) =>
       existingNames = (col.options.create for col in existingNames when col.options?)
       nonexistingNames = _.difference collectionNames, existingNames
-      @createCollections nonexistingNames, done
+      @createCollections database, nonexistingNames, done
 
-  createCollections: (collectionNames, done) ->
+  createCollections: (database=@adminDatabase, collectionNames, done) ->
     return (done null) if collectionNames.length == 0
     collectionName = collectionNames.shift()
-    @db.createCollection collectionName, {safe: true}, (err) =>
+    @selectDatabase(database).createCollection collectionName, {safe: true}, (err) =>
       return (done err) if err?
-      @createCollections collectionNames, done
+      @createCollections database, collectionNames, done
 
-  all: (collectionName, query, done) ->
+  all: (database=@adminDatabase, collectionName, query, done) ->
     query = @patchObjectID query
-    @db.collection collectionName, (err, collection) ->
+    @selectDatabase(database).collection collectionName, (err, collection) ->
       return (done err) if err?
       collection.find(query).toArray (err, docs) ->
         done err, docs
 
-  get: (collectionName, query, done) ->
+  get: (database=@adminDatabase, collectionName, query, done) ->
     query = @patchObjectID query
-    @db.collection collectionName, (err, collection) ->
+    @selectDatabase(database).collection collectionName, (err, collection) ->
       return (done err) if err?
       collection.findOne query, (err, doc) ->
         done err, doc
 
-  put: (collectionName, query, doc, done) ->
+  put: (database=@adminDatabase, collectionName, query, doc, done) ->
     query = @patchObjectID query
     doc = @patchObjectID doc
-    @db.collection collectionName, (err, collection) ->
+    @selectDatabase(database).collection collectionName, (err, collection) ->
       return (done err) if err?
       if not query? and doc._id?
         query = {_id: doc._id}
@@ -55,15 +57,24 @@ class Db
         collection.insert doc, {safe: true}, (err, doc) ->
           done err, doc
 
-  delete: (collectionName, query, done) ->
+  delete: (database=@adminDatabase, collectionName, query, done) ->
     query = @patchObjectID query
-    @db.collection collectionName, (err, collection) ->
+    @selectDatabase(database).collection collectionName, (err, collection) ->
       return (done err) if err?
       collection.remove query, {safe: true}, (err) ->
         done err
 
   close: ->
     @db.close()
+
+  # @private
+  selectDatabase: (database) ->
+    if @adminDatabase == database
+      @db
+    else if @dbCache[database]
+      @dbCache[database]
+    else
+      @dbCache[database] = @db.db(database)
 
   # @private
   patchObjectID: (obj) ->
@@ -73,4 +84,3 @@ class Db
     return obj
 
 exports.Db = Db
-exports.ObjectID = mongo.ObjectID

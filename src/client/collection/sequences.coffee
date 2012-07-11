@@ -1,7 +1,7 @@
 define ['collection/named', 'model/sequence'], (NamedCollection, Sequence) ->
   class Sequences extends NamedCollection
     model: Sequence
-    url: '/api/v1/sequences/'
+    collectionUrl: 'sequences'
 
     constructor: (models, options) ->
       options ?= {}

@@ -13,7 +13,7 @@
 
       Sequences.prototype.model = Sequence;
 
-      Sequences.prototype.url = '/api/v1/sequences/';
+      Sequences.prototype.collectionUrl = 'sequences';
 
       function Sequences(models, options) {
         if (options == null) {

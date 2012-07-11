@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['backbone', 'view/common/layout', 'view/common/menu', 'view/common/sidebar', 'view/admin/words', 'view/admin/sentences', 'view/gpc/button', 'view/common/collection'], function(Backbone, Layout, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView) {
+  define(['backbone', 'view/common/menu', 'view/common/template', 'view/common/hider', 'view/common/collection', 'text!templates/admin/home.handlebars'], function(Backbone, MenuView, TemplateView, HiderView, CollectionView, homeTemplate) {
     var AdminRouter;
     return AdminRouter = (function(_super) {
 
@@ -12,83 +12,56 @@
       AdminRouter.name = 'AdminRouter';
 
       AdminRouter.prototype.routes = {
-        "": "home",
-        "words": "words",
-        "sentences": "sentences"
+        "": "home"
       };
 
-      AdminRouter.prototype.menu = {
-        "Words": "#words",
-        "Sentences": "#sentences"
-      };
-
-      AdminRouter.prototype.sidebar = function() {
-        return {
-          'Spelling Patterns': this.makeSpellingPatterns()
-        };
+      AdminRouter.prototype.menu = function() {
+        return {};
       };
 
       function AdminRouter(options) {
         AdminRouter.__super__.constructor.call(this, options);
         this.store = options.store;
-        this.layout = new Layout({
-          menu: "#main-menu",
-          content: "#main-content",
-          sidebar: "#toolbar-content"
-        });
-        this.setup = false;
+        this.layout = options.layout;
       }
 
       AdminRouter.prototype.home = function() {
-        return this.navigate('words', {
+        return this.showContent('home', function() {
+          return new TemplateView({
+            template: homeTemplate
+          });
+        });
+      };
+
+      AdminRouter.prototype.redirect = function(page) {
+        return this.navigate(page, {
           trigger: true,
           replace: true
         });
       };
 
-      AdminRouter.prototype.words = function() {
-        console.log("Showing admin words page");
-        return this.showContent(new WordsView({
-          store: this.store
-        }));
-      };
-
-      AdminRouter.prototype.sentences = function() {
-        console.log("Showing admin sentences page");
-        return this.showContent(new SentencesView({
-          store: this.store
-        }));
-      };
-
-      AdminRouter.prototype.makeSpellingPatterns = function() {
-        return new CollectionView({
-          id: 'spelling-patterns',
-          collection: this.store.sequences().first().elements(),
-          knownGPCs: this.store.knownGPCs(),
-          modelView: GPCButtonView
+      AdminRouter.prototype.setupDefaultViews = function() {
+        var _this = this;
+        this.layout.menu.render("admin/menu", function() {
+          return new MenuView({
+            model: {
+              menu: _this.menu()
+            }
+          });
+        });
+        return this.layout.sidebar.render("admin/sidebar", function() {
+          return new HiderView({
+            selector: "#side-panel, #side-panel-toggle"
+          });
         });
       };
 
-      AdminRouter.prototype.setupDefaultViews = function() {
-        if (this.setup) {
-          return;
-        }
-        this.setup = true;
-        this.layout.menu.render(new MenuView({
-          model: {
-            menu: this.menu
-          }
-        }));
-        return this.layout.sidebar.render(new SidebarView({
-          model: {
-            sections: this.sidebar()
-          }
-        }));
-      };
-
-      AdminRouter.prototype.showContent = function(view) {
+      AdminRouter.prototype.showContent = function(name, viewBuilder) {
+        var contentName;
+        contentName = "admin/" + name;
+        console.log("Showing " + contentName);
         this.setupDefaultViews();
-        return this.layout.content.render(view);
+        return this.layout.content.render(contentName, viewBuilder);
       };
 
       return AdminRouter;

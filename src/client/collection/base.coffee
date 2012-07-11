@@ -5,6 +5,10 @@ define ['backbone'], (Backbone) ->
   # @abstract
   # @see http://backbonejs.org/#Collection Backbone.Collection
   class BaseCollection extends Backbone.Collection
+    project: "synphony"
+
+    url: () ->
+      "/api/v1/#{@project}/#{@collectionUrl}/"
 
     add: (models, options={}) ->
       super models, options

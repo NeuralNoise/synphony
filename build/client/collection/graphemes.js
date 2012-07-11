@@ -17,7 +17,7 @@
 
       Graphemes.prototype.model = Grapheme;
 
-      Graphemes.prototype.url = '/api/v1/graphemes/';
+      Graphemes.prototype.collectionUrl = 'graphemes';
 
       return Graphemes;
 
