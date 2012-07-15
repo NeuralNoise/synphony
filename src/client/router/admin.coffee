@@ -2,6 +2,7 @@ define ['backbone', 'view/common/menu', 'view/common/template',
         'view/common/hider', 'view/common/collection',
         'text!templates/admin/home.handlebars'],
 (Backbone, MenuView, TemplateView, HiderView, CollectionView, homeTemplate) ->
+  # The router for administration functions such as login and home page.
   class AdminRouter extends Backbone.Router
     routes:
       "": "home"
@@ -13,10 +14,12 @@ define ['backbone', 'view/common/menu', 'view/common/template',
       @store = options.store
       @layout = options.layout
 
+    # The home page
     home: ->
       @showContent 'home', ->
         new TemplateView template: homeTemplate
 
+    # @private
     redirect: (page) ->
       @navigate page, trigger: true, replace: true
 

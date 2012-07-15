@@ -113,36 +113,32 @@
           </td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>A learning sequence. For examle the productivity sequence. </p> 
+</div>
+<div class='tags'>
+</div>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
   <li>
     <span class='signature'>
       <a href='#elements-instance'>
-        - (void) <strong>elements</strong>()
+        - (SequenceElements) <strong>elements</strong>()
       </a>
     </span>
     <span class='desc'>
-      
+      Get the elements of the sequence.
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#gpcs-instance'>
-        - (void) <strong>gpcs</strong>()
+        - (Array&lt;GPC&gt;) <strong>gpcs</strong>()
       </a>
     </span>
     <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#parse-instance'>
-        - (void) <strong>parse</strong>(data)
-      </a>
-    </span>
-    <span class='desc'>
-      
+      Get the GPCs in the sequence.
     </span>
   </li>
 </ul>
@@ -154,8 +150,7 @@
         <a href='../classes/NamedModel.html'>NamedModel</a>
       </h3>
       <p class='inherited'>
-                <a href='../classes/NamedModel.html#name-instance'>#name</a>,
-        <a href='../classes/NamedModel.html#validate-instance'>#validate</a>
+        <a href='../classes/NamedModel.html#name-instance'>#name</a>
       </p>
       <h3 class='inherited'>
         Methods inherited from
@@ -169,30 +164,49 @@
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='elements-instance'>
-      - (void) <strong>elements</strong>()
+      - (SequenceElements) <strong>elements</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Get the elements of the sequence. </p> 
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt><a href='../classes/SequenceElements.html'>SequenceElements</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>A SequenceElements collection</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='gpcs-instance'>
-      - (void) <strong>gpcs</strong>()
+      - (Array&lt;GPC&gt;) <strong>gpcs</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Get the GPCs in the sequence. </p> 
 </div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='parse-instance'>
-      - (void) <strong>parse</strong>(data)
-    </p>
-    <div class='tags'>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt>Array<<a href='../classes/GPC.html'>GPC</a>></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the gpcs</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Wed Jul 11 2012 13:08:18 GMT-0700 (PDT)
+  Sun Jul 15 2012 13:12:27 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.9.0

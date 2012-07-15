@@ -134,32 +134,12 @@
   </li>
   <li>
     <span class='signature'>
-      <a href='#destroy-instance'>
-        - (void) <strong>destroy</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#makeModelView-instance'>
-        - (void) <strong>makeModelView</strong>(model, options = {})
-      </a>
-    </span>
-    <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
       <a href='#addModelView-instance'>
         - (void) <strong>addModelView</strong>(model, index = -1, options = {})
       </a>
     </span>
     <span class='desc'>
-      
+      Wrap a model in a view and add it to the collection view.
     </span>
   </li>
   <li>
@@ -169,7 +149,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Remove the view for a model.
     </span>
   </li>
 </ul>
@@ -207,38 +187,30 @@
       <h2>Instance Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='destroy-instance'>
-      - (void) <strong>destroy</strong>()
-    </p>
-    <div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='makeModelView-instance'>
-      - (void) <strong>makeModelView</strong>(model, options = {})
-    </p>
-    <div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
     <p class='signature' id='addModelView-instance'>
       - (void) <strong>addModelView</strong>(model, index = -1, options = {})
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Wrap a model in a view and add it to the collection view. If already rendered the new view will be rendered and inserted into the DOM. @param <Backbone.Model> model The model th wrap. @param <int> The index to insert the view at. -1 is the end. @param <Object> options The options to pass to the new view. </p> 
+</div>
+<div class='tags'>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='removeModelView-instance'>
       - (void) <strong>removeModelView</strong>(model)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Remove the view for a model. The view will be destroyed. If rendered, the view will be removed from the DOM. @param <Backbone.Model> model The model to remove. </p> 
+</div>
+<div class='tags'>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Wed Jul 11 2012 13:08:18 GMT-0700 (PDT)
+  Sun Jul 15 2012 13:12:27 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.9.0

@@ -2,6 +2,7 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
         'view/common/sidebar', 'view/demo/words',
         'view/demo/sentences', 'view/gpc/button', 'view/common/collection'],
 (Backbone, Layout, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView) ->
+  # The demo router for exploring the functionality of SynPhony.
   class DemoRouter extends Backbone.Router
     prefix = "demo"
 
@@ -10,10 +11,12 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
       "demo/:project/words": "words"
       "demo/:project/sentences": "sentences"
 
+    # @private
     menu: ->
       "Words": "##{prefix}/#{@project}/words"
       "Sentences": "##{prefix}/#{@project}/sentences"
 
+    # @private
     sidebar: ->
       'Spelling Patterns': @makeSpellingPatterns()
 
@@ -23,13 +26,16 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
       @layout = options.layout
       @project = ""
 
+    # Demo home route.
     home: (project) ->
       @redirect project, "words"
 
+    # Words demo route.
     words: (project) ->
       @showContent project, "words", =>
         new WordsView { @store }
 
+    # Sentences demo route.
     sentences: (project) ->
       @showContent project, "sentences", =>
         new SentencesView { @store }

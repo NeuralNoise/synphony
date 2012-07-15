@@ -1,4 +1,6 @@
 define ['underscore', 'view/common/base'], (_, BaseView) ->
+  # A list of words. For speed, a template is not used. Instead a string is built
+  # and given to jquery in one go.
   class WordListView extends BaseView
     tagName: 'table'
     id: 'word-list'

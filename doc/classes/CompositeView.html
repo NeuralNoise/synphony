@@ -145,7 +145,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Destroy all sub-views and ourself.
     </span>
   </li>
   <li>
@@ -155,7 +155,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Add a view.
     </span>
   </li>
   <li>
@@ -165,7 +165,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Remove a specific view.
     </span>
   </li>
   <li>
@@ -175,7 +175,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Render the view and all sub-views.
     </span>
   </li>
 </ul>
@@ -205,35 +205,77 @@
     <p class='signature' id='destroy-instance'>
       - (void) <strong>destroy</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Destroy all sub-views and ourself. </p> 
+</div>
+<div class='tags'>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='addView-instance'>
       - (void) <strong>addView</strong>(view, index = -1)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Add a view. If already rendered the new view will be rendered and inserted into the DOM. </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>view</span>
+      <span class='type'>
+        (<tt><a href='../classes/BaseView.html'>BaseView</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>The view to add.</span>
+    </li>
+    <li>
+      <span class='name'>index</span>
+      <span class='type'>
+        (<tt>int</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>The index to insert at. -1 is the end.</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='removeView-instance'>
       - (void) <strong>removeView</strong>(view)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Remove a specific view. The view will be destroyed. </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>view</span>
+      <span class='type'>
+        (<tt><a href='../classes/BaseView.html'>BaseView</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>The view to remove.</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='render-instance'>
       - (void) <strong>render</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Render the view and all sub-views. After this method is called, any modifications to the list of sub-views will be displayed. </p> 
+</div>
+<div class='tags'>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Wed Jul 11 2012 13:08:18 GMT-0700 (PDT)
+  Sun Jul 15 2012 13:12:27 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.9.0

@@ -113,26 +113,32 @@
           </td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>A collection of GPCs that are known by the user. </p> 
+</div>
+<div class='tags'>
+</div>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
   <li>
     <span class='signature'>
       <a href='#isKnown-instance'>
-        - (void) <strong>isKnown</strong>(gpc)
+        - (Boolean) <strong>isKnown</strong>(gpc)
       </a>
     </span>
     <span class='desc'>
-      
+      Is a specific gpc known or not?
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#hasFocus-instance'>
-        - (void) <strong>hasFocus</strong>(gpc)
+        - (Boolean) <strong>hasFocus</strong>(gpc)
       </a>
     </span>
     <span class='desc'>
-      
+      Does the gpc have the focus? In other words is it the last to be clicked on?
     </span>
   </li>
   <li>
@@ -142,7 +148,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      If the gpc is in the list of known ones remove it, otherwise add it.
     </span>
   </li>
 </ul>
@@ -172,30 +178,92 @@
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='isKnown-instance'>
-      - (void) <strong>isKnown</strong>(gpc)
+      - (Boolean) <strong>isKnown</strong>(gpc)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Is a specific gpc known or not? </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>gpc</span>
+      <span class='type'>
+        (<tt><a href='../classes/GPC.html'>GPC</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>The gpc to check.</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt>Boolean</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>true: known false: unknown</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='hasFocus-instance'>
-      - (void) <strong>hasFocus</strong>(gpc)
+      - (Boolean) <strong>hasFocus</strong>(gpc)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Does the gpc have the focus? In other words is it the last to be clicked on? </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>gpc</span>
+      <span class='type'>
+        (<tt><a href='../classes/GPC.html'>GPC</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>The gpc to check.</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt>Boolean</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>true: in focus false: not</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='toggle-instance'>
       - (void) <strong>toggle</strong>(gpc)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>If the gpc is in the list of known ones remove it, otherwise add it. </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>gpc</span>
+      <span class='type'>
+        (<tt><a href='../classes/GPC.html'>GPC</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>The gpc to toggle.</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Wed Jul 11 2012 13:08:18 GMT-0700 (PDT)
+  Sun Jul 15 2012 13:12:27 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.9.0

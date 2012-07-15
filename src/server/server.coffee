@@ -112,7 +112,7 @@ module.exports.run = ->
   app.get '/js/synphony.js', (staticFile '/build/client', 'synphony.js')
   app.get '/js/templates.js', (staticFile '/build/client', 'templates.js')
 
-  for folder in ['collection', 'model', 'router', 'view', 'view_model']
+  for folder in ['collection', 'model', 'router', 'view', 'view_model', 'interactor']
     url = "/js/#{folder}"
     app.get "#{url}/:file.js", (staticPath "/build/client/#{folder}", url)
   app.get "/js/view/:folder/:file.js", (staticPath "/build/client/view", "/js/view")

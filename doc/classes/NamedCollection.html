@@ -150,7 +150,7 @@
   <li>
     <span class='signature'>
       <a href='#getByName-instance'>
-        - (void) <strong>getByName</strong>(name)
+        - (NamedModel) <strong>getByName</strong>(name)
       </a>
     </span>
     <span class='desc'>
@@ -195,10 +195,10 @@
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='getByName-instance'>
-      - (void) <strong>getByName</strong>(name)
+      - (NamedModel) <strong>getByName</strong>(name)
     </p>
     <div class='docstring'>
-  <p>Fetch a model by its name. This will index the names of the models the first time it&#39;s called, then afterwards this method should be fast. </p> <p>@returns [NamedModel] model looked up or null if not found. </p> 
+  <p>Fetch a model by its name. This will index the names of the models the first time it&#39;s called, then afterwards this method should be fast. </p> 
 </div>
 <div class='tags'>
   <h3>Parameters:</h3>
@@ -210,6 +210,16 @@
       </span>
       &mdash;
       <span class='desc'>Name of the model to look up.</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt><a href='../classes/NamedModel.html'>NamedModel</a></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>model looked up or null if not found.</span>
     </li>
   </ul>
 </div>
@@ -244,7 +254,7 @@
     </div>
     <div id='footer'>
   Generated on
-  Wed Jul 11 2012 13:08:18 GMT-0700 (PDT)
+  Sun Jul 15 2012 13:12:27 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.9.0

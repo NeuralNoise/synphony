@@ -135,7 +135,7 @@
     passport = auth.setup(baseUrl, app, findOrCreateUser, serializeUser, deserializeUser);
     app.get('/js/synphony.js', staticFile('/build/client', 'synphony.js'));
     app.get('/js/templates.js', staticFile('/build/client', 'templates.js'));
-    _ref1 = ['collection', 'model', 'router', 'view', 'view_model'];
+    _ref1 = ['collection', 'model', 'router', 'view', 'view_model', 'interactor'];
     for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
       folder = _ref1[_i];
       url = "/js/" + folder;

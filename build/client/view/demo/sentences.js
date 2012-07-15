@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['view/common/template', 'view/common/composite', 'view/common/collection', 'view/sentence/list', 'model/known_focus_search', 'text!templates/demo/sentences.handlebars'], function(TemplateView, CompositeView, CollectionView, SentenceListView, KnownFocusSearch, hbsTemplate) {
+  define(['view/common/template', 'view/common/composite', 'view/common/collection', 'view/sentence/list', 'interactor/known_focus_search', 'text!templates/demo/sentences.handlebars'], function(TemplateView, CompositeView, CollectionView, SentenceListView, KnownFocusSearch, hbsTemplate) {
     var SentencesView;
     return SentencesView = (function(_super) {
 

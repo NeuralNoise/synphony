@@ -1,4 +1,5 @@
 define ['underscore', 'view/common/base'], (_, BaseView) ->
+  # A list of sentences.
   class SentenceListView extends BaseView
     tagName: 'div'
     id: 'sentence-list'

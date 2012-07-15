@@ -2,6 +2,7 @@ fs = require 'fs'
 
 {print} = require 'util'
 {spawn} = require 'child_process'
+{_} = require 'underscore'
 
 COFFEE = if process.platform is 'win32'
   'C:/Users/Norbert/AppData/Roaming/npm/coffee.cmd'
@@ -50,4 +51,10 @@ task 'precompile', 'Precompile handlebars templates', ->
   spawnHandlebars ['templates', '-f', 'build/client/templates.js']
 
 task 'doc', 'Compile docs', ->
-  spawnCodo ['--readme', 'README.txt', '-o', 'doc', 'src/client']
+  walk = require('walkdir')
+  files = walk.sync('src/client')
+  files = _.filter files, (file) -> /\.coffee$/.test(file)
+  files = _.sortBy files, (file) ->
+    parts = file.split('/')
+    parts[parts.length - 1]
+  spawnCodo ['--readme', 'README.txt', '-o', 'doc'].concat(files)

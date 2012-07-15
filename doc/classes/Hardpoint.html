@@ -139,7 +139,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Sets the view to a new one if the name of the new view is different from the previous view's name.
     </span>
   </li>
   <li>
@@ -149,7 +149,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Same as setView except the new view will be rendered and replace the current contents of the hardpoint.
     </span>
   </li>
   <li>
@@ -159,7 +159,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Destroy the hard point and any attached view.
     </span>
   </li>
 </ul>
@@ -189,28 +189,75 @@
     <p class='signature' id='setView-instance'>
       - (void) <strong>setView</strong>(name, viewBuilder)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Sets the view to a new one if the name of the new view is different from the previous view&#39;s name. The viewBuilder function is expected to return a new view, but will only be called if the name of the current view differs. </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>name</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>The name of the view</span>
+    </li>
+    <li>
+      <span class='name'>The</span>
+      <span class='type'>
+        (<tt>() -> new BaseView</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>builder function for the view.</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='render-instance'>
       - (void) <strong>render</strong>(name, viewBuilder)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Same as setView except the new view will be rendered and replace the current contents of the hardpoint. </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>name</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>The name of the view</span>
+    </li>
+    <li>
+      <span class='name'>The</span>
+      <span class='type'>
+        (<tt>() -> new BaseView</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>builder function for the view.</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='destroy-instance'>
       - (void) <strong>destroy</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Destroy the hard point and any attached view. </p> 
+</div>
+<div class='tags'>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Wed Jul 11 2012 13:08:18 GMT-0700 (PDT)
+  Sun Jul 15 2012 13:12:27 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.9.0

@@ -1,7 +1,8 @@
 define ['view/common/template', 'view/common/composite',
-  'view/common/collection', 'view/sentence/list', 'model/known_focus_search'
+  'view/common/collection', 'view/sentence/list', 'interactor/known_focus_search'
   'text!templates/demo/sentences.handlebars'],
 (TemplateView, CompositeView, CollectionView, SentenceListView, KnownFocusSearch, hbsTemplate) ->
+  # The main Demo Sentences page.
   class SentencesView extends CompositeView
     id: 'sentences-page'
 
