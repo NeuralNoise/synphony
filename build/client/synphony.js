@@ -29,7 +29,7 @@
     enforceDefine: true
   });
 
-  define(['jquery', 'interactor/application_initializer'], function($, ApplicationInitializer) {
+  define(['jquery', 'router/application_initializer'], function($, ApplicationInitializer) {
     return $(function() {
       ($('#side-panel-toggle')).click(function() {
         ($('#control-panel')).toggle();

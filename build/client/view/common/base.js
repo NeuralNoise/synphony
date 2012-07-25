@@ -9,14 +9,22 @@
 
       __extends(BaseView, _super);
 
-      function BaseView() {
-        return BaseView.__super__.constructor.apply(this, arguments);
+      function BaseView(options) {
+        if (options == null) {
+          options = {};
+        }
+        this.interactor = options.interactor;
+        BaseView.__super__.constructor.call(this, options);
       }
 
       BaseView.prototype.destroy = function() {
+        var _ref;
         this.undelegateEvents();
         this.remove();
         this.trigger('destroy');
+        if ((_ref = this.interactor) != null) {
+          _ref.destroy();
+        }
         this.off();
         return console.log("Destroyed");
       };

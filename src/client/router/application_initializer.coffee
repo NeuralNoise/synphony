@@ -1,9 +1,9 @@
 define ['jquery', 'backbone', 'model/store', 'view/common/layout',
-        'router/admin', 'router/demo', 'router/designer',
-        'interactor/base', 'interactor/curriculum_designer'],
-($, Backbone, Store, Layout, AdminRouter, DemoRouter, DesignerRouter, BaseInteractor, CurriculumDesigner) ->
+        'router/admin', 'router/demo', 'router/designer', 'interactor/cirriculum_designer'
+        ],
+($, Backbone, Store, Layout, AdminRouter, DemoRouter, DesignerRouter, CirriculumDesigner) ->
   # Initialize the application and start it running.
-  class ApplicationInitializer extends BaseInteractor
+  class ApplicationInitializer
     constructor: () ->
       @adminRouter = null
       @demoRouter = null
@@ -36,7 +36,7 @@ define ['jquery', 'backbone', 'model/store', 'view/common/layout',
     # Setup interactors to handle the various use cases.
     # @private
     setupInteractors: ->
-      @curriculumDesigner = new CurriculumDesigner { @store, @layout }
+      @curriculumDesigner = new CirriculumDesigner { @store, @layout }
 
     # Setup the routers which handle URLs
     # @private

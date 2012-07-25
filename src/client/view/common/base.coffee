@@ -9,10 +9,16 @@ define ['underscore', 'backbone'],
   # Also there's `triggers` which can be used to forward DOM
   # events to anyone listening to this view.
   class BaseView extends Backbone.View
+    constructor: (options={}) ->
+      @interactor = options.interactor
+      super options
+
     # Destroy the view taking care to remove event handlers so
     # it will be garbage collected properly, as well as removing
     # it from the DOM. A `destroy` event is triggered immediately
-    # prior to removing all listeners.
+    # prior to removing all listeners. Any interactor will
+    # also be destroyed, which will remove any event listeners
+    # on that interactor as well.
     destroy: ->
       # remove all event handlers in the DOM
       @undelegateEvents()
@@ -22,6 +28,9 @@ define ['underscore', 'backbone'],
 
       # let event listeners know we closed
       @trigger 'destroy'
+
+      # nuke any attached interactors
+      @interactor?.destroy()
 
       # remove all event listeners
       @off()

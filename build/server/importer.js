@@ -27,8 +27,9 @@
 
     __extends(Importer, _super);
 
-    function Importer(database, filename) {
-      this.database = database;
+    function Importer(databaseUrl, projectName, filename) {
+      this.databaseUrl = databaseUrl;
+      this.projectName = projectName;
       this.filename = filename;
       this.objectIds = {};
       this.on("start", _.bind(this.loadJson, this));
@@ -55,13 +56,14 @@
     };
 
     Importer.prototype.loadDatabase = function() {
-      this.db = new thedb.Db(this.database);
+      this.db = new thedb.Db(this.databaseUrl);
       return this.db.load(this.whenDone("database-loaded"));
     };
 
     Importer.prototype.ensureCollections = function() {
       this.collectionNames = _.keys(this.data);
-      return this.db.ensureCollections(null, this.collectionNames, this.whenDone("collections-ensured"));
+      console.log("Ensuring collections");
+      return this.db.ensureCollections(this.projectName, this.collectionNames, this.whenDone("collections-ensured"));
     };
 
     Importer.prototype.nextCollection = function() {
@@ -107,7 +109,7 @@
           name: this.document.name
         };
       }
-      return this.db.put(null, this.collectionName, query, this.document, this.whenDone("document-inserted", function(result) {
+      return this.db.put(this.projectName, this.collectionName, query, this.document, this.whenDone("document-inserted", function(result) {
         _this.objectIds[id] = result._id.toString();
         return console.log("    " + id + " => " + result._id);
       }));
@@ -188,10 +190,10 @@
   })(EventEmitter);
 
   module.exports.run = function() {
-    var database, filename, _ref;
-    _ref = _.rest(process.argv, 2), database = _ref[0], filename = _ref[1];
-    console.log("Importing " + filename + " into database " + database);
-    return (new Importer(database, filename)).run();
+    var databaseUrl, filename, projectName, _ref;
+    _ref = _.rest(process.argv, 2), databaseUrl = _ref[0], projectName = _ref[1], filename = _ref[2];
+    console.log("Importing " + filename + " into project " + projectName + " in database " + databaseUrl);
+    return (new Importer(databaseUrl, projectName, filename)).run();
   };
 
 }).call(this);

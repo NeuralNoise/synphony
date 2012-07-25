@@ -1,7 +1,8 @@
 define ['backbone', 'view/common/layout', 'view/common/menu',
         'view/common/sidebar', 'view/demo/words',
-        'view/demo/sentences', 'view/gpc/button', 'view/common/collection'],
-(Backbone, Layout, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView) ->
+        'view/demo/sentences', 'view/gpc/button', 'view/common/collection',
+        'interactor/word_searcher'],
+(Backbone, Layout, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView, WordSearcher) ->
   # The demo router for exploring the functionality of SynPhony.
   class DemoRouter extends Backbone.Router
     prefix = "demo"
@@ -33,7 +34,7 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
     # Words demo route.
     words: (project) ->
       @showContent project, "words", =>
-        new WordsView { @store }
+        new WordsView { interactor: new WordSearcher { @store } }
 
     # Sentences demo route.
     sentences: (project) ->

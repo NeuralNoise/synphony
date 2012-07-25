@@ -12,30 +12,14 @@
       WordsView.prototype.id = 'words-page';
 
       function WordsView(options) {
-        var _this = this;
         WordsView.__super__.constructor.call(this, options);
-        this.store = options.store;
-        this.collection = this.store.words();
-        this.knownGPCs = this.store.knownGPCs();
-        this.search = new KnownFocusSearch(this.collection);
         this.addView(new TemplateView({
           template: hbsTemplate
         }));
         this.addView(new WordListView({
-          collection: this.collection,
-          knownGPCs: this.knownGPCs,
-          filter: function() {
-            return _this.filterWords();
-          }
+          interactor: this.interactor
         }));
       }
-
-      WordsView.prototype.filterWords = function() {
-        var focusGPCs, knownGPCs;
-        knownGPCs = this.knownGPCs.models;
-        focusGPCs = this.knownGPCs.isEmpty() ? [] : [this.knownGPCs.last()];
-        return this.search.getKnownFocusItems(knownGPCs, focusGPCs);
-      };
 
       return WordsView;
 

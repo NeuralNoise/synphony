@@ -12,7 +12,7 @@ foreignKeys =
   ]
 
 class Importer extends EventEmitter
-  constructor: (@database, @filename) ->
+  constructor: (@databaseUrl, @projectName, @filename) ->
     @objectIds = {}
     # workflow for importing
     @on "start", _.bind @loadJson, @
@@ -35,12 +35,13 @@ class Importer extends EventEmitter
         @data = JSON.parse(data)
 
   loadDatabase: ->
-    @db = new thedb.Db @database
+    @db = new thedb.Db @databaseUrl
     @db.load @whenDone "database-loaded"
 
   ensureCollections: ->
     @collectionNames = _.keys @data
-    @db.ensureCollections null, @collectionNames, @whenDone "collections-ensured"
+    console.log "Ensuring collections"
+    @db.ensureCollections @projectName, @collectionNames, @whenDone "collections-ensured"
 
   nextCollection: ->
     @collectionName = @collectionNames.shift()
@@ -75,7 +76,7 @@ class Importer extends EventEmitter
     delete @document.id
     query = null
     query = { name: @document.name } if @document.name?
-    @db.put null, @collectionName, query, @document, @whenDone "document-inserted", (result) =>
+    @db.put @projectName, @collectionName, query, @document, @whenDone "document-inserted", (result) =>
       @objectIds[id] = result._id.toString()
       console.log "    #{id} => #{result._id}"
 
@@ -115,6 +116,6 @@ class Importer extends EventEmitter
 
 
 module.exports.run = () ->
-  [database, filename] = _.rest process.argv, 2
-  console.log "Importing #{filename} into database #{database}"
-  (new Importer database, filename).run()
+  [databaseUrl, projectName, filename] = _.rest process.argv, 2
+  console.log "Importing #{filename} into project #{projectName} in database #{databaseUrl}"
+  (new Importer databaseUrl, projectName, filename).run()

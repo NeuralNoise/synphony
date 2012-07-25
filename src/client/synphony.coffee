@@ -29,7 +29,7 @@ requirejs.config
   # urlArgs: "bust=" +  (new Date).getTime()
   enforceDefine: true
 
-define ['jquery', 'interactor/application_initializer'],
+define ['jquery', 'router/application_initializer'],
 ($, ApplicationInitializer) ->
   $ ->
     # Only put jQuery things here that are not worth the effort of

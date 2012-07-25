@@ -37,8 +37,11 @@
       };
 
       Hardpoint.prototype.destroy = function() {
-        this.view.destroy();
-        this.view = null;
+        if (this.view != null) {
+          this.view.destroy();
+          this.view = null;
+          this.name = null;
+        }
         return Hardpoint.__super__.destroy.call(this);
       };
 
