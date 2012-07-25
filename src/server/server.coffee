@@ -14,6 +14,7 @@ less = require 'less'
 fs = require 'fs'
 path = require 'path'
 auth = require './auth'
+gzip = require 'connect-gzip'
 {_} = require 'underscore'
 
 # Either use mongolab or localhost
@@ -103,6 +104,7 @@ module.exports.run = ->
 
   app.use express.favicon()
   app.use express.static __dirname+'/../../public'
+  app.use gzip.gzip()
   app.use express.logger()
   app.use express.bodyParser()
   app.use express.methodOverride()
