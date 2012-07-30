@@ -4,17 +4,20 @@ fs = require 'fs'
 {spawn} = require 'child_process'
 {_} = require 'underscore'
 
-BINPATH = if process.platform is 'win32'
+
+if process.platform is 'win32'
+  # 'C:/Users/Norbert/AppData/Roaming/npm/coffee.cmd'
   regex = /\\/g # to fix syntax highlighting issue in sublime
-  (process.env.APPDATA.replace regex, '/')+"/"
+  BINPATH = (process.env.APPDATA.replace regex, '/')+"/npm/"
+  EXTENSION = '.cmd'
 else
   ''
 
-COFFEE = BINPATH + 'coffee'
+COFFEE = BINPATH + 'coffee' + EXTENSION
 
-HANDLEBARS = BINPATH + 'handlebars'
+HANDLEBARS = BINPATH + 'handlebars' + EXTENSION
 
-CODO = BINPATH + 'codo'
+CODO = BINPATH + 'codo' + EXTENSION
 
 spawner = (cmd, opts, callback) ->
   coffee = spawn cmd, opts
