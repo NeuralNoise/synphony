@@ -8,29 +8,39 @@ Dependancies
 
 Install node.js (0.6 or higher) and npm then:
 
+```
 npm install
+```
 
 This should get you everything you need. You may want to install this globally:
 
+```
 npm install -g coffeescript
+```
 
 Building
 --------
 
 To build src/ into build/ run:
 
+```
 cake build
+```
 
 To watch coffeescript files and recompile on changes:
 
+```
 cake watch
+```
 
 Running
 -------
 
 Make sure you build, run mongodb and then do:
 
+```
 node synphony_server.js
+```
 
 Now visit http://localhost:3000/ in any browser except internet explorer.
 
@@ -66,6 +76,7 @@ Notes
 License and Copyright
 ---------------------
 
+```
 SynPhony: Synthetic Phonics tool for early grade literacy teaching
 Copyright (C) 2012  Canada Institute of Linguistics
 
@@ -83,4 +94,4 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 See LICENSE.txt for more details.
-
+```
