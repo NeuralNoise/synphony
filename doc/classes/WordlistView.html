@@ -12,7 +12,7 @@
   <div id='menu'>
     <a href='../class_index.html' title='Index'>Index</a>
     &raquo;
-    <span class='title'>WordlistView</span>
+    <span class='title'>WordListView</span>
     <nav>
       <ul>
         <li class='noframes'>
@@ -99,23 +99,23 @@
     <div id='content'>
       <h1>
         Class:
-        WordlistView
+        WordListView
       </h1>
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src/client/view/wordlist.coffee</td>
+          <td>src/client/view/word/list.coffee</td>
         </tr>
         <tr>
           <td>Inherits:</td>
           <td>
-            <a href='../classes/TemplateView.html'>TemplateView</a>
+            <a href='../classes/BaseView.html'>BaseView</a>
           </td>
         </tr>
       </table>
       <h2>Overview</h2>
       <div class='docstring'>
-  <p>View for the wordlist form. </p> 
+  <p>A list of words. For speed, a template is not used. Instead a string is built and given to jquery in one go. </p> 
 </div>
 <div class='tags'>
 </div>
@@ -123,8 +123,19 @@
       <ul class='summary'>
   <li>
     <span class='signature'>
-      <a href='#initialize-instance'>
-        - (void) <strong>initialize</strong>()
+      <a href='#constructor-instance'>
+        - (void) <strong>constructor</strong>(options)
+      </a>
+    </span>
+    <span class='constructor note title'>Constructor</span>
+    <span class='desc'>
+      
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#wordHTML-instance'>
+        - (void) <strong>wordHTML</strong>(word)
       </a>
     </span>
     <span class='desc'>
@@ -133,48 +144,8 @@
   </li>
   <li>
     <span class='signature'>
-      <a href='#onKeyUp-instance'>
-        - (void) <strong>onKeyUp</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when the form is updated, set the wordlist on the model to the text box contents
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onModelChange-instance'>
-        - (void) <strong>onModelChange</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      When the model changes update the text box contents to match
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onClickClean-instance'>
-        - (void) <strong>onClickClean</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when someone clicks the clean button, call clean() on the model
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onClickCleanUpperCase-instance'>
-        - (void) <strong>onClickCleanUpperCase</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when someone clicks the clean uppercase button, call cleanUpperCase() on the model
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onClickCleanDebris-instance'>
-        - (void) <strong>onClickCleanDebris</strong>()
+      <a href='#gpcHTML-instance'>
+        - (void) <strong>gpcHTML</strong>(gpc)
       </a>
     </span>
     <span class='desc'>
@@ -183,22 +154,12 @@
   </li>
   <li>
     <span class='signature'>
-      <a href='#save-instance'>
-        - (void) <strong>save</strong>()
+      <a href='#render-instance'>
+        - (void) <strong>render</strong>()
       </a>
     </span>
     <span class='desc'>
-      save the model
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onModelSaved-instance'>
-        - (void) <strong>onModelSaved</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      when model is saved briefly flash a message to the user
+      
     </span>
   </li>
 </ul>
@@ -207,19 +168,67 @@
       </h2>
       <h3 class='inherited'>
         Methods inherited from
-        <a href='../classes/TemplateView.html'>TemplateView</a>
-      </h3>
-      <p class='inherited'>
-                <a href='../classes/TemplateView.html#constructor-instance'>#constructor</a>,
-                <a href='../classes/TemplateView.html#toHTML-instance'>#toHTML</a>,
-                <a href='../classes/TemplateView.html#renderSubviews-instance'>#renderSubviews</a>,
-        <a href='../classes/TemplateView.html#render-instance'>#render</a>
-      </p>
-      <h3 class='inherited'>
-        Methods inherited from
         <a href='../classes/BaseView.html'>BaseView</a>
       </h3>
       <p class='inherited'>
+                <a href='../classes/BaseView.html#constructor-instance'>#constructor</a>,
+        <a href='../classes/BaseView.html#destroy-instance'>#destroy</a>
+      </p>
+      <h2>Constructor Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='constructor-instance'>
+      - (void) <strong>constructor</strong>(options)
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+</div>
+      <h2>Instance Method Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='wordHTML-instance'>
+      - (void) <strong>wordHTML</strong>(word)
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='gpcHTML-instance'>
+      - (void) <strong>gpcHTML</strong>(gpc)
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='render-instance'>
+      - (void) <strong>render</strong>()
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+</div>
+    </div>
+    <div id='footer'>
+  Generated on
+  Mon Jul 30 2012 15:26:58 GMT-0700 (PDT)
+  by
+  <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
+  v0.9.0
+  (Node.js v0.6.16).
+  &#10034;
+  Press Ctrl-h to see the keyboard shortcuts
+  &#10034;
+  <a href='http://twitter.com/#!/netzpirat'>@netzpirat</a>
+  &#10034;
+  <a href='https://mksoft.ch'>mksoft.ch</a>
+</div>
+  </body>
+</html>ds inherited from
+        <a href='../classes/BaseView.html'>BaseView</a>
+      </h3>
+      <p class='inherited'>
+                <a href='../classes/BaseView.html#constructor-instance'>#constructor</a>,
         <a href='../classes/BaseView.html#destroy-instance'>#destroy</a>
       </p>
       <h2>Instance Method Details</h2>
@@ -302,11 +311,11 @@
     </div>
     <div id='footer'>
   Generated on
-  Sun Jul 15 2012 13:12:27 GMT-0700 (PDT)
+  Mon Jul 30 2012 15:26:58 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.9.0
-  (Node.js v0.6.12).
+  (Node.js v0.6.16).
   &#10034;
   Press Ctrl-h to see the keyboard shortcuts
   &#10034;

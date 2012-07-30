@@ -107,12 +107,6 @@
           <td>Defined in:</td>
           <td>src/client/interactor/base.coffee</td>
         </tr>
-        <tr>
-          <td>Inherits:</td>
-          <td>
-            <a href='../classes/Backbone/Events.html'>Backbone.Events</a>
-          </td>
-        </tr>
       </table>
       <h2>Overview</h2>
       <div class='docstring'>
@@ -136,9 +130,10 @@
 </div>
       <h2>Direct Known Subclasses</h2>
       <p class='children'>
-                <a href='../classes/ApplicationInitializer.html'>ApplicationInitializer</a>,
+                <a href='../classes/CirriculumDesigner.html'>CirriculumDesigner</a>,
                 <a href='../classes/KnownFocusSearch.html'>KnownFocusSearch</a>,
-        <a href='../classes/Segmenter.html'>Segmenter</a>
+                <a href='../classes/Segmenter.html'>Segmenter</a>,
+        <a href='../classes/WordSearcher.html'>WordSearcher</a>
       </p>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
@@ -150,6 +145,26 @@
     </span>
     <span class='desc'>
       Perform whatever interaction the interactor is meant to do.
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#delegateEvent-instance'>
+        - (void) <strong>delegateEvent</strong>(eventProducer, eventName, newEventName = eventName)
+      </a>
+    </span>
+    <span class='desc'>
+      Helper function to delgate model events to the interactor for the view layer to listen to.
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#destroy-instance'>
+        - (void) <strong>destroy</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Called to clean up cyclical references between the interactor and the model layer.
     </span>
   </li>
 </ul>
@@ -176,15 +191,62 @@
   </ul>
 </div>
   </div>
+  <div class='method_details'>
+    <p class='signature' id='delegateEvent-instance'>
+      - (void) <strong>delegateEvent</strong>(eventProducer, eventName, newEventName = eventName)
+    </p>
+    <div class='docstring'>
+  <p>Helper function to delgate model events to the interactor for the view layer to listen to. </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>eventProducer</span>
+      <span class='type'>
+        (<tt>Backbone.Events</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the producer of the event to delegate</span>
+    </li>
+    <li>
+      <span class='name'>eventName</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the event name</span>
+    </li>
+    <li>
+      <span class='name'>newEventName</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>optional different name</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='destroy-instance'>
+      - (void) <strong>destroy</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Called to clean up cyclical references between the interactor and the model layer. Also removes any event listeners. </p> 
+</div>
+<div class='tags'>
+</div>
+  </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Sun Jul 15 2012 13:12:27 GMT-0700 (PDT)
+  Mon Jul 30 2012 15:26:58 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.9.0
-  (Node.js v0.6.12).
+  (Node.js v0.6.16).
   &#10034;
   Press Ctrl-h to see the keyboard shortcuts
   &#10034;

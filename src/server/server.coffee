@@ -102,7 +102,7 @@ module.exports.run = ->
         console.log err
       done err, user
 
-  app.use express.favicon()
+  app.use express.favicon __dirname+'/../../public/favicon.ico'
   app.use express.static __dirname+'/../../public'
   app.use gzip.gzip()
   app.use express.logger()
