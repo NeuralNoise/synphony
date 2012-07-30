@@ -20,7 +20,7 @@
 
   DATABASE_URL = (_ref = process.env.MONGOLAB_URI) != null ? _ref : "mongodb://localhost:27017/synphony";
 
-  staticFile = function(root, path) {
+  staticFile = function(root, pathName) {
     return function(req, res) {
       var next;
       next = function(err) {
@@ -33,21 +33,21 @@
       };
       return express["static"].send(req, res, next, {
         getOnly: true,
-        root: __dirname + '/../..' + root,
-        path: path
+        root: path.resolve(__dirname, __dirname + '/../..' + root),
+        path: pathName
       });
     };
   };
 
-  staticPath = function(root, path) {
+  staticPath = function(root, pathName) {
     return function(req, res) {
       var next, url;
       url = req.url;
-      if (url.indexOf(path) !== 0) {
+      if (url.indexOf(pathName) !== 0) {
         console.log("Orig URL: " + url);
         return res.send(404);
       }
-      url = url.substring(path.length);
+      url = url.substring(pathName.length);
       console.log("URL: " + url);
       next = function(err) {
         if (err) {
@@ -59,7 +59,7 @@
       };
       return express["static"].send(req, res, next, {
         getOnly: true,
-        root: __dirname + '/../..' + root,
+        root: path.resolve(__dirname, __dirname + '/../..' + root),
         path: url
       });
     };
