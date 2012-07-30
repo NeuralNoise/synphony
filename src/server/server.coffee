@@ -20,7 +20,7 @@ gzip = require 'connect-gzip'
 # Either use mongolab or localhost
 DATABASE_URL = process.env.MONGOLAB_URI ? "mongodb://localhost:27017/synphony"
 
-staticFile = (root, path) ->
+staticFile = (root, pathName) ->
   (req, res) ->
     next = (err) ->
       if err
@@ -30,16 +30,16 @@ staticFile = (root, path) ->
         res.send(404)
     express.static.send req, res, next,
       getOnly: true
-      root: __dirname+'/../..'+root
-      path: path
+      root: path.resolve __dirname, __dirname+'/../..'+root
+      path: pathName
 
-staticPath = (root, path) ->
+staticPath = (root, pathName) ->
   (req, res) ->
     url = req.url
-    if url.indexOf(path) != 0
+    if url.indexOf(pathName) != 0
       console.log "Orig URL: #{url}"
       return res.send 404
-    url = url.substring(path.length)
+    url = url.substring(pathName.length)
     console.log "URL: #{url}"
 
     next = (err) ->
@@ -50,7 +50,7 @@ staticPath = (root, path) ->
         res.send 404
     express.static.send req, res, next,
       getOnly: true
-      root: __dirname+'/../..'+root
+      root: path.resolve __dirname, __dirname+'/../..'+root
       path: url
 
 
