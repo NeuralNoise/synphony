@@ -124,12 +124,23 @@
                 <a href='../classes/CompositeView.html'>CompositeView</a>,
                 <a href='../classes/Hardpoint.html'>Hardpoint</a>,
                 <a href='../classes/HiderView.html'>HiderView</a>,
-                <a href='../classes/TemplateView.html'>TemplateView</a>,
+                <a href='../classes/WordListView.html'>WordListView</a>,
                 <a href='../classes/SentenceListView.html'>SentenceListView</a>,
-        <a href='../classes/WordListView.html'>WordListView</a>
+        <a href='../classes/TemplateView.html'>TemplateView</a>
       </p>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
+  <li>
+    <span class='signature'>
+      <a href='#constructor-instance'>
+        - (void) <strong>constructor</strong>(options = {})
+      </a>
+    </span>
+    <span class='constructor note title'>Constructor</span>
+    <span class='desc'>
+      
+    </span>
+  </li>
   <li>
     <span class='signature'>
       <a href='#destroy-instance'>
@@ -141,6 +152,16 @@
     </span>
   </li>
 </ul>
+      <h2>Constructor Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='constructor-instance'>
+      - (void) <strong>constructor</strong>(options = {})
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+</div>
       <h2>Instance Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
@@ -148,7 +169,7 @@
       - (void) <strong>destroy</strong>()
     </p>
     <div class='docstring'>
-  <p>Destroy the view taking care to remove event handlers so it will be garbage collected properly, as well as removing it from the DOM. A <code>destroy</code> event is triggered immediately prior to removing all listeners. </p> 
+  <p>Destroy the view taking care to remove event handlers so it will be garbage collected properly, as well as removing it from the DOM. A <code>destroy</code> event is triggered immediately prior to removing all listeners. Any interactor will also be destroyed, which will remove any event listeners on that interactor as well. </p> 
 </div>
 <div class='tags'>
 </div>
@@ -157,11 +178,11 @@
     </div>
     <div id='footer'>
   Generated on
-  Wed Jul 11 2012 13:08:18 GMT-0700 (PDT)
+  Mon Jul 30 2012 15:26:58 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.9.0
-  (Node.js v0.6.12).
+  (Node.js v0.6.16).
   &#10034;
   Press Ctrl-h to see the keyboard shortcuts
   &#10034;

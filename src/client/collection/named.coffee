@@ -10,7 +10,7 @@ define ['collection/base'], (BaseCollection) ->
     # method should be fast.
     #
     # @param [String] name Name of the model to look up.
-    # @returns [NamedModel] model looked up or null if not found.
+    # @return [NamedModel] model looked up or null if not found.
     getByName: (name) ->
       if not @_byName?
         @_byName = {}

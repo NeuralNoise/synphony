@@ -1,13 +1,20 @@
 define ['underscore', 'model/named'], (_, NamedModel) ->
+  # Sentence is a list of words, and has the proper formatting too.
   class Sentence extends NamedModel
-    parse: (data) ->
-      @parseIdLookup 'words', 'words', data
-      data
-
+    # Get a set of GPCs in the sentence. Duplicates are
+    # removed.
+    # @return [Array<GPC>] the set of gpcs.
     gpcs: ->
       @cachedGPCs ?= @findGPCs()
 
+    # Get the list of words in the sentence.
+    # @return [Array<Word>] words
     words: -> @get 'words'
+
+    # @private
+    parse: (data) ->
+      @parseIdLookup 'words', 'words', data
+      data
 
     # @private
     findGPCs: ->

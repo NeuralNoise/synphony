@@ -14,9 +14,11 @@ less = require 'less'
 fs = require 'fs'
 path = require 'path'
 auth = require './auth'
+gzip = require 'connect-gzip'
 {_} = require 'underscore'
 
-ADMINDB = 'admin'
+# Either use mongolab or localhost
+DATABASE_URL = process.env.MONGOLAB_URI ? "mongodb://localhost:27017/synphony"
 
 staticFile = (root, path) ->
   (req, res) ->
@@ -68,25 +70,25 @@ compileStyle = (callback) ->
 
 module.exports.run = ->
   app = express.createServer()
-  db = new thedb.Db ADMINDB
+  db = new thedb.Db DATABASE_URL
   db.load (err) ->
     if err?
       console.error err.toString()
     else
-      db.ensureCollections ADMINDB, [
+      db.ensureCollections null, [
         'users', 'projects'
       ], (err) ->
         if err?
           console.error err.toString()
 
-  port = 3000
+  port = process.env.PORT ? 3000
   baseUrl = "http://localhost:#{port}/"
 
   findOrCreateUser = (identifier, profile, done) ->
     user = _.clone profile
     user.open_id = identifier
 
-    db.put ADMINDB, 'users', {'open_id': identifier}, user, (err, user) ->
+    db.put null, 'users', {'open_id': identifier}, user, (err, user) ->
       if err?
         console.log err
       done err, user
@@ -95,13 +97,14 @@ module.exports.run = ->
     done null, user._id.toString()
 
   deserializeUser = (id, done) ->
-    user = db.get ADMINDB, 'users', {_id: id}, (err, user) ->
+    user = db.get null, 'users', {_id: id}, (err, user) ->
       if err?
         console.log err
       done err, user
 
-  app.use express.favicon()
+  app.use express.favicon __dirname+'/../../public/favicon.ico'
   app.use express.static __dirname+'/../../public'
+  app.use gzip.gzip()
   app.use express.logger()
   app.use express.bodyParser()
   app.use express.methodOverride()
@@ -112,7 +115,7 @@ module.exports.run = ->
   app.get '/js/synphony.js', (staticFile '/build/client', 'synphony.js')
   app.get '/js/templates.js', (staticFile '/build/client', 'templates.js')
 
-  for folder in ['collection', 'model', 'router', 'view', 'view_model']
+  for folder in ['collection', 'model', 'router', 'view', 'view_model', 'interactor']
     url = "/js/#{folder}"
     app.get "#{url}/:file.js", (staticPath "/build/client/#{folder}", url)
   app.get "/js/view/:folder/:file.js", (staticPath "/build/client/view", "/js/view")

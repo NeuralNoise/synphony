@@ -1,3 +1,21 @@
+###
+# SynPhony: Synthetic Phonics tool for early grade literacy teaching
+# Copyright (C) 2012  Canada Institute of Linguistics
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+###
+
 requirejs.config
   baseUrl: 'js/'
 
@@ -29,13 +47,8 @@ requirejs.config
   # urlArgs: "bust=" +  (new Date).getTime()
   enforceDefine: true
 
-define ['jquery', 'backbone', 'model/store', 'view/common/layout', 'router/admin', 'router/demo', 'router/designer'],
-($, Backbone, Store, Layout, AdminRouter, DemoRouter, DesignerRouter) ->
-  adminRouter = null
-  demoRouter = null
-  designerRouter = null
-  store = null
-
+define ['jquery', 'router/application_initializer'],
+($, ApplicationInitializer) ->
   $ ->
     # Only put jQuery things here that are not worth the effort of
     # making a whole view for them. If you find you need state or
@@ -47,13 +60,4 @@ define ['jquery', 'backbone', 'model/store', 'view/common/layout', 'router/admin
       ($ '#side-panel').toggle()
       ($ '#side-panel-toggle').toggleClass 'active'
 
-    layout = new Layout
-        menu: "#main-menu"
-        content: "#main-content"
-        sidebar: "#toolbar-content"
-    store = new Store
-    console.log "Loaded, starting router"
-    adminRouter = new AdminRouter { store, layout }
-    demoRouter = new DemoRouter { store, layout }
-    designerRouter = new DesignerRouter {store, layout }
-    Backbone.history.start()
+    (new ApplicationInitializer).run()

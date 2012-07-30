@@ -1,6 +1,7 @@
 define ['backbone', 'view/common/layout', 'view/common/menu',
         'view/common/collection'],
 (Backbone, Layout, MenuView, CollectionView) ->
+  # Cirriculum designer interface, for building lesson plans and assessments.
   class DesignerRouter extends Backbone.Router
     prefix = "designer"
 
@@ -20,6 +21,7 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
       @layout = options.layout
       @project = ""
 
+    # Designer home.
     home: (project) ->
       @showContent project, "home", =>
         new TeachingOrderView { @store }

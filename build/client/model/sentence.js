@@ -13,11 +13,6 @@
         return Sentence.__super__.constructor.apply(this, arguments);
       }
 
-      Sentence.prototype.parse = function(data) {
-        this.parseIdLookup('words', 'words', data);
-        return data;
-      };
-
       Sentence.prototype.gpcs = function() {
         var _ref;
         return (_ref = this.cachedGPCs) != null ? _ref : this.cachedGPCs = this.findGPCs();
@@ -25,6 +20,11 @@
 
       Sentence.prototype.words = function() {
         return this.get('words');
+      };
+
+      Sentence.prototype.parse = function(data) {
+        this.parseIdLookup('words', 'words', data);
+        return data;
       };
 
       Sentence.prototype.findGPCs = function() {

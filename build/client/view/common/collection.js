@@ -27,30 +27,6 @@
         }
       }
 
-      CollectionView.prototype.destroy = function() {
-        _.each(this.views, function(view) {
-          return view.destroy();
-        });
-        this.views = [];
-        return CollectionView.__super__.destroy.call(this);
-      };
-
-      CollectionView.prototype.makeModelView = function(model, options) {
-        var modelView, view;
-        if (options == null) {
-          options = {};
-        }
-        modelView = this.options.modelView || this.modelView;
-        options = _.extend({
-          model: model
-        }, options);
-        view = new modelView(options);
-        if (this.rendered) {
-          view.render();
-        }
-        return view;
-      };
-
       CollectionView.prototype.addModelView = function(model, index, options) {
         var view;
         if (index == null) {
@@ -71,6 +47,22 @@
         return _.each(views, function(view) {
           return this.removeView(view);
         });
+      };
+
+      CollectionView.prototype.makeModelView = function(model, options) {
+        var modelView, view;
+        if (options == null) {
+          options = {};
+        }
+        modelView = this.options.modelView || this.modelView;
+        options = _.extend({
+          model: model
+        }, options);
+        view = new modelView(options);
+        if (this.rendered) {
+          view.render();
+        }
+        return view;
       };
 
       CollectionView.prototype.onCollectionAdd = function(model) {

@@ -104,12 +104,18 @@
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src/client/model/known_focus_search.coffee</td>
+          <td>src/client/interactor/known_focus_search.coffee</td>
+        </tr>
+        <tr>
+          <td>Inherits:</td>
+          <td>
+            <a href='../classes/BaseInteractor.html'>BaseInteractor</a>
+          </td>
         </tr>
       </table>
       <h2>Overview</h2>
       <div class='docstring'>
-  <p>Strategy for searching through words or sentences for matches with containing known GPCs and focus GPCs. A known GPC is a list of GPCs that matching items MAY contain. A focus GPC is a list of GPCs that matching items MUST contain. </p> 
+  <p>Strategy for searching through words or sentences for matches with containing known GPCs and focus GPCs. A known GPC is a list of GPCs that matching items MAY contain. A focus GPC is a list of GPCs that matching items MUST contain. </p> <p>The Item refered to below is <em>any</em> object with a .gpcs() method that returns an Array of GPC instances. So this will work on Word or Sentence instances, and in the future perhaps Story instances too. </p> 
 </div>
 <div class='tags'>
 </div>
@@ -123,33 +129,23 @@
     </span>
     <span class='constructor note title'>Constructor</span>
     <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#getFocusItems-instance'>
-        - (void) <strong>getFocusItems</strong>(focusGPCs, list = @models)
-      </a>
-    </span>
-    <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#getKnownItems-instance'>
-        - (void) <strong>getKnownItems</strong>(knownGPCs, list = @models)
-      </a>
-    </span>
-    <span class='desc'>
-      
+      Create the search.
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#getKnownFocusItems-instance'>
-        - (void) <strong>getKnownFocusItems</strong>(knownGPCs, focusGPCs, list = @models)
+        - (Array&lt;Item&gt;) <strong>getKnownFocusItems</strong>(knownGPCs, focusGPCs, list = @models)
+      </a>
+    </span>
+    <span class='desc'>
+      Get the list of items that have the known and focus GPCs.
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#run-instance'>
+        - (void) <strong>run</strong>(knownGPCs, focusGPCs, list = @models, callback)
       </a>
     </span>
     <span class='desc'>
@@ -157,35 +153,94 @@
     </span>
   </li>
 </ul>
+      <h2>
+        <small>Inherited Method Summary</small>
+      </h2>
+      <h3 class='inherited'>
+        Methods inherited from
+        <a href='../classes/BaseInteractor.html'>BaseInteractor</a>
+      </h3>
+      <p class='inherited'>
+                <a href='../classes/BaseInteractor.html#run-instance'>#run</a>,
+                <a href='../classes/BaseInteractor.html#delegateEvent-instance'>#delegateEvent</a>,
+        <a href='../classes/BaseInteractor.html#destroy-instance'>#destroy</a>
+      </p>
       <h2>Constructor Details</h2>
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='constructor-instance'>
       - (void) <strong>constructor</strong>(collection)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Create the search. </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>collection</span>
+      <span class='type'>
+        (<tt>Backbone.Collection</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>optional collection of items</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
       <h2>Instance Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='getFocusItems-instance'>
-      - (void) <strong>getFocusItems</strong>(focusGPCs, list = @models)
-    </p>
-    <div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='getKnownItems-instance'>
-      - (void) <strong>getKnownItems</strong>(knownGPCs, list = @models)
-    </p>
-    <div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
     <p class='signature' id='getKnownFocusItems-instance'>
-      - (void) <strong>getKnownFocusItems</strong>(knownGPCs, focusGPCs, list = @models)
+      - (Array&lt;Item&gt;) <strong>getKnownFocusItems</strong>(knownGPCs, focusGPCs, list = @models)
+    </p>
+    <div class='docstring'>
+  <p>Get the list of items that have the known and focus GPCs. This algorithm works on any item with a gpcs() method that returns an array of gpcs. The result is a subset of the list which contains no unknown gpcs, and contains any focus gpcs. </p> 
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>knownGPCs</span>
+      <span class='type'>
+        (<tt>Array<<a href='../classes/GPC.html'>GPC</a>></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>array of known GPC instances</span>
+    </li>
+    <li>
+      <span class='name'>focusGPCs</span>
+      <span class='type'>
+        (<tt>Array<<a href='../classes/GPC.html'>GPC</a>></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>array of focus GPC instances</span>
+    </li>
+    <li>
+      <span class='name'>list</span>
+      <span class='type'>
+        (<tt>Array<Item></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>array of items with .gpcs() method (optional - defaults to collection's models)</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'>
+        (<tt>Array<Item></tt>)
+      </span>
+      &mdash;
+      <span class='desc'>list of items found</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='run-instance'>
+      - (void) <strong>run</strong>(knownGPCs, focusGPCs, list = @models, callback)
     </p>
     <div class='tags'>
 </div>
@@ -194,11 +249,11 @@
     </div>
     <div id='footer'>
   Generated on
-  Wed Jul 11 2012 13:08:18 GMT-0700 (PDT)
+  Mon Jul 30 2012 15:26:58 GMT-0700 (PDT)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v0.9.0
-  (Node.js v0.6.12).
+  (Node.js v0.6.16).
   &#10034;
   Press Ctrl-h to see the keyboard shortcuts
   &#10034;

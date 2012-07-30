@@ -1,5 +1,6 @@
 define ['view/common/template', 'text!templates/gpc/button.handlebars'],
 (TemplateView, hbsTemplate) ->
+  # A button for a GPC.
   class GPCButtonView extends TemplateView
     template: hbsTemplate
     tagName: 'span'

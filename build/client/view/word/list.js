@@ -15,12 +15,8 @@
 
       function WordListView(options) {
         WordListView.__super__.constructor.call(this, options);
-        this.filter = options.filter || function(collection) {
-          return collection.models;
-        };
-        this.knownGPCs = options.knownGPCs;
         this.columns = options.columns || 3;
-        this.knownGPCs.on('update', this.render, this);
+        this.interactor.on('update', this.render, this);
       }
 
       WordListView.prototype.wordHTML = function(word) {
@@ -38,31 +34,32 @@
       WordListView.prototype.gpcHTML = function(gpc) {
         var focus, known;
         known = "";
-        if (this.knownGPCs.isKnown(gpc)) {
+        if (this.interactor.isGpcKnown(gpc)) {
           known = "known";
         }
         focus = "";
-        if (this.knownGPCs.hasFocus(gpc)) {
+        if (this.interactor.gpcHasFocus(gpc)) {
           focus = "focus";
         }
         return "<span class='" + known + " " + focus + "'>" + (gpc.graphemeName()) + "</span>";
       };
 
       WordListView.prototype.render = function() {
-        var column, html, words,
-          _this = this;
-        words = this.filter(this.collection);
-        column = 0;
-        html = "<tr>";
-        _.each(words, function(word) {
-          html += "<td>" + _this.wordHTML(word) + "</td>";
-          column += 1;
-          if (column >= _this.columns) {
-            column = 0;
-            return html += "</tr><tr>";
-          }
+        var _this = this;
+        this.interactor.run(function(error, words) {
+          var column, html;
+          column = 0;
+          html = "<tr>";
+          _.each(words, function(word) {
+            html += "<td>" + _this.wordHTML(word) + "</td>";
+            column += 1;
+            if (column >= _this.columns) {
+              column = 0;
+              return html += "</tr><tr>";
+            }
+          });
+          return _this.$el.html(html);
         });
-        this.$el.html(html);
         return this;
       };
 

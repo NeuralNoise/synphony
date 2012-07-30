@@ -11,11 +11,16 @@ define ['underscore', 'view/common/base'], (_, BaseView) ->
 
       @rendered = false
 
+    # Destroy all sub-views and ourself.
     destroy: ->
       _.each @views, (view) -> view.destroy()
       @views = []
       super()
 
+    # Add a view. If already rendered the new view
+    # will be rendered and inserted into the DOM.
+    # @param [BaseView] view The view to add.
+    # @param [int] index The index to insert at. -1 is the end.
     addView: (view, index=-1) ->
       if index < 0 || index >= @views.length
         @views.push view
@@ -26,6 +31,8 @@ define ['underscore', 'view/common/base'], (_, BaseView) ->
         if @rendered
           @$el.children()[index].insertBefore view.el
 
+    # Remove a specific view. The view will be destroyed.
+    # @param [BaseView] view The view to remove.
     removeView: (view) ->
       index = @views.indexOf view
       if index >= 0
@@ -34,6 +41,9 @@ define ['underscore', 'view/common/base'], (_, BaseView) ->
       else
         throw new Error "View not found"
 
+    # Render the view and all sub-views. After this method
+    # is called, any modifications to the list of sub-views
+    # will be displayed.
     render: ->
       if @rendered
         _.each @views, (view) -> view.remove()

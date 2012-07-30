@@ -11,6 +11,7 @@ define ['underscore', 'model/base'], (_, BaseModel) ->
     # Basic validation of the name
     #
     # @see http://backbonejs.org/#Model-validate Backbone.Model#validate
+    # @private
     validate: (attribs) ->
       if not attribs.name?
         "Must have a name"
