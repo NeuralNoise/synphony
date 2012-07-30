@@ -4,20 +4,17 @@ fs = require 'fs'
 {spawn} = require 'child_process'
 {_} = require 'underscore'
 
-COFFEE = if process.platform is 'win32'
-  'C:/Users/Norbert/AppData/Roaming/npm/coffee.cmd'
+BINPATH = if process.platform is 'win32'
+  regex = /\\/g # to fix syntax highlighting issue in sublime
+  (process.env.APPDATA.replace regex, '/')+"/"
 else
-  'coffee'
+  ''
 
-HANDLEBARS = if process.platform is 'win32'
-  'C:/Users/Norbert/AppData/Roaming/npm/handlebars.cmd'
-else
-  'handlebars'
+COFFEE = BINPATH + 'coffee'
 
-HANDLEBARS = if process.platform is 'win32'
-  'C:/Users/Norbert/AppData/Roaming/npm/codo.cmd'
-else
-  'codo'
+HANDLEBARS = BINPATH + 'handlebars'
+
+CODO = BINPATH + 'codo'
 
 spawner = (cmd, opts, callback) ->
   coffee = spawn cmd, opts
@@ -35,7 +32,7 @@ spawnHandlebars = (opts, callback) ->
   spawner(HANDLEBARS, opts, callback)
 
 spawnCodo = (opts, callback) ->
-  spawner(HANDLEBARS, opts, callback)
+  spawner(CODO, opts, callback)
 
 task 'build', 'Build build/ from src/', ->
   spawnCoffee ['-c', '-o', 'build/server', 'src/server']
@@ -57,4 +54,4 @@ task 'doc', 'Compile docs', ->
   files = _.sortBy files, (file) ->
     parts = file.split('/')
     parts[parts.length - 1]
-  spawnCodo ['--readme', 'README.txt', '-o', 'doc'].concat(files)
+  spawnCodo ['--readme', 'README.md', '-o', 'doc'].concat(files)
