@@ -22,7 +22,7 @@
 
       function DesignerRouter(options) {
         DesignerRouter.__super__.constructor.call(this, options);
-        this.store = options.store;
+        this.projectManager = options.projectManager;
         this.layout = options.layout;
         this.project = "";
       }
@@ -31,7 +31,7 @@
         var _this = this;
         return this.showContent(project, "home", function() {
           return new TeachingOrderView({
-            store: _this.store
+            projectManager: _this.projectManager
           });
         });
       };
@@ -46,10 +46,8 @@
       DesignerRouter.prototype.loadProject = function(project, done) {
         if (this.project !== project) {
           this.project = project;
-          this.store.setProject(project);
-          return this.store.fetch({
-            success: done
-          });
+          this.projectManager.setProject(project);
+          return this.projectManager.load(done);
         } else {
           return done();
         }

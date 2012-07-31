@@ -1,9 +1,9 @@
 define ['interactor/base', 'interactor/known_focus_search'], (BaseInteractor, KnownFocusSearch) ->
   class WordSearcher extends BaseInteractor
     constructor: (options) ->
-      @store = options.store
-      @words = @store.words()
-      @knownGPCs = @store.knownGPCs()
+      @projectManager = options.projectManager
+      @words = @projectManager.words()
+      @knownGPCs = @projectManager.knownGPCs()
       @search = new KnownFocusSearch @words
       @delegateEvent @knownGPCs, 'update'
 

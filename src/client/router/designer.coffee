@@ -17,14 +17,14 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
 
     constructor: (options) ->
       super options
-      @store = options.store
+      @projectManager = options.projectManager
       @layout = options.layout
       @project = ""
 
     # Designer home.
     home: (project) ->
       @showContent project, "home", =>
-        new TeachingOrderView { @store }
+        new TeachingOrderView { @projectManager }
 
     # @private
     redirect: (project, page) ->
@@ -34,8 +34,8 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
     loadProject: (project, done) ->
       if @project != project
         @project = project
-        @store.setProject project
-        @store.fetch success: done
+        @projectManager.setProject project
+        @projectManager.load done
       else
         done()
 

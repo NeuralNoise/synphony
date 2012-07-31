@@ -11,7 +11,7 @@ define ['backbone', 'view/common/menu', 'view/common/template',
 
     constructor: (options) ->
       super options
-      @store = options.store
+      @projectManager = options.projectManager
       @layout = options.layout
 
     # The home page

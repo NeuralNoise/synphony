@@ -1,8 +1,8 @@
-define ['backbone', 'view/common/layout', 'view/common/menu',
+define ['backbone', 'view/common/menu',
         'view/common/sidebar', 'view/demo/words',
         'view/demo/sentences', 'view/gpc/button', 'view/common/collection',
         'interactor/word_searcher'],
-(Backbone, Layout, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView, WordSearcher) ->
+(Backbone, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView, WordSearcher) ->
   # The demo router for exploring the functionality of SynPhony.
   class DemoRouter extends Backbone.Router
     prefix = "demo"
@@ -23,7 +23,7 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
 
     constructor: (options) ->
       super options
-      @store = options.store
+      @projectManager = options.projectManager
       @layout = options.layout
       @project = ""
 
@@ -34,12 +34,12 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
     # Words demo route.
     words: (project) ->
       @showContent project, "words", =>
-        new WordsView { interactor: new WordSearcher { @store } }
+        new WordsView { interactor: new WordSearcher { @projectManager } }
 
     # Sentences demo route.
     sentences: (project) ->
       @showContent project, "sentences", =>
-        new SentencesView { @store }
+        new SentencesView { @projectManager }
 
     # @private
     redirect: (project, page) ->
@@ -49,8 +49,8 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
     loadProject: (project, done) ->
       if @project != project
         @project = project
-        @store.setProject project
-        @store.fetch success: done
+        @projectManager.setProject project
+        @projectManager.load done
       else
         done()
 
@@ -58,8 +58,8 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
     makeSpellingPatterns: ->
       new CollectionView
         id: 'spelling-patterns'
-        collection: @store.sequences().first().elements()
-        knownGPCs: @store.knownGPCs()
+        collection: @projectManager.sequences().first().elements()
+        knownGPCs: @projectManager.knownGPCs()
         modelView: GPCButtonView
 
     # @private

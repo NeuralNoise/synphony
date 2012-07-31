@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['backbone', 'view/common/layout', 'view/common/menu', 'view/common/sidebar', 'view/demo/words', 'view/demo/sentences', 'view/gpc/button', 'view/common/collection', 'interactor/word_searcher'], function(Backbone, Layout, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView, WordSearcher) {
+  define(['backbone', 'view/common/menu', 'view/common/sidebar', 'view/demo/words', 'view/demo/sentences', 'view/gpc/button', 'view/common/collection', 'interactor/word_searcher'], function(Backbone, MenuView, SidebarView, WordsView, SentencesView, GPCButtonView, CollectionView, WordSearcher) {
     var DemoRouter;
     return DemoRouter = (function(_super) {
       var prefix;
@@ -33,7 +33,7 @@
 
       function DemoRouter(options) {
         DemoRouter.__super__.constructor.call(this, options);
-        this.store = options.store;
+        this.projectManager = options.projectManager;
         this.layout = options.layout;
         this.project = "";
       }
@@ -47,7 +47,7 @@
         return this.showContent(project, "words", function() {
           return new WordsView({
             interactor: new WordSearcher({
-              store: _this.store
+              projectManager: _this.projectManager
             })
           });
         });
@@ -57,7 +57,7 @@
         var _this = this;
         return this.showContent(project, "sentences", function() {
           return new SentencesView({
-            store: _this.store
+            projectManager: _this.projectManager
           });
         });
       };
@@ -72,10 +72,8 @@
       DemoRouter.prototype.loadProject = function(project, done) {
         if (this.project !== project) {
           this.project = project;
-          this.store.setProject(project);
-          return this.store.fetch({
-            success: done
-          });
+          this.projectManager.setProject(project);
+          return this.projectManager.load(done);
         } else {
           return done();
         }
@@ -84,8 +82,8 @@
       DemoRouter.prototype.makeSpellingPatterns = function() {
         return new CollectionView({
           id: 'spelling-patterns',
-          collection: this.store.sequences().first().elements(),
-          knownGPCs: this.store.knownGPCs(),
+          collection: this.projectManager.sequences().first().elements(),
+          knownGPCs: this.projectManager.knownGPCs(),
           modelView: GPCButtonView
         });
       };

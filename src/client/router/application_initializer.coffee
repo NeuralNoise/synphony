@@ -1,7 +1,9 @@
-define ['jquery', 'backbone', 'model/store', 'view/common/layout',
-        'router/admin', 'router/demo', 'router/designer', 'interactor/cirriculum_designer'
+define ['jquery', 'backbone', 'view/common/layout',
+        'router/admin', 'router/demo', 'router/designer',
+        'interactor/cirriculum_designer',
+        'interactor/project_manager'
         ],
-($, Backbone, Store, Layout, AdminRouter, DemoRouter, DesignerRouter, CirriculumDesigner) ->
+($, Backbone, Layout, AdminRouter, DemoRouter, DesignerRouter, CirriculumDesigner, ProjectManager) ->
   # Initialize the application and start it running.
   class ApplicationInitializer
     constructor: () ->
@@ -9,13 +11,12 @@ define ['jquery', 'backbone', 'model/store', 'view/common/layout',
       @demoRouter = null
       @designerRouter = null
       @layout = null
-      @store = null
       @curriculumDesigner = null
+      @projectManager = null
 
     # Initialize and start the application running.
     run: ->
       @setupLayout()
-      @setupStore()
       @setupInteractors()
       @setupRouters()
       @start()
@@ -28,21 +29,17 @@ define ['jquery', 'backbone', 'model/store', 'view/common/layout',
         content: "#main-content"
         sidebar: "#toolbar-content"
 
-    # Setup the store, which is the root object for the model layer.
-    # @private
-    setupStore: ->
-      @store = new Store
-
     # Setup interactors to handle the various use cases.
     # @private
     setupInteractors: ->
-      @curriculumDesigner = new CirriculumDesigner { @store, @layout }
+      @projectManager = new ProjectManager
+      @curriculumDesigner = new CirriculumDesigner { @projectManager, @layout }
 
     # Setup the routers which handle URLs
     # @private
     setupRouters: ->
-      @adminRouter = new AdminRouter { @store, @layout }
-      @demoRouter = new DemoRouter { @store, @layout }
+      @adminRouter = new AdminRouter { @projectManager, @layout }
+      @demoRouter = new DemoRouter { @projectManager, @layout }
       @designerRouter = new DesignerRouter { @curriculumDesigner }
 
     # And set everything in motion by triggering routing of the current URL
