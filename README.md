@@ -49,8 +49,6 @@ Testing
 
 open tests/SpecRunner.html in your browser after you have run cake build
 
-The tests are broken at the momement because I am bad. I'm still getting used to writing tests first not the other way around.
-
 Notes
 -----
 

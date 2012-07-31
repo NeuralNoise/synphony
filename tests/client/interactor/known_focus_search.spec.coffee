@@ -1,6 +1,6 @@
 define ['model/word', 'model/grapheme', 'model/phoneme', 'collection/graphemes',
         'collection/phonemes', 'collection/gpcs', 'collection/words',
-        'collection/sentences', 'model/known_focus_search'],
+        'collection/sentences', 'interactor/known_focus_search'],
 (Word, Grapheme, Phoneme, Graphemes, Phonemes, GPCs, Words, Sentences, KnownFocusSearch) ->
   describe "KnownFocusSearch", ->
     graphemes = new Graphemes DB.graphemes, parse: true

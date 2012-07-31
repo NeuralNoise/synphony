@@ -28,7 +28,7 @@
         }
         if (this.collection[collectionName] != null) {
           if (!(data[fieldName] != null)) {
-            console.log("Warning: data has no filed " + fieldName);
+            console.log("Warning: data has no field " + fieldName);
             return;
           }
           datum = data[fieldName];
