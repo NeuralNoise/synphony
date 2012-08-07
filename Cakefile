@@ -11,7 +11,7 @@ if process.platform is 'win32'
   BINPATH = (process.env.APPDATA.replace regex, '/')+"/npm/"
   EXTENSION = '.cmd'
 else
-  ''
+  BINPATH = EXTENSION = ''
 
 COFFEE = BINPATH + 'coffee' + EXTENSION
 
