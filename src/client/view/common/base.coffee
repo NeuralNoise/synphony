@@ -36,6 +36,14 @@ define ['underscore', 'backbone'],
       @off()
       console.log "Destroyed"
 
+    # Render a sub-view to a selector after a template has been rendered. This
+    # ensures that events are re-delegated properly.
+    # @param [String] selector jQuery css selector of the subview in the template
+    # @param [Backbone.View] view the view to render into the selector
+    # idea from http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
+    renderToSelector: (selector, view) ->
+        (view.setElement @$ selector).render()
+
     # @private
     delegateEvents: (events = @events) ->
       events = events() if _.isFunction events

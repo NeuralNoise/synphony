@@ -1,4 +1,4 @@
-bootstrapDB({
+bootstrapData('DB',{
   "phonemes": [
     {
       "_id": 3,

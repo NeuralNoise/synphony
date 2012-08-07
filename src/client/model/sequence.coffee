@@ -7,10 +7,15 @@ define ['model/named', 'collection/sequence_elements'], (NamedModel, SequenceEle
 
     # Get the GPCs in the sequence.
     # @return [Array<GPC>] the gpcs
-    gpcs: -> @elements().getGpcs()
+    getGpcs: -> @elements().getGpcs()
+
+    # @depricated
+    gpcs: -> @getGpcs()
+
 
     # @private
     parse: (data) ->
       if data.elements?
+        data = _.clone data
         data.elements = new SequenceElements data.elements, {parse: true, collection: @}
       data

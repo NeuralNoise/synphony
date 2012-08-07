@@ -33,14 +33,14 @@ define ['jquery', 'backbone', 'view/common/layout',
     # @private
     setupInteractors: ->
       @projectManager = new ProjectManager
-      @curriculumDesigner = new CirriculumDesigner { @projectManager, @layout }
+      @curriculumDesigner = new CirriculumDesigner { @projectManager }
 
     # Setup the routers which handle URLs
     # @private
     setupRouters: ->
       @adminRouter = new AdminRouter { @projectManager, @layout }
       @demoRouter = new DemoRouter { @projectManager, @layout }
-      @designerRouter = new DesignerRouter { @curriculumDesigner }
+      @designerRouter = new DesignerRouter { @curriculumDesigner, @projectManager, @layout }
 
     # And set everything in motion by triggering routing of the current URL
     # @private

@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['backbone', 'view/common/layout', 'view/common/menu', 'view/common/collection'], function(Backbone, Layout, MenuView, CollectionView) {
+  define(['backbone', 'view/common/layout', 'view/common/menu', 'view/common/hider', 'view/common/collection', 'view/designer/exporter', 'interactor/tangerine_exporter'], function(Backbone, Layout, MenuView, HiderView, CollectionView, ExporterView, TangerineExporter) {
     var DesignerRouter;
     return DesignerRouter = (function(_super) {
       var prefix;
@@ -13,7 +13,8 @@
       prefix = "designer";
 
       DesignerRouter.prototype.routes = {
-        "designer/:project": "home"
+        "designer/:project": "home",
+        "designer/:project/export": "export"
       };
 
       DesignerRouter.prototype.menu = function() {
@@ -32,6 +33,23 @@
         return this.showContent(project, "home", function() {
           return new TeachingOrderView({
             projectManager: _this.projectManager
+          });
+        });
+      };
+
+      DesignerRouter.prototype["export"] = function(project) {
+        var _this = this;
+        return this.showContent(project, "export", function() {
+          var exporter;
+          exporter = new TangerineExporter({
+            graphemesPerLesson: 3,
+            wordsPerLesson: 20,
+            curriculumId: "curriculum-example-tok_pisin",
+            sequence: _this.projectManager.getSequences().first(),
+            projectManager: _this.projectManager
+          });
+          return new ExporterView({
+            interactor: exporter
           });
         });
       };

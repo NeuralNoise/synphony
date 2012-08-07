@@ -18,14 +18,14 @@
   -->
 
 
-  <!-- include source files here... -->
+  <!-- include data here... -->
   <script type="text/javascript">
-    window.bootstrapDB = function(db) {
-      console.log("loaded db!");
-      window.DB = db;
+    window.bootstrapData = function(varName, data) {
+      window[varName] = data;
     };
   </script>
   <script type="text/javascript" src="data/tok_pisin.jsonp"></script>
+  <script type="text/javascript" src="data/tangerine_subtests.jsonp"></script>
 
   <!-- include spec files here... -->
 

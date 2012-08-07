@@ -1,41 +1,72 @@
 define ['interactor/base', 'model/store'], (BaseInteractor, Store) ->
-  # In order to multitask I want to be able to load different projects.
+  # Manages projects and allows them to be switched and a new one to be loaded.
+  #
+  # Eventually the Store model will be replaced by this class, since what
+  # the Store does is more of an interactor responsibility.
+  #
+  # User story:
+  # In order to work on multiple language projects
+  # I want to be able to load different projects.
   class ProjectManager extends BaseInteractor
-    constructor: ->
-      @store = new Store
+    constructor: (data) ->
+      if data?
+        @store = new Store data, parse: true
+      else
+        @store = new Store
       @project = @store.project
 
     getStore: -> @store
 
     # Get the phonemes collection
     # @return [Phonemes] phonemes
-    phonemes: -> @store.phonemes()
+    getPhonemes: -> @store.phonemes()
+
+    # @depricated
+    phonemes: -> @getPhonemes()
 
     # Get the graphemes collection
     # @return [Graphemes] graphemes
-    graphemes: -> @store.graphemes()
+    getGraphemes: -> @store.graphemes()
+
+    # @depricated
+    graphemes: -> @getGraphemes()
 
     # Get the gpcs collection
     # @return [GPCs] gpcs
-    gpcs: -> @store.gpcs()
+    getGpcs: -> @store.gpcs()
+
+    # @depricated
+    gpcs: -> @getGpcs()
 
     # Get the words collection
     # @return [Words] words
-    words: -> @store.words()
+    getWords: -> @store.words()
+
+    # @depricated
+    words: -> @getWords()
 
     # Get the sentences collection
     # @return [Sentences] sentences
-    sentences: -> @store.sentences()
+    getSentences: -> @store.sentences()
+
+    # @depricated
+    sentences: -> @getSentences()
 
     # Get the sequences collection
     # @return [Sequences] sequences
-    sequences: -> @store.sequences()
+    getSequences: -> @store.sequences()
+
+    # @depricated
+    sequences: -> @getSequences()
 
     # Get the knownGPCs collection
     # @return [KnownGPCs] knownGPCs
-    knownGPCs: -> @store.knownGPCs()
+    getKnownGPCs: -> @store.knownGPCs()
 
-    setProject: (name) -> 
+    # @depricated
+    knownGPCs: -> @getKnownGPCs()
+
+    setProject: (name) ->
       @store.setProject(name)
       @project = @store.project
 

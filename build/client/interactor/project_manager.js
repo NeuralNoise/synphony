@@ -9,8 +9,14 @@
 
       __extends(ProjectManager, _super);
 
-      function ProjectManager() {
-        this.store = new Store;
+      function ProjectManager(data) {
+        if (data != null) {
+          this.store = new Store(data, {
+            parse: true
+          });
+        } else {
+          this.store = new Store;
+        }
         this.project = this.store.project;
       }
 
@@ -18,32 +24,60 @@
         return this.store;
       };
 
-      ProjectManager.prototype.phonemes = function() {
+      ProjectManager.prototype.getPhonemes = function() {
         return this.store.phonemes();
       };
 
-      ProjectManager.prototype.graphemes = function() {
+      ProjectManager.prototype.phonemes = function() {
+        return this.getPhonemes();
+      };
+
+      ProjectManager.prototype.getGraphemes = function() {
         return this.store.graphemes();
       };
 
-      ProjectManager.prototype.gpcs = function() {
+      ProjectManager.prototype.graphemes = function() {
+        return this.getGraphemes();
+      };
+
+      ProjectManager.prototype.getGpcs = function() {
         return this.store.gpcs();
       };
 
-      ProjectManager.prototype.words = function() {
+      ProjectManager.prototype.gpcs = function() {
+        return this.getGpcs();
+      };
+
+      ProjectManager.prototype.getWords = function() {
         return this.store.words();
       };
 
-      ProjectManager.prototype.sentences = function() {
+      ProjectManager.prototype.words = function() {
+        return this.getWords();
+      };
+
+      ProjectManager.prototype.getSentences = function() {
         return this.store.sentences();
       };
 
-      ProjectManager.prototype.sequences = function() {
+      ProjectManager.prototype.sentences = function() {
+        return this.getSentences();
+      };
+
+      ProjectManager.prototype.getSequences = function() {
         return this.store.sequences();
       };
 
-      ProjectManager.prototype.knownGPCs = function() {
+      ProjectManager.prototype.sequences = function() {
+        return this.getSequences();
+      };
+
+      ProjectManager.prototype.getKnownGPCs = function() {
         return this.store.knownGPCs();
+      };
+
+      ProjectManager.prototype.knownGPCs = function() {
+        return this.getKnownGPCs();
       };
 
       ProjectManager.prototype.setProject = function(name) {

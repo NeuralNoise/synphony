@@ -29,6 +29,10 @@
         return console.log("Destroyed");
       };
 
+      BaseView.prototype.renderToSelector = function(selector, view) {
+        return (view.setElement(this.$(selector))).render();
+      };
+
       BaseView.prototype.delegateEvents = function(events) {
         var combinedEvents;
         if (events == null) {

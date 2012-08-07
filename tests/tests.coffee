@@ -27,6 +27,7 @@ define [
   '../tests/client/model/sequence.spec'
   '../tests/client/model/sequence_element.spec'
   '../tests/client/interactor/known_focus_search.spec'
+  '../tests/client/interactor/tangerine_exporter.spec'
   '../tests/client/collection/named.spec'
   '../tests/client/collection/graphemes.spec'
   '../tests/client/collection/phonemes.spec'

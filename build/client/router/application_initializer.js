@@ -32,8 +32,7 @@
       ApplicationInitializer.prototype.setupInteractors = function() {
         this.projectManager = new ProjectManager;
         return this.curriculumDesigner = new CirriculumDesigner({
-          projectManager: this.projectManager,
-          layout: this.layout
+          projectManager: this.projectManager
         });
       };
 
@@ -47,7 +46,9 @@
           layout: this.layout
         });
         return this.designerRouter = new DesignerRouter({
-          curriculumDesigner: this.curriculumDesigner
+          curriculumDesigner: this.curriculumDesigner,
+          projectManager: this.projectManager,
+          layout: this.layout
         });
       };
 
