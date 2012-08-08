@@ -157,7 +157,6 @@
           return res.send(500, error);
         } else {
           res.contentType('text/css');
-          console.log("Sending CSS:\n" + css);
           return res.send(css);
         }
       });

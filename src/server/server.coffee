@@ -132,7 +132,6 @@ module.exports.run = ->
         res.send 500, error
       else
         res.contentType 'text/css'
-        console.log "Sending CSS:\n#{css}"
         res.send css
 
   app.get '/api/v1/:project/:collection/?', (req, res) ->
