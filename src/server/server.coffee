@@ -106,7 +106,9 @@ module.exports.run = ->
 
   app.use express.favicon __dirname+'/../../public/favicon.ico'
   app.use express.static __dirname+'/../../public'
-  # app.use gzip.gzip()
+  if process.platform isnt 'win32'
+    # gzip library has a bug on windows, so don't use it
+    app.use gzip.gzip()
   app.use express.logger()
   app.use express.bodyParser()
   app.use express.methodOverride()

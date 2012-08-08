@@ -132,6 +132,9 @@
     };
     app.use(express.favicon(__dirname + '/../../public/favicon.ico'));
     app.use(express["static"](__dirname + '/../../public'));
+    if (process.platform !== 'win32') {
+      app.use(gzip.gzip());
+    }
     app.use(express.logger());
     app.use(express.bodyParser());
     app.use(express.methodOverride());
