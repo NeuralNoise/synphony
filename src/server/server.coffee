@@ -65,6 +65,8 @@ compileStyle = (callback) ->
       filename: "synphony.less"
       file: "synphony.less"
     less.render data, options, (err, css) ->
+      if err?
+        console.error "ERROR: #{err.toString()}"
       callback err, css
 
 
@@ -124,10 +126,11 @@ module.exports.run = ->
 
   app.get '/css/synphony.css', (req, res) ->
     compileStyle (error, css) ->
-      if error
+      if error?
         res.send 500, error
       else
         res.contentType 'text/css'
+        console.log "Sending CSS:\n#{css}"
         res.send css
 
   app.get '/api/v1/:project/:collection/?', (req, res) ->
