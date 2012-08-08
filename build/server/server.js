@@ -78,6 +78,9 @@
         file: "synphony.less"
       };
       return less.render(data, options, function(err, css) {
+        if (err != null) {
+          console.error("ERROR: " + (err.toString()));
+        }
         return callback(err, css);
       });
     });
@@ -148,10 +151,11 @@
     app.get("/templates/:folder/:file.handlebars", staticPath("/templates", "/templates"));
     app.get('/css/synphony.css', function(req, res) {
       return compileStyle(function(error, css) {
-        if (error) {
+        if (error != null) {
           return res.send(500, error);
         } else {
           res.contentType('text/css');
+          console.log("Sending CSS:\n" + css);
           return res.send(css);
         }
       });
