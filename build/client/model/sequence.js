@@ -17,12 +17,17 @@
         return this.get('elements');
       };
 
-      Sequence.prototype.gpcs = function() {
+      Sequence.prototype.getGpcs = function() {
         return this.elements().getGpcs();
+      };
+
+      Sequence.prototype.gpcs = function() {
+        return this.getGpcs();
       };
 
       Sequence.prototype.parse = function(data) {
         if (data.elements != null) {
+          data = _.clone(data);
           data.elements = new SequenceElements(data.elements, {
             parse: true,
             collection: this

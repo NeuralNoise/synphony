@@ -1,0 +1,375 @@
+bootstrapData('TANGERINE_SUBTESTS',[
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 1,
+    "variableName": "spellingPatterns",
+    "name": "Spelling Patterns",
+    "items": [
+      "e",
+      "m",
+      "s"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 1,
+    "variableName": "familiarWords",
+    "name": "Familiar Words",
+    "items": [
+      "em",
+      "e",
+      "me",
+      "es",
+      "sem",
+      "meme"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 2,
+    "variableName": "spellingPatterns",
+    "name": "Spelling Patterns",
+    "items": [
+      "i",
+      "a",
+      "p"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 2,
+    "variableName": "familiarWords",
+    "name": "Familiar Words",
+    "items": [
+      "i",
+      "mi",
+      "papa",
+      "mas",
+      "as",
+      "sipsip",
+      "mama",
+      "pas",
+      "amamas",
+      "papamama",
+      "pis",
+      "pasim",
+      "isi",
+      "pe",
+      "pam",
+      "spia",
+      "amamasim",
+      "pi",
+      "ia",
+      "sis"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 3,
+    "variableName": "spellingPatterns",
+    "name": "Spelling Patterns",
+    "items": [
+      "k",
+      "t",
+      "n"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 3,
+    "variableName": "familiarWords",
+    "name": "Familiar Words",
+    "items": [
+      "na",
+      "man",
+      "stap",
+      "mekim",
+      "kam",
+      "pinis",
+      "kamap",
+      "kisim",
+      "askim",
+      "ken",
+      "pasin",
+      "inap",
+      "pikinini",
+      "nem",
+      "sin",
+      "sanap",
+      "antap",
+      "tisa",
+      "makim",
+      "mak"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 4,
+    "variableName": "spellingPatterns",
+    "name": "Spelling Patterns",
+    "items": [
+      "l",
+      "o",
+      "r"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 4,
+    "variableName": "familiarWords",
+    "name": "Familiar Words",
+    "items": [
+      "ol",
+      "olsem",
+      "tok",
+      "no",
+      "tokim",
+      "tasol",
+      "manmeri",
+      "sapos",
+      "planti",
+      "ples",
+      "mipela",
+      "salim",
+      "meri",
+      "moa",
+      "lo",
+      "sampela",
+      "narapela",
+      "toktok",
+      "namel",
+      "kirap"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 5,
+    "variableName": "spellingPatterns",
+    "name": "Spelling Patterns",
+    "items": [
+      "u",
+      "b",
+      "ai"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 5,
+    "variableName": "familiarWords",
+    "name": "Familiar Words",
+    "items": [
+      "bai",
+      "orait",
+      "bin",
+      "tru",
+      "lukim",
+      "taim",
+      "bekim",
+      "bikpela",
+      "laik",
+      "bilip",
+      "tumas",
+      "lusim",
+      "laip",
+      "tu",
+      "tupela",
+      "kaikai",
+      "bipo",
+      "laikim",
+      "bek",
+      "lain"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 6,
+    "variableName": "spellingPatterns",
+    "name": "Spelling Patterns",
+    "items": [
+      "w",
+      "d",
+      "h"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 6,
+    "variableName": "familiarWords",
+    "name": "Familiar Words",
+    "items": [
+      "dispela",
+      "wanpela",
+      "disaipel",
+      "wanem",
+      "wantaim",
+      "harim",
+      "de",
+      "wok",
+      "dai",
+      "bihainim",
+      "wara",
+      "bihain",
+      "wokim",
+      "hap",
+      "wan",
+      "han",
+      "bodi",
+      "helpim",
+      "dua",
+      "husat"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 7,
+    "variableName": "spellingPatterns",
+    "name": "Spelling Patterns",
+    "items": [
+      "au",
+      "g",
+      "ng"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 7,
+    "variableName": "familiarWords",
+    "name": "Familiar Words",
+    "items": [
+      "long",
+      "bilong",
+      "go",
+      "God",
+      "gat",
+      "samting",
+      "olgeta",
+      "nau",
+      "graun",
+      "gen",
+      "gut",
+      "autim",
+      "tingting",
+      "ating",
+      "taun",
+      "strong",
+      "nogut",
+      "ausait",
+      "gutpela",
+      "wokabaut"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 8,
+    "variableName": "spellingPatterns",
+    "name": "Spelling Patterns",
+    "items": [
+      "v",
+      "f",
+      "y"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 8,
+    "variableName": "familiarWords",
+    "name": "Familiar Words",
+    "items": [
+      "yupela",
+      "yu",
+      "save",
+      "yet",
+      "givim",
+      "heven",
+      "profet",
+      "hevi",
+      "yes",
+      "yau",
+      "ofisa",
+      "gavman",
+      "veranda",
+      "yutupela",
+      "yia",
+      "tenkyu",
+      "toksave",
+      "oliv",
+      "silva",
+      "saveman"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 9,
+    "variableName": "spellingPatterns",
+    "name": "Spelling Patterns",
+    "items": [
+      "oi",
+      "j",
+      "ei"
+    ]
+  },
+  {
+    "collection": "subtest",
+    "prototype": "grid",
+    "curriculumID": "test_curriculum_id",
+    "lesson": 9,
+    "variableName": "familiarWords",
+    "name": "Familiar Words",
+    "items": [
+      "Jisas",
+      "soim",
+      "tromoi",
+      "jas",
+      "jem",
+      "jek",
+      "boi",
+      "Jun",
+      "peim",
+      "nois",
+      "loia",
+      "boil",
+      "sloim",
+      "majik",
+      "loloi",
+      "Julai",
+      "toilet",
+      "soisos",
+      "poisen",
+      "oloboi"
+    ]
+  }
+])

@@ -7,6 +7,11 @@ define ['underscore', 'interactor/base'], (_, BaseInteractor) ->
   # The Item refered to below is *any* object with a .gpcs() method that
   # returns an Array of GPC instances. So this will work on Word or Sentence
   # instances, and in the future perhaps Story instances too.
+  #
+  # User Story:
+  # In order to build useful teaching material
+  # I want to be able to filter any list of items containing a list of GPCs by
+  # which GPCs are known and which are the focus of the lesson.
   class KnownFocusSearch extends BaseInteractor
     # Create the search.
     # @param [Backbone.Collection] collection optional collection of items

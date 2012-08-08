@@ -19,7 +19,7 @@
 
       function AdminRouter(options) {
         AdminRouter.__super__.constructor.call(this, options);
-        this.store = options.store;
+        this.projectManager = options.projectManager;
         this.layout = options.layout;
       }
 

@@ -26,7 +26,9 @@ define [
   '../tests/client/model/sentence.spec'
   '../tests/client/model/sequence.spec'
   '../tests/client/model/sequence_element.spec'
-  '../tests/client/model/known_focus_search.spec'
+  '../tests/client/model/project.spec'
+  '../tests/client/interactor/known_focus_search.spec'
+  '../tests/client/interactor/tangerine_exporter.spec'
   '../tests/client/collection/named.spec'
   '../tests/client/collection/graphemes.spec'
   '../tests/client/collection/phonemes.spec'
@@ -36,4 +38,5 @@ define [
   '../tests/client/collection/sentences.spec'
   '../tests/client/collection/sequences.spec'
   '../tests/client/collection/sequence_elements.spec'
+  '../tests/client/collection/projects.spec'
 ], -> {}

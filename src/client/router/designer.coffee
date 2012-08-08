@@ -1,12 +1,13 @@
-define ['backbone', 'view/common/layout', 'view/common/menu',
-        'view/common/collection'],
-(Backbone, Layout, MenuView, CollectionView) ->
+define ['backbone', 'view/common/layout', 'view/common/menu', 'view/common/hider'
+        'view/common/collection', 'view/designer/exporter', 'interactor/tangerine_exporter'],
+(Backbone, Layout, MenuView, HiderView, CollectionView, ExporterView, TangerineExporter) ->
   # Cirriculum designer interface, for building lesson plans and assessments.
   class DesignerRouter extends Backbone.Router
     prefix = "designer"
 
     routes:
       "designer/:project": "home"
+      "designer/:project/export": "export"
 
     menu: -> {}
      # "Words": "##{prefix}/#{@project}/words"
@@ -17,14 +18,25 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
 
     constructor: (options) ->
       super options
-      @store = options.store
+      @projectManager = options.projectManager
       @layout = options.layout
       @project = ""
 
     # Designer home.
     home: (project) ->
       @showContent project, "home", =>
-        new TeachingOrderView { @store }
+        new TeachingOrderView { @projectManager }
+
+    export: (project) ->
+      @showContent project, "export", =>
+        exporter = new TangerineExporter {
+          graphemesPerLesson: 3
+          wordsPerLesson: 20
+          curriculumId: "curriculum-example-tok_pisin"
+          sequence: @projectManager.getSequences().first()
+          @projectManager
+        }
+        new ExporterView interactor: exporter
 
     # @private
     redirect: (project, page) ->
@@ -34,8 +46,8 @@ define ['backbone', 'view/common/layout', 'view/common/menu',
     loadProject: (project, done) ->
       if @project != project
         @project = project
-        @store.setProject project
-        @store.fetch success: done
+        @projectManager.setProject project
+        @projectManager.load done
       else
         done()
 

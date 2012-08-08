@@ -10,9 +10,9 @@
       __extends(WordSearcher, _super);
 
       function WordSearcher(options) {
-        this.store = options.store;
-        this.words = this.store.words();
-        this.knownGPCs = this.store.knownGPCs();
+        this.projectManager = options.projectManager;
+        this.words = this.projectManager.words();
+        this.knownGPCs = this.projectManager.knownGPCs();
         this.search = new KnownFocusSearch(this.words);
         this.delegateEvent(this.knownGPCs, 'update');
       }

@@ -34,7 +34,7 @@ define ['backbone', 'underscore'], (Backbone, _) ->
         return
       if @collection[collectionName]?
         if not data[fieldName]?
-          console.log "Warning: data has no filed #{fieldName}"
+          console.log "Warning: data has no field #{fieldName}"
           return
         datum = data[fieldName]
         isArrayOfIds = (_.isArray datum) and _.any datum, (thing) ->
