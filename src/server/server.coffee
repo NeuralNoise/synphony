@@ -106,7 +106,7 @@ module.exports.run = ->
 
   app.use express.favicon __dirname+'/../../public/favicon.ico'
   app.use express.static __dirname+'/../../public'
-  app.use gzip.gzip()
+  # app.use gzip.gzip()
   app.use express.logger()
   app.use express.bodyParser()
   app.use express.methodOverride()
