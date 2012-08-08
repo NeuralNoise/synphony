@@ -1,4 +1,11 @@
 bootstrapData('DB',{
+  "projects": [
+    {
+      "_id": 300001,
+      "name": "Tok Pisin",
+      "slug": "tok_pisin"
+    }
+  ],
   "phonemes": [
     {
       "_id": 3,
