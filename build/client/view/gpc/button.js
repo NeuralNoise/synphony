@@ -13,6 +13,8 @@
 
       GPCButtonView.prototype.tagName = 'span';
 
+      GPCButtonView.prototype.id = 'spelling-pattern-button';
+
       GPCButtonView.prototype.events = {
         'click button': 'onClick'
       };

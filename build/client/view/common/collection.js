@@ -19,13 +19,24 @@
         CollectionView.__super__.constructor.call(this, options);
         if (this.collection) {
           this.collection.each(function(model) {
-            return _this.addModelView(model, -1, options);
+            var fixedOptions;
+            fixedOptions = _.clone(options);
+            return _this.addModelView(model, -1, _this.optionsWithoutCssInfo(options));
           });
           this.collection.on('add', this.onCollectionAdd, this);
           this.collection.on('remove', this.onCollectionRemove, this);
           this.collection.on('reset', this.onCollectionReset, this);
         }
       }
+
+      CollectionView.prototype.optionsWithoutCssInfo = function(options) {
+        var fixedOptions;
+        fixedOptions = _.clone(options);
+        delete fixedOptions.id;
+        delete fixedOptions.className;
+        delete fixedOptions.tagName;
+        return fixedOptions;
+      };
 
       CollectionView.prototype.addModelView = function(model, index, options) {
         var view;

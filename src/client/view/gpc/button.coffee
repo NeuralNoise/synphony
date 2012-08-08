@@ -4,6 +4,7 @@ define ['view/common/template', 'text!templates/gpc/button.handlebars'],
   class GPCButtonView extends TemplateView
     template: hbsTemplate
     tagName: 'span'
+    id: 'spelling-pattern-button'
 
     events:
       'click button': 'onClick'

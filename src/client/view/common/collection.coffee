@@ -15,11 +15,20 @@ define ['underscore', 'view/common/composite', 'view/common/base'],
 
       if @collection
         @collection.each (model) =>
-          @addModelView model, -1, options
+          fixedOptions = _.clone options
+          @addModelView model, -1, @optionsWithoutCssInfo options
 
         @collection.on 'add', @onCollectionAdd, @
         @collection.on 'remove', @onCollectionRemove, @
         @collection.on 'reset', @onCollectionReset, @
+
+    # @private
+    optionsWithoutCssInfo: (options) ->
+      fixedOptions = _.clone options
+      delete fixedOptions.id
+      delete fixedOptions.className
+      delete fixedOptions.tagName
+      fixedOptions
 
     # Wrap a model in a view and add it to the collection view. If
     # already rendered the new view will be rendered and inserted into
