@@ -2,18 +2,21 @@
    Author: Norbert Rennert
    ========================================================================== */
 
-/* 
+/*
   KNOWN CRASH CAUSES (crashes less's parser.js and node.js)
-  invalid property names; eg: border -bottom (a space between border-bottom)
-  unmatched curly braces
+    invalid property names; eg: border -bottom (a space between border-bottom)
+    unmatched curly braces
+    using an unknown variable name (eg. @base, instead of @base-color)
 */
 
 
 /* GENERAL ITEMS */
-@font-face { font-family:"Andika"; src:url(Andika-R.ttf); }
+@font-face {
+  font-family: "Andika"; src:url(Andika-R.ttf);
+}
 
 body {
-  font-family:  "Trebuchet MS",sans-serif;
+  font-family: "Trebuchet MS",sans-serif;
 }
 hr {
   border-color: @gray2;
@@ -21,6 +24,10 @@ hr {
 .rtl {
   unicode-bidi: bidi-override;
   direction: rtl;
+}
+#main-body {
+  width: 100%;
+  padding-top: 1.9em;
 }
 
 /* COLOUR DEFINITIONS */
@@ -66,25 +73,43 @@ hr {
     #main-menu, #main-menu ul {
       display: inline;
 
-      ul li {
-        display: inline-block;
-        vertical-align: middle;
-        padding: 0 0.8em;
-        border-right: 1px solid black;
+      li {
+        list-style: none;
+        position: relative;
+        float: left;
+        text-align: center;
+        margin-right: 5px;
+        font: 14px "Trebuchet MS", sans-serif;
       }
-
-      ul li:last-child {
-        border-right: none;
-      }
-
       a {
+        display: block;
+        width: 8em;
+        color: black;
+        line-height: 22px;
         text-decoration: none;
-        color: @gray3;
-
-        &:hover {
-          color: @gray5;
-          text-shadow: 0px 0px 5px @white, 0px 0px 7px @white;
-        }
+        background: @base-color;
+        border: 1px solid @darker-base;
+        margin: 0 -1px -1px 0;
+      }
+      :hover > a {
+        background: @hover-base;
+        color: yellow;
+      }
+      :hover > ul {
+        visibility: visible;
+      }
+      .level2 {
+        position: absolute;
+        top: 23px;
+        left: 0px;
+      }
+      .level3,.level4 {
+        position: absolute;
+        top: 0px;
+        /*left: 8.08em;*/
+      }
+      .level2, .level3, .level4 {
+        visibility: hidden;
       }
     }
   }
@@ -95,9 +120,46 @@ hr {
   }
 }
 
-#main-body {
-  width: 100%;
-  padding-top: 1.9em;
+/* BUTTONS */
+.action-button {
+  display: inline-block;
+  font-family: Andika, Arial, sans-serif;
+  font-size: 1.2em;
+  position: relative;
+  white-space: nowrap;
+  text-align: center;
+  border: 2px solid @base-color;
+  z-index: 3;
+  border-radius: 7px;
+  background-color: @lighter-base;
+  margin: 3px 0;
+  min-width: 2em;
+}
+.action-button:hover {
+  border: 2px outset lighten(@hover-base, 10%);
+  background-color: lighten(@hover-base, 10%);
+}
+.action-button.active {
+  background-color: @darker-base;
+  border: 2px outset @darker-base;
+  background: @lighter-base;/*Old browsers IE9 SVG, needs conditional override of 'filter' to 'none'*/
+  background: ~"url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZGVlZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzc3YzFmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=)";
+  background: -moz-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*FF3.6+*/
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,@lighter-base), color-stop(100%,@darker-base));/*Chrome,Safari4+*/
+  background: -webkit-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*Chrome10+,Safari5.1+*/
+  background: -o-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*Opera 11.10+*/
+  background: -ms-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*IE10+*/
+  background: linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*W3C*/
+  filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='@lighter-base', endColorstr='@darker-base',GradientType=1 )"; /*IE6-8 fallback on horizontal gradient*/
+}
+.action-button.focus {
+  border: 2px outset @darker-base;
+  text-shadow: 0px 0px 5px @white, 0px 0px 8px @white;
+  background: @hover-base;
+  box-shadow: 2px 2px 2px @gray1;
+}
+button.action-button.active:hover {
+  background-color: @darker-base;
 }
 /* MAIN TABLE COMPONENT */
 
@@ -106,10 +168,11 @@ table#main {
 }
 
 /* SIDE PANEL COMPONENTS */
+/*
 .active {
   background-color: @darker-base;
 }
-
+*/
 .focus {
   color: @focus;
 }
@@ -188,44 +251,6 @@ footer {
 
 #spelling-patterns {
   padding-left: 5px;
-
-  button {
-    display: inline-block;
-    font-family: Andika, Arial, sans-serif;
-    font-size: 1.2em;
-    position: relative;
-    white-space: nowrap;
-    text-align: center;
-    border: 2px solid @base-color; //#CAE8FF;
-    z-index: 3;
-    border-radius: 7px;
-    background-color: @lighter-base; //#D7EEFF;/*CAE8FF;*/
-    margin: 3px 0;
-    min-width: 2em;
-  }
-  button.active {
-    background-color: @darker-base;
-    border: 2px outset @darker-base;
-    background: @lighter-base;/*Old browsers IE9 SVG, needs conditional override of 'filter' to 'none'*/
-    background: ~"url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZGVlZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzc3YzFmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=)";
-    background: -moz-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*FF3.6+*/
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,@lighter-base), color-stop(100%,@darker-base));/*Chrome,Safari4+*/
-    background: -webkit-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*Chrome10+,Safari5.1+*/
-    background: -o-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*Opera 11.10+*/
-    background: -ms-linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*IE10+*/
-    background: linear-gradient(135deg, @lighter-base 0%, @darker-base 100%);/*W3C*/
-    filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='@lighter-base', endColorstr='@darker-base',GradientType=1 )"; /*IE6-8 fallback on horizontal gradient*/
-  }
-  button.focus {
-    border: 2px outset @darker-base;
-    text-shadow: 0px 0px 5px @white, 0px 0px 8px @white;
-    background: @hover-base;
-    box-shadow: 2px 2px 2px @gray1;
-  }
-  button:hover {
-    border: 2px outset lighten(@hover-base, 10%);
-    background-color: lighten(@hover-base, 10%);
-  }
 }
 
 /* SIDE PANEL COMPONENTS */
@@ -244,7 +269,7 @@ footer {
 
     &:hover{
       cursor: w-resize;
-      background-color: @lighter-base;//#75C1FF;
+      background-color: @lighter-base;
     }
   }
 
@@ -325,7 +350,7 @@ footer {
 
         }
       p:nth-child(odd) {
-        background: #E4E4E4;
+        background: @gray1; //#E4E4E4;
       }
       }
     }
