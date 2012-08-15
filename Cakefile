@@ -40,7 +40,7 @@ spawnCodo = (opts, callback) ->
 task 'build', 'Build build/ from src/', ->
   spawnCoffee ['-c', '-o', 'build/server', 'src/server']
   spawnCoffee ['-c', '-o', 'build/client', 'src/client']
-  spawnCoffee ['-c', '-o', 'build/test', 'tests']
+  spawnCoffee ['-c', '-o', 'build/tests', 'tests']
 
 task 'watch', 'Build build/ from src/', ->
   spawnCoffee ['-w', '-c', '-o', 'build/server', 'src/server']

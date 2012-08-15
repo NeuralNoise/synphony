@@ -29,6 +29,7 @@ define [
   '../tests/client/model/project.spec'
   '../tests/client/interactor/known_focus_search.spec'
   '../tests/client/interactor/tangerine_exporter.spec'
+  '../tests/client/interactor/project_creator.spec'
   '../tests/client/collection/named.spec'
   '../tests/client/collection/graphemes.spec'
   '../tests/client/collection/phonemes.spec'

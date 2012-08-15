@@ -5,4 +5,5 @@ define ['view/common/template', 'text!templates/common/menu.handlebars'],
     template: hbsTemplate
     tagName: 'span'
 
+
     templateData: -> @model

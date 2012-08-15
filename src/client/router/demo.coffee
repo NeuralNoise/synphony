@@ -8,14 +8,15 @@ define ['backbone', 'view/common/menu',
     prefix = "demo"
 
     routes:
+      "demo": "home"
       "demo/:project": "home"
       "demo/:project/words": "words"
       "demo/:project/sentences": "sentences"
 
     # @private
     menu: ->
-      "Words": "##{prefix}/#{@project}/words"
-      "Sentences": "##{prefix}/#{@project}/sentences"
+      router: "demo"
+      project: @project
 
     # @private
     sidebar: ->
@@ -65,7 +66,7 @@ define ['backbone', 'view/common/menu',
     # @private
     setupDefaultViews: ->
       @layout.menu.render "#{prefix}/menu/#{@project}", =>
-        new MenuView model: { menu: @menu() }
+        new MenuView model: @menu()
       @layout.sidebar.render "#{prefix}/sidebar/#{@project}", =>
         new SidebarView model: {sections: @sidebar()}
 

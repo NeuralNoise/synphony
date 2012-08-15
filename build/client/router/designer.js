@@ -18,7 +18,10 @@
       };
 
       DesignerRouter.prototype.menu = function() {
-        return {};
+        return {
+          router: "demo",
+          project: this.project
+        };
       };
 
       function DesignerRouter(options) {

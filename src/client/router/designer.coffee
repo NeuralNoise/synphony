@@ -9,9 +9,10 @@ define ['backbone', 'view/common/layout', 'view/common/menu', 'view/common/hider
       "designer/:project": "home"
       "designer/:project/export": "export"
 
-    menu: -> {}
-     # "Words": "##{prefix}/#{@project}/words"
-     # "Sentences": "##{prefix}/#{@project}/sentences"
+    # @private
+    menu: ->
+      router: "demo"
+      project: @project
 
     #sidebar: ->
     #  'Spelling Patterns': @makeSpellingPatterns()

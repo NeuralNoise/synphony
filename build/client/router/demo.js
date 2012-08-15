@@ -13,6 +13,7 @@
       prefix = "demo";
 
       DemoRouter.prototype.routes = {
+        "demo": "home",
         "demo/:project": "home",
         "demo/:project/words": "words",
         "demo/:project/sentences": "sentences"
@@ -20,8 +21,8 @@
 
       DemoRouter.prototype.menu = function() {
         return {
-          "Words": "#" + prefix + "/" + this.project + "/words",
-          "Sentences": "#" + prefix + "/" + this.project + "/sentences"
+          router: "demo",
+          project: this.project
         };
       };
 
@@ -92,9 +93,7 @@
         var _this = this;
         this.layout.menu.render("" + prefix + "/menu/" + this.project, function() {
           return new MenuView({
-            model: {
-              menu: _this.menu()
-            }
+            model: _this.menu()
           });
         });
         return this.layout.sidebar.render("" + prefix + "/sidebar/" + this.project, function() {
